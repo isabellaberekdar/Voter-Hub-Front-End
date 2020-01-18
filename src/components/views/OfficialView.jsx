@@ -16,7 +16,7 @@ const OfficialView = props => {
 
   return (
     <div>
-      OfficialView here
+      <h2>OfficialView here</h2>
       <OfficialCard />
       <div className="disqus-container">
         <Disqus.DiscussionEmbed

@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <navbar></navbar>
+        <navbar>Navbar here</navbar>
         <Switch>
           {/* <Route exact path='/' component={Homepage} /> */}
           <Route exact path="/home" component={HomeContainer} />
@@ -16,7 +16,7 @@ function App() {
           <Route component={NotFound} />
           <div></div>
         </Switch>
-        <footer></footer>
+        <footer>Footer here</footer>
       </Router>
     </div>
   );

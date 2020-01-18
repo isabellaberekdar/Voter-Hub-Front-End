@@ -11,7 +11,7 @@ class HomeContainer extends Component {
   render() {
     return (
       <div>
-        HomeContainer here
+        <h1>HomeContainer here</h1>
         <HomeView />
       </div>
     );

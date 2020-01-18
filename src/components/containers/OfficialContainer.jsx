@@ -11,7 +11,7 @@ class OfficialContainer extends Component {
   render() {
     return (
       <div>
-        OfficialContainer here
+        <h1>OfficialContainer here</h1>
         <OfficialView />
       </div>
     );
