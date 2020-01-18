@@ -9,7 +9,7 @@ import { OfficialCard } from "..";
 const HomeView = props => {
   return (
     <div>
-      HomeView here
+      <h2>HomeView here</h2>
       <OfficialCard />
     </div>
   );
