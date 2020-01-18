@@ -2,23 +2,21 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 
-import { HomeContainer, NotFound, RepresentativeContainer } from "./components";
+import { HomeContainer, NotFound, OfficialContainer } from "./components";
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <navbar></navbar>
         <Switch>
           {/* <Route exact path='/' component={Homepage} /> */}
           <Route exact path="/home" component={HomeContainer} />
-          <Route
-            exact
-            path="/representative"
-            component={RepresentativeContainer}
-          />
+          <Route exact path="/Official" component={OfficialContainer} />
           <Route component={NotFound} />
           <div></div>
         </Switch>
+        <footer></footer>
       </Router>
     </div>
   );

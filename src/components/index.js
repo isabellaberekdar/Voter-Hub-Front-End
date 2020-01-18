@@ -6,9 +6,9 @@
 export { default as HomeContainer } from "./containers/HomeContainer.jsx";
 export { default as HomeView } from "./views/HomeView.jsx";
 
-export { default as RepresentativeContainer } from "./containers/RepresentativeContainer.jsx";
-export { default as RepresentativeView } from "./views/RepresentativeView.jsx";
+export { default as OfficialContainer } from "./containers/OfficialContainer.jsx";
+export { default as OfficialView } from "./views/OfficialView.jsx";
 
-export { default as RepresentativeCard } from "./views/RepresentativeCard.jsx";
+export { default as OfficialCard } from "./views/OfficialCard.jsx";
 
 export { default as NotFound } from "./views/NotFound.jsx";

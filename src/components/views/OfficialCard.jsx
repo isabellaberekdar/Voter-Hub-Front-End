@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import "../views/RepresentativeCard.css";
+// import "../views/OfficialCard.css";
 
-const RepresentativeCard = props => {
-  return <div>RepresentativeCard here</div>;
+const OfficialCard = props => {
+  return <div>OfficialCard here</div>;
 };
 
 // StudentCard.propTypes = {
@@ -16,4 +16,4 @@ const RepresentativeCard = props => {
 //   buttonText: PropTypes.string.isRequired
 // };
 
-export default RepresentativeCard;
+export default OfficialCard;
