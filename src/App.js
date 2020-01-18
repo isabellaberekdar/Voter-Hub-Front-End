@@ -1,20 +1,27 @@
-import React from "react"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import "./App.css"
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
 
+import { HomeContainer, NotFound, RepresentativeContainer } from "./components";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
         <Switch>
           {/* <Route exact path='/' component={Homepage} /> */}
-          <div>
-          </div>
+          <Route exact path="/home" component={HomeContainer} />
+          <Route
+            exact
+            path="/representative"
+            component={RepresentativeContainer}
+          />
+          <Route component={NotFound} />
+          <div></div>
         </Switch>
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
