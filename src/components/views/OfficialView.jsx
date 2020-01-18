@@ -1,9 +1,9 @@
 import React from "react";
-import { OfficialCard } from "..";
 import Disqus from "disqus-react";
 
 // If you need cards or styling, you can uncomment the lines here to import
-// import "./OfficialView.css";
+import { OfficialCard } from "..";
+import "./OfficialView.css";
 
 const OfficialView = props => {
   // Disqus configuration information
@@ -18,10 +18,12 @@ const OfficialView = props => {
     <div>
       OfficialView here
       <OfficialCard />
-      <Disqus.DiscussionEmbed
-        shortname={disqusShortname}
-        config={disqusConfig}
-      />
+      <div className="disqus-container">
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={disqusConfig}
+        />
+      </div>
     </div>
   );
 };
