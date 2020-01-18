@@ -12,3 +12,5 @@ export { default as OfficialView } from "./views/OfficialView.jsx";
 export { default as OfficialCard } from "./views/OfficialCard.jsx";
 
 export { default as NotFound } from "./views/NotFound.jsx";
+
+export { default as AuthFormView } from "./views/AuthFormView";
