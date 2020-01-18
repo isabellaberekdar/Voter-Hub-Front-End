@@ -4,7 +4,14 @@ import PropTypes from "prop-types";
 // import "../views/OfficialCard.css";
 
 const OfficialCard = props => {
-  return <div>OfficialCard here</div>;
+  return (
+    <div>
+      <h3>OfficialCard here</h3>
+      <p>{props.division}</p>
+      <p>{props.office}</p>
+      <p>{props.official}</p>
+    </div>
+  );
 };
 
 // StudentCard.propTypes = {

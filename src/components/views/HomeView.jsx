@@ -7,10 +7,32 @@ import { OfficialCard } from "..";
 // import { OfficialCard } from "../";
 
 const HomeView = props => {
+  let officialCards = [];
+  for (let i = 0; i < 10; i++) {
+    officialCards.push(
+      <OfficialCard
+        division="division here"
+        office="office here"
+        official="official here"
+      />
+    );
+  }
   return (
     <div>
       <h2>HomeView here</h2>
-      <OfficialCard />
+      <form onSubmit={props.handleSubmit}>
+        <label>Your address</label>
+        <input
+          type="text"
+          name="address"
+          placeholder="Enter your address here..."
+          onChange={props.handleChange}
+          value={props.address_input}
+        />
+        <input className="test-submit-button" type="submit" />
+      </form>
+
+      {officialCards}
     </div>
   );
 };
