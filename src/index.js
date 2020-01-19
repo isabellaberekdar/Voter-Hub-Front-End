@@ -10,7 +10,7 @@ import { BrowserRouter } from "react-router-dom"
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <navbar>Navbar here</navbar>
+{/*       <navbar>Navbar here</navbar> */}
       <App />
     </BrowserRouter>
   </Provider>,
