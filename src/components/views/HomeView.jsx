@@ -9,16 +9,29 @@ import { OfficialCard } from "..";
 const HomeView = props => {
   // console.log("meow", props.data);
   let officialCards = [];
+
   if (props.store) {
-    for (let i = 0; i < props.store.officials.length; i++) {
-      officialCards.push(
-        <OfficialCard
-          // division={"division here"}
-          // office={"office here"}
-          official={props.store.officials[i]}
-        />
-      );
+    // let officials_info = [];
+    for (let i = 0; i < props.store.offices.length; i++) {
+      // console.log(props.store.offices[i]);
+      for (let j = 0; j < props.store.offices[i].officialIndices.length; j++) {
+        // console.log(props.store.offices[i].officialIndices[j]);
+        // officials_info[props.store.offices[i].officialIndices[j]] = {
+        //   office: props.store.offices[i],
+        //   official:
+        //     props.store.officials[props.store.offices[i].officialIndices[j]]
+        // };
+        officialCards.push(
+          <OfficialCard
+            office={props.store.offices[i]}
+            official={
+              props.store.officials[props.store.offices[i].officialIndices[j]]
+            }
+          />
+        );
+      }
     }
+    // console.log(officials_info);
   }
 
   console.log(props);
