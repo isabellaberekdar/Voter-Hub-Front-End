@@ -12,10 +12,9 @@ class HomeContainer extends Component {
   }
 
   componentDidMount = () => {
-    this.props
-      .getOfficial({ city: "New York", state: "NY", zip: "10065" })
-      .then(this.setState({ officials: this.state.store.officials }))
-      .then(console.log("woof"));
+    this.props.getOfficial({ city: "New York", state: "NY", zip: "10065" });
+    // .then(this.setState({ officials: this.state.store.officials }))
+    // .then(console.log("woof"));
   };
 
   // handleChange = event => {
