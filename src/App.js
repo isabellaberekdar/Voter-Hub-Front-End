@@ -11,8 +11,12 @@ function App() {
         <navbar>Navbar here</navbar>
         <Switch>
           {/* <Route exact path='/' component={Homepage} /> */}
-          <Route exact path="/home" component={HomeContainer} />
-          <Route exact path="/Official" component={OfficialContainer} />
+          <Route exact path="/" component={HomeContainer} />
+          <Route
+            exact
+            path="/official/:division/:office/:index"
+            component={OfficialContainer}
+          />
           <Route component={NotFound} />
           <div></div>
         </Switch>
@@ -22,5 +26,4 @@ function App() {
   );
 }
 
-export default App
-
+export default App;

@@ -3,13 +3,20 @@ import { connect } from "react-redux";
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
 import HomeView from "../views/HomeView";
 
-import { getOfficialThunk } from "../../store/utilities/official";
+import { getOfficialsThunk } from "../../store/utilities/officials";
 
 class HomeContainer extends Component {
   constructor(props) {
     super(props);
-    this.props.getOfficial({ city: "New York", state: "NY", zip: "10065" });
+    this.state = { officials: [] };
   }
+
+  componentDidMount = () => {
+    this.props
+      .getOfficial({ city: "New York", state: "NY", zip: "10065" })
+      .then(this.setState({ officials: this.state.store.officials }))
+      .then(console.log("woof"));
+  };
 
   // handleChange = event => {
   //   this.setState({
@@ -26,22 +33,42 @@ class HomeContainer extends Component {
   // };
 
   render() {
+    console.log(this.props.divisions);
+    let homeViewElement = [];
+    if (this.props) {
+      homeViewElement = (
+        <HomeView
+          handleSubmit={this.handleSubmit}
+          divisions={this.props.divisions}
+          offices={this.props.offices}
+          officials={this.props.officials}
+        />
+      );
+    } else {
+      homeViewElement = [];
+    }
     return (
       <div>
         <h1>HomeContainer here</h1>
-        <HomeView handleSubmit={this.handleSubmit} />
+        <HomeView
+          handleSubmit={this.handleSubmit}
+          divisions={this.props.divisions}
+          offices={this.props.offices}
+          officials={this.props.officials}
+        />
       </div>
     );
   }
 }
 
 const mapState = state => {
-  return {};
+  // console.log("blah");
+  return { store: state.officialsReducer.data };
 };
 
 const mapDispatch = dispatch => {
   return {
-    getOfficial: address => dispatch(getOfficialThunk(address))
+    getOfficial: address => dispatch(getOfficialsThunk(address))
   };
 };
 

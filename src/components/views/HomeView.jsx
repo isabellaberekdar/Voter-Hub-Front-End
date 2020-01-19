@@ -7,8 +7,9 @@ import { OfficialCard } from "..";
 // import { OfficialCard } from "../";
 
 const HomeView = props => {
+  // console.log("meow", props.data);
   let officialCards = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < props.length; i++) {
     officialCards.push(
       <OfficialCard
         division="division here"

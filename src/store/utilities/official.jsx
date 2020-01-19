@@ -18,9 +18,10 @@ export const getOfficialThunk = address => async dispatch => {
   console.log(address);
   try {
     // Query the api for the officials associated with the given address
-    const data = await axios.get(
-      `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
-    );
+    const data = await axios
+      .get
+      // `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
+      ();
     console.log(data);
     dispatch(getOfficial(data));
   } catch (error) {
@@ -29,17 +30,17 @@ export const getOfficialThunk = address => async dispatch => {
 };
 
 // REDUCER
-const reducer = (state = {}, action) => {
+const officialReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_OFFICIAL:
       // create a new object, copy over everything from state, then add the new officials data that was fetched
       return {
         ...state,
-        officials: action.payload
+        official: action.payload
       };
     default:
       return state;
   }
 };
 
-export default reducer;
+export default officialReducer;
