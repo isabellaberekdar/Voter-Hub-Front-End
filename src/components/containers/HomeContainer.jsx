@@ -40,19 +40,16 @@ class HomeContainer extends Component {
 
   render() {
     console.log("apple", this.props.store);
-    // if (this.props.store.hasOwnProperty("divisions")) {
-    //   console.log(this.props.store.divisions);
+    // if (this.props.store) {
+    //   console.log("meow", this.props.store.divisions);
+    //   console.log("meow", this.props.store.offices);
+    //   console.log("meow", this.props.store.officials);
     // }
 
     return (
       <div>
         <h1>HomeContainer here</h1>
-        <HomeView
-          handleSubmit={this.handleSubmit}
-          divisions={this.props.divisions}
-          offices={this.props.offices}
-          officials={this.props.officials}
-        />
+        <HomeView handleSubmit={this.handleSubmit} store={this.props.store} />
       </div>
     );
   }

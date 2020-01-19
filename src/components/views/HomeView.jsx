@@ -9,15 +9,19 @@ import { OfficialCard } from "..";
 const HomeView = props => {
   // console.log("meow", props.data);
   let officialCards = [];
-  for (let i = 0; i < props.length; i++) {
-    officialCards.push(
-      <OfficialCard
-        division="division here"
-        office="office here"
-        official={this.props.officials[i]}
-      />
-    );
+  if (props.store) {
+    for (let i = 0; i < props.store.officials.length; i++) {
+      officialCards.push(
+        <OfficialCard
+          // division={"division here"}
+          // office={"office here"}
+          official={props.store.officials[i]}
+        />
+      );
+    }
   }
+
+  console.log(props);
   return (
     <div>
       <h2>HomeView here</h2>

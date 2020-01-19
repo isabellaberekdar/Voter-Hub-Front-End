@@ -9,7 +9,7 @@ const OfficialCard = props => {
       <h3>OfficialCard here</h3>
       <p>{props.division}</p>
       <p>{props.office}</p>
-      <p>{props.official}</p>
+      <p>{props.official.name}</p>
     </div>
   );
 };
