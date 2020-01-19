@@ -4,6 +4,7 @@ import Message from "..";
 //MessageBoard is an array containing Message objects {name, text}
 //has a prop "subject" and "messages"
 const MessageBoard = props => {
+    //Not sure if this fixes the problem if messages isn't passed in as a prop
     let allMessage = props.messages === "undefined" ? 
         "No Messages"
         : props.messages.map(message => 
@@ -11,8 +12,8 @@ const MessageBoard = props => {
         );
 
     return <div>
-        <h3>Subject: {props.subject}</h3>
-        <p>All Messages: {allMessage}</p>
+        <div>Subject: {props.subject}</div>
+        <div>All Messages: {allMessage}</div>
     </div>
 }
 
