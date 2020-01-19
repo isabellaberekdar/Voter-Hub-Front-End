@@ -2,7 +2,7 @@ import axios from "axios"
 
 // ACTION TYPES
 const GET_OFFICIAL = "GET_OFFICIAL"
-
+const GET_PHOTO = "GET_PHOTO"
 // ACTION CREATORS
 /* ** move api keys out ** */
 
@@ -10,6 +10,13 @@ const getOfficial = official => {
   return {
     type: GET_OFFICIAL,
     payload: official
+  }
+}
+
+const getPhoto = photo => {
+  return {
+    type: GET_PHOTO,
+    payload: photo
   }
 }
 
@@ -27,15 +34,48 @@ export const getOfficialThunk = address => async dispatch => {
   }
 }
 
+// see if there is a faster way to get the id
+// senate only?
+export const getPhotoThunk = (first, last, state) => async dispatch => {
+  try {
+    // get small list of local officials
+    const { data } = await axios.get(
+      `https://api.propublica.org/congress/v1/members/senate/${state}/current.json`,
+      {
+        headers: {
+          "X-API-Key": "5nyWHyGLejmxUBanKJgsUjLedZa1IpLHIDxJVTr3"
+        }
+      }
+    )
+    // look for the official with the given name
+    const person = data.results.find(person => person.first_name === first && person.last_name === last)
+    // use the id to find their photo
+    if (person) {
+      const photo = `https://theunitedstates.io/images/congress/225x275/${person.id}.jpg`
+      dispatch(getPhoto(photo))
+    } else {
+      // if -1, the official was not found. Supply a default photo
+    }
+  } 
+  
+  catch (error) {
+    console.log("Error in getPhotoThunk:", error)
+  }
+}
+
 // REDUCER
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    
     case GET_OFFICIAL:
       // create a new object, copy over everything from state, then add the new officials data that was fetched
       return {
         ...state,
         officials: action.payload
+      }
+    case GET_PHOTO:
+      return {
+        ...state,
+        photo: action.payload
       }
     default:
       return state
