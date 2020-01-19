@@ -3,14 +3,15 @@ import MessageBoard from "..";
 
 //contains props official and messageBoardArray
 const MessageBoardCollection = props => {
+    const { official, messageBoardArray } = props;
 
-    let messageBoardArray = props.messageBoardArray.map(MessageBoard =>
+    let messageBoardArr = messageBoardArray.map(MessageBoard =>
         <div>{MessageBoard}</div>    
     )
 
     return <div>
-        <h2>{props.official}'s MessageBoards</h2>
-        {messageBoardArray}
+        <h2>{official}'s MessageBoards</h2>
+        {messageBoardArr}
     </div>
 }
 
