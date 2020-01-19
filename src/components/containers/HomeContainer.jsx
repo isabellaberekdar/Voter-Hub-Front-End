@@ -8,13 +8,20 @@ import { getOfficialsThunk } from "../../store/utilities/officials";
 class HomeContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { officials: [] };
+    this.state = { divisions: {}, offices: [], officials: [] };
   }
 
   componentDidMount = () => {
-    this.props.getOfficial({ city: "New York", state: "NY", zip: "10065" });
-    // .then(this.setState({ officials: this.state.store.officials }))
-    // .then(console.log("woof"));
+    this.props
+      .getOfficial({ city: "New York", state: "NY", zip: "10065" })
+      .then(
+        this.setState({
+          // data: this.props.store
+          // offices: this.props.store.offices,
+          // officials: this.props.store.officials
+        })
+      )
+      .then("orange", console.log(this.state));
   };
 
   // handleChange = event => {
@@ -32,20 +39,11 @@ class HomeContainer extends Component {
   // };
 
   render() {
-    console.log(this.props.divisions);
-    let homeViewElement = [];
-    if (this.props) {
-      homeViewElement = (
-        <HomeView
-          handleSubmit={this.handleSubmit}
-          divisions={this.props.divisions}
-          offices={this.props.offices}
-          officials={this.props.officials}
-        />
-      );
-    } else {
-      homeViewElement = [];
-    }
+    console.log("apple", this.props.store);
+    // if (this.props.store.hasOwnProperty("divisions")) {
+    //   console.log(this.props.store.divisions);
+    // }
+
     return (
       <div>
         <h1>HomeContainer here</h1>
@@ -61,8 +59,7 @@ class HomeContainer extends Component {
 }
 
 const mapState = state => {
-  // console.log("blah");
-  return { store: state.officialsReducer.data };
+  return { store: state.officialsReducer.officials };
 };
 
 const mapDispatch = dispatch => {

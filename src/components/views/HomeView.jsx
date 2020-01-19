@@ -14,7 +14,7 @@ const HomeView = props => {
       <OfficialCard
         division="division here"
         office="office here"
-        official="official here"
+        official={this.props.officials[i]}
       />
     );
   }

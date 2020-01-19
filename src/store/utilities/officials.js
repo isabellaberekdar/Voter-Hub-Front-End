@@ -18,10 +18,10 @@ export const getOfficialsThunk = address => async dispatch => {
   // console.log(address);
   try {
     // Query the api for the officials associated with the given address
-    const data = await axios.get(
+    const { data } = await axios.get(
       `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
     );
-    console.log(data);
+    console.log("canteloupe", data);
     dispatch(getOfficials(data));
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error);
