@@ -1,20 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
-import HomeView from "../views/HomeView"
-import { getOfficialThunk } from "../../store/utilities/official"
+import HomeView from "../views/HomeView";
+import {
+  getOfficialThunk,
+  getOfficialsThunk
+} from "../../store/utilities/official";
 
 class HomeContainer extends Component {
-/*   constructor(props) {
-    super(props)
+  constructor(props) {
+    super(props);
+    console.log("here");
   }
- */
+
   componentDidMount() {
-    this.props.getSingleOfficialThunk('ocd-division/country:us/state:ny/county:new_york', 0)
+    this.props.getSingleOfficialThunk(
+      "ocd-division/country:us/state:ny/county:new_york",
+      0
+    );
+    this.props.getOfficialsThunk({
+      city: "New York",
+      state: "NY",
+      zip: "10065"
+    });
   }
 
   render() {
-    console.log("apple", this.props.store);
     return (
       <div>
         <h1>HomeContainer here</h1>
@@ -34,8 +45,10 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getSingleOfficialThunk: (divisionId, index) => dispatch(getOfficialThunk(divisionId, index))
-  }
-}
+    getSingleOfficialThunk: (divisionId, index) =>
+      dispatch(getOfficialThunk(divisionId, index)),
+    getOfficialsThunk: address => dispatch(getOfficialsThunk(address))
+  };
+};
 
 export default connect(mapState, mapDispatch)(HomeContainer);

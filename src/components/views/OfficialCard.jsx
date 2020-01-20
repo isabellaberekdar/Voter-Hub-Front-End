@@ -4,9 +4,11 @@ import React from "react";
 import "../views/OfficialCard.css";
 
 const OfficialCard = props => {
-  console.log(props);
+  console.log("eggplant", props.office.divisionId);
+  console.log("eggplant", props.officeIndex);
+  console.log("eggplant", props.officialIndex);
 
-  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ with the type is "Facebook"
+  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
   let channels = [];
   if (props.official.channels) {
     for (let key in props.official.channels) {
