@@ -1,6 +1,38 @@
-div.official-card {
-  border-style: solid;
-  border-radius: 10px;
+/* Fonts */
+@font-face {
+  font-family: avenir;
+  src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+}
+
+@font-face {
+  font-family: avenir-medium;
+  src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: avenir-black;
+  src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+}
+
+@font-face {
+  font-family: roboto-slab;
+  src: url('../views/fonts/RobotoSlab-Regular.ttf');
+}
+
+@font-face {
+  font-family: roboto-slab-bold;
+  src: url('../views/fonts/RobotoSlab-Bold.ttf');
+}
+
+.official-card {
+  display: inline-block;
+  min-height: 650px;
+  vertical-align: top;
+  padding: 12px; 
+  border: 2px solid #E84A3D;
   margin: 20px;
-  width: 400px;
+  width: 250px;
+  font-family: avenir;
+  font-size: 14px;
+  word-wrap: break-word;
 }
