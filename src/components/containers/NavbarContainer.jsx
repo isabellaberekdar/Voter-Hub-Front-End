@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { me } from "../../thunks";
-import '../views/Navbar.css';
+import React, { Component } from "react"
+import { withRouter } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { me } from "../../thunks"
+import "../views/Navbar.css"
 
 class NavbarContainer extends Component {
     render() {
@@ -26,14 +26,22 @@ class NavbarContainer extends Component {
                 <Link to="/signup">Signup</Link>
             </div>
         </div>
-      );
-    }
+        <div className="navbar-links">
+          <Link to="/">Home</Link>
+          <Link to="/Official">Officials</Link>
+          <Link>Upcoming Events</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
+        </div>
+      </div>
+    )
   }
-  
-  const mapState = (state) => {
-    return {
-      isLoggedIn: !!state.user.id
-    }
+}
+
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.user.id
   }
-  
-  export default withRouter(connect(mapState)(NavbarContainer));
+}
+
+export default withRouter(connect(mapState)(NavbarContainer))
