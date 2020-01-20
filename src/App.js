@@ -1,15 +1,19 @@
-import React from "react";
+import React, {Component} from "react";
 import "./App.css";
 import RoutesContainer from "./components/routes/RoutesContainer";
+import NavbarContainer from "./components/containers/NavbarContainer";
+import Footer from "./components/containers/Footer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
+class App extends Component {
+  render () {
+    return (
+      <div className="App">
+        <NavbarContainer />
         <RoutesContainer />
-      </header>
-    </div>
-  );
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
 import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
 import NewsArticles from '../views/NewsArticles'
+
 class OfficialContainer extends Component {
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
@@ -48,7 +49,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getOfficial: (state, index) => dispatch(getOfficialThunk(state, index)),
+    getOfficialThunk: (division, officeIndex, officialIndex) =>
+      dispatch(getOfficialThunk(division, officeIndex, officialIndex)),
     getPhoto: (number, state) => dispatch(getPhotoThunk(number, state)),
     getArticles: name => dispatch(getArticlesThunk(name))
   }

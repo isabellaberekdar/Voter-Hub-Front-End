@@ -1,64 +1,53 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react"
+import { connect } from "react-redux"
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
-import HomeView from "../views/HomeView";
+import HomeView from "../views/HomeView"
 import {
-  getOfficialsThunk,
-  getPhotoThunk
-} from "../../store/utilities/official";
+  getOfficialThunk,
+  getOfficialsThunk
+} from "../../store/utilities/official"
 
 class HomeContainer extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    console.log("here")
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
+    this.props.getSingleOfficialThunk(
+      "ocd-division/country:us/state:ny/county:new_york",
+      0
+    )
     this.props.getOfficialsThunk({
-      city: "New York",
-      state: "NY",
-      zip: "10065"
-    });
-  };
-
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   });
-  // };
-
-  // handleSubmit = event => {
-  //   event.preventDefault();
-
-  //   // needs validation
-  //   // this doesn't work because inputValue is not currently an address object
-  //   // this.props.getOfficial(this.state.inputValue);
-  // };
+      city: "Sacramento",
+      state: "CA",
+      zip: "95811"
+    })
+  }
 
   render() {
-    console.log("apple", this.props.store);
     return (
       <div>
-        <h1>HomeContainer here</h1>
         <HomeView handleSubmit={this.handleSubmit} store={this.props.store} />
       </div>
-    );
+    )
   }
 }
 
 const mapState = state => {
-  console.log(state);
+  console.log(state)
   return {
     photo: state.official,
     store: state.official.officials
-  };
-};
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
-    getPhotoThunk: (first, last, state) =>
-      dispatch(getPhotoThunk(first, last, state)),
+    getSingleOfficialThunk: (divisionId, index) =>
+      dispatch(getOfficialThunk(divisionId, index)),
     getOfficialsThunk: address => dispatch(getOfficialsThunk(address))
-  };
-};
+  }
+}
 
-export default connect(mapState, mapDispatch)(HomeContainer);
+export default connect(mapState, mapDispatch)(HomeContainer)
