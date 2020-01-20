@@ -6,16 +6,74 @@ import "../views/OfficialCard.css";
 const OfficialCard = props => {
   console.log(props);
   console.log(props.official.address);
+
+  {
+    /* Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ with the type is "Facebook" */
+  }
+  let channels = [];
+  if (props.official.channels) {
+    for (let key in props.official.channels) {
+      if (props.official.channels.hasOwnProperty(key)) {
+        if (props.official.channels[key].type == "Facebook") {
+          console.log(
+            "Facebook: ",
+            "https://www.facebook.com/" + props.official.channels[key].id
+          );
+          channels.push(
+            <p>
+              <a
+                href={
+                  "https://www.facebook.com/" + props.official.channels[key].id
+                }
+              >
+                https://www.facebook.com/{props.official.channels[key].id}
+              </a>
+            </p>
+          );
+        } else if (props.official.channels[key].type == "Twitter") {
+          console.log(
+            "Twitter: ",
+            "https://twitter.com/" + props.official.channels[key].id
+          );
+          channels.push(
+            <p>
+              <a
+                href={"https://twitter.com/" + props.official.channels[key].id}
+              >
+                https://twitter.com/{props.official.channels[key].id}
+              </a>
+            </p>
+          );
+        } else if (props.official.channels[key].type == "YouTube") {
+          console.log(
+            "YouTube: ",
+            "https://www.youtube.com/user/" + props.official.channels[key].id
+          );
+          channels.push(
+            <p>
+              <a
+                href={
+                  "https://www.youtube.com/user/" +
+                  props.official.channels[key].id
+                }
+              >
+                https://www.youtube.com/user/{props.official.channels[key].id}
+              </a>
+            </p>
+          );
+        }
+      }
+    }
+  }
+
   return (
     <div className="official-card">
       <h3>OfficialCard here</h3>
       <p>{props.office.name}</p>
       <p>{props.office.divisionId}</p>
-
       {/* Some offices don't have levels or roles, so we need to check if they have them before trying to access them by index, or else it will result in an error. */}
       {props.office.levels ? <p>{props.office.levels[0]}</p> : <div></div>}
       {props.office.roles ? <p>{props.office.roles[0]}</p> : <div></div>}
-
       <p>{props.official.name}</p>
       <p>{props.official.party}</p>
       {props.official.photoUrl ? (
@@ -23,7 +81,6 @@ const OfficialCard = props => {
       ) : (
         <div></div>
       )}
-
       {/* Some officials don't have an address. */}
       {/* The address is an array holding a single object. */}
       {/* Some addresses have a line2 and line3 etc in addition to just a line1 (Andrew M. Cuomo) So we'll have to iterate through them somehow.*/}
@@ -38,7 +95,6 @@ const OfficialCard = props => {
       ) : (
         <div></div>
       )}
-
       {/* Officials will usually have one phone, url, and email */}
       {props.official.phones ? <p>{props.official.phones[0]}</p> : <div></div>}
       {props.official.urls ? (
@@ -46,18 +102,16 @@ const OfficialCard = props => {
       ) : (
         <div></div>
       )}
-      {props.official.emails ? <p>{props.official.emails[0]}</p> : <div></div>}
-
-      {/* Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ with the type is "Facebook" */}
-      {/* {props.official.channels ? (
-        <div>
-          <p>
-            {props.official.channels[0].type}: {props.official.channels[0].id}
-          </p>
-        </div>
+      {props.official.emails ? (
+        <p>
+          <a href={"mailto:" + props.official.emails[0]}>
+            {props.official.emails[0]}
+          </a>
+        </p>
       ) : (
         <div></div>
-      )} */}
+      )}
+      {channels}
     </div>
   );
 };
