@@ -100,7 +100,7 @@ const OfficialCard = props => {
     <div className="official-card">
       <a href={officialPageUrl}>officialPageUrl</a>
       <center>
-        <h2>
+        <h2 id="office-name">
           <b>{props.office.name}</b>
         </h2>
         <h3>{props.official.name}</h3>
@@ -119,7 +119,9 @@ const OfficialCard = props => {
           <img src={props.official.photoUrl} width="130px" />
         </center>
       ) : (
-        <div></div>
+        <center>
+          <img src="./images/placeholder.png" target="blank" height="162.5px"></img>
+        </center>
       )}
 
       {props.official.address ? (
