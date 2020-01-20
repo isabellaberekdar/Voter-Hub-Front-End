@@ -19,9 +19,9 @@ class HomeContainer extends Component {
       0
     );
     this.props.getOfficialsThunk({
-      city: "New York",
-      state: "NY",
-      zip: "10065"
+      city: "Sacramento",
+      state: "CA",
+      zip: "95811"
     });
   }
 

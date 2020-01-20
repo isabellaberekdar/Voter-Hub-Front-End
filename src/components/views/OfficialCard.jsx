@@ -4,9 +4,15 @@ import React from "react";
 import "../views/OfficialCard.css";
 
 const OfficialCard = props => {
-  console.log("eggplant", props.office.divisionId);
-  console.log("eggplant", props.officeIndex);
-  console.log("eggplant", props.officialIndex);
+  console.log(props.office.divisionId);
+  console.log(props.officeIndex);
+  console.log(props.officialIndex);
+
+  let officialPageUrl =
+    "/" + props.division + "/" + props.officeIndex + "/" + props.officialIndex;
+  // html.replace(":", "%3A");
+  // html.replace("/", "%2F");
+  console.log(officialPageUrl);
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
   let channels = [];
@@ -85,6 +91,7 @@ const OfficialCard = props => {
   return (
     <div className="official-card">
       <h3>OfficialCard here</h3>
+      <a href={officialPageUrl}>officialPageUrl</a>
       <p>{props.office.name}</p>
       <p>{props.office.divisionId}</p>
       {/* Some offices don't have levels or roles, so we need to check if they have them before trying to access them by index, or else it will result in an error. */}

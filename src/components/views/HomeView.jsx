@@ -64,6 +64,26 @@ const HomeView = props => {
                   ].officialIndices[j]
                 ]
               );
+
+              officialCards.push(
+                <OfficialCard
+                  office={
+                    props.store.offices[
+                      props.store.divisions[key].officeIndices[i]
+                    ]
+                  }
+                  official={
+                    props.store.officials[
+                      props.store.offices[
+                        props.store.divisions[key].officeIndices[i]
+                      ].officialIndices[j]
+                    ]
+                  }
+                  division={key}
+                  officeIndex={i}
+                  officialIndex={j}
+                />
+              );
               // print out the official's index in the entire officials array, and the official object
               // console.log(
               //   "OFFICIAL",
@@ -81,17 +101,6 @@ const HomeView = props => {
       }
     }
 
-    for (let i = 0; i < props.store.divisions.length; i++) {
-      for (let j = 0; j < props.store.divisions[i].officeIndices.length; j++) {
-        for (
-          let k = 0;
-          k < props.store.offices[j].officialIndices.length;
-          k++
-        ) {
-          console.log(i, j, k);
-        }
-      }
-    }
     // for (let i = 0; i < props.store.offices.length; i++) {
     //   // console.log(props.store.offices[i]);
     //   for (let j = 0; j < props.store.offices[i].officialIndices.length; j++) {
