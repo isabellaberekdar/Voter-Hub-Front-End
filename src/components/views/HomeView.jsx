@@ -144,7 +144,7 @@ const HomeView = props => {
           </div>
         </div>
         <div className="home-content">
-          {officialCards}
+          <center>{officialCards}</center>
         </div>
     </div>
   );
