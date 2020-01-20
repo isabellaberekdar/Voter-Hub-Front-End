@@ -1,24 +1,33 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-// import { action } from "../../store/utilities/Official"; // Get the action creator for ____?
-import OfficialView from "../views/OfficialView";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import OfficialView from "../views/OfficialView"
+import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
 
 class OfficialContainer extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    // Fetch the object from the Google api that has information about the government official
+
+    // First, get the necessary values from the url
+    const state = this.props.match.params.state
+    const index = this.props.match.params.index
+    console.log(state, index)
+    this.props.getOfficial(state, index)
+    // check if there is a photo. If not, go find one
+    this.props.getArticles('Andrew Cuomo')
+
+    console.log("ARTICLES")
+    console.log(this.props)
   }
 
   render() {
+    console.log(this.props.official)
     return (
       <div>
         <h1>OfficialContainer here</h1>
-        <OfficialView
-          division="division here"
-          office="office here"
-          official="official here"
-        />
+        {this.props.official && <img src={this.props.official.photoUrl} />}
+        <OfficialView division='division here' office='office here' official='official here' />
       </div>
-    );
+    )
   }
 }
 
@@ -29,12 +38,20 @@ const mapState = state => {
     // campus: state.campusReducer.allCampuses[studentInfo.campus],
     division: "state.google.divisions",
     office: "state.google.offices",
-    official: "state.google.officials"
-  };
-};
+    official: state.official.official
+
+    /*     official: "state.google.officials"
+
+ */
+  }
+}
 
 const mapDispatch = dispatch => {
-  return {};
-};
+  return {
+    getOfficial: (state, index) => dispatch(getOfficialThunk(state, index)),
+    getPhoto: (number, state) => dispatch(getPhotoThunk(number, state)),
+    getArticles: name => dispatch(getArticlesThunk(name))
+  }
+}
 
-export default connect(mapState, mapDispatch)(OfficialContainer);
+export default connect(mapState, mapDispatch)(OfficialContainer)

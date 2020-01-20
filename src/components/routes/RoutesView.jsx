@@ -17,7 +17,8 @@ const RoutesView = (props) => {
       
       
         {/* <Route exact path='/' component={Homepage} /> */}
-        <Route exact path="/Official" component={OfficialContainer} />
+        <Route exact path="/official" component={OfficialContainer} />
+
         <Route component={NotFound} />
         <div></div>
         <footer>Footer here</footer>
