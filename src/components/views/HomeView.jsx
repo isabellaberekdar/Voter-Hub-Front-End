@@ -35,23 +35,24 @@ const HomeView = props => {
   console.log(props);
   return (
     <div>
-    <div className="header">
-      <img src="/images/homeheader.png" alt="header of homepage" width="100%" />
-      <div className="centered">
-        <form onSubmit={props.handleSubmit}>
-          <input
-            type="text"
-            name="address"
-            placeholder="Enter your address to find who represents you..."
-            onChange={props.handleChange}
-            value={props.address_input}
-            id="address-entry"
-          />
-          <input className="test-submit-button" type="submit" />
-        </form>
+      <div className="header">
+        <img src="/images/homeheader.png" alt="header of homepage" width="100%" />
+        <div className="centered">
+          <form onSubmit={props.handleSubmit}>
+            <input
+              type="text"
+              name="address"
+              placeholder="Enter your address to find who represents you..."
+              onChange={props.handleChange}
+              value={props.address_input}
+              id="address-entry"
+            />
+          </form>
+          </div>
         </div>
-      </div>
-      {officialCards}
+        <div className="home-content">
+          {officialCards}
+        </div>
     </div>
   );
 };

@@ -29,7 +29,7 @@
 }
 
 .centered input#address-entry {
-    background-color: white;
+    background: white url(/images/search.png) no-repeat 510px 10px/30px 30px;
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
@@ -44,4 +44,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.home-content {
+    flex: 1 0 auto;
+    padding: 20px;
+}
+
+.home-content:not(#nonhome) {
+    font-family: avenir;
 }
