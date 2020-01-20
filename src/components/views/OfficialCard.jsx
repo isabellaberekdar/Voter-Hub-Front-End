@@ -6,9 +6,7 @@ import "../views/OfficialCard.css";
 const OfficialCard = props => {
   console.log(props);
 
-  {
-    /* Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ with the type is "Facebook" */
-  }
+  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ with the type is "Facebook"
   let channels = [];
   if (props.official.channels) {
     for (let key in props.official.channels) {
@@ -65,6 +63,23 @@ const OfficialCard = props => {
     }
   }
 
+  // Some officials don't have an address.
+  // The address is an array holding a single object of address lines. Kind of weird.
+  // Some addresses have a line2 and line3 etc in addition to just a line1 (Andrew M. Cuomo). So we'll have to iterate through them somehow, ignoring any that are just blank strings "".
+  let addressLines = [];
+  if (props.official.address) {
+    for (let index in props.official.address) {
+      if (props.official.address.hasOwnProperty(index)) {
+        for (let key in props.official.address[0]) {
+          if (props.official.address[0][key] !== "") {
+            console.log(props.official.address[0][key]);
+            addressLines.push(<p>{props.official.address[0][key]}</p>);
+          }
+        }
+      }
+    }
+  }
+
   return (
     <div className="official-card">
       <h3>OfficialCard here</h3>
@@ -80,16 +95,15 @@ const OfficialCard = props => {
       ) : (
         <div></div>
       )}
-      {/* Some officials don't have an address. */}
-      {/* The address is an array holding a single object. */}
-      {/* Some addresses have a line2 and line3 etc in addition to just a line1 (Andrew M. Cuomo) So we'll have to iterate through them somehow.*/}
+
       {props.official.address ? (
         <div>
-          <p>{props.official.address[0].line1}</p>
+          {addressLines}
+          {/* <p>{props.official.address[0].line1}</p>
           <p>
             {props.official.address[0].city}, {props.official.address[0].state}{" "}
             {props.official.address[0].zip}
-          </p>
+          </p> */}
         </div>
       ) : (
         <div></div>
