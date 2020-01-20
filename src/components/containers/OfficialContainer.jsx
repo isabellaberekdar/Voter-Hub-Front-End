@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
 import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
-
+import NewsArticles from '../views/NewsArticles'
 class OfficialContainer extends Component {
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
@@ -16,16 +16,16 @@ class OfficialContainer extends Component {
     this.props.getArticles('Andrew Cuomo')
 
     console.log("ARTICLES")
-    console.log(this.props)
   }
-
+  
   render() {
-    console.log(this.props.official)
+    console.log(this.props.articles)
     return (
       <div>
         <h1>OfficialContainer here</h1>
         {this.props.official && <img src={this.props.official.photoUrl} />}
-        <OfficialView division='division here' office='office here' official='official here' />
+        <NewsArticles articles={this.props.articles} />
+ */}        <OfficialView division='division here' office='office here' official='official here' />
       </div>
     )
   }
@@ -38,8 +38,8 @@ const mapState = state => {
     // campus: state.campusReducer.allCampuses[studentInfo.campus],
     division: "state.google.divisions",
     office: "state.google.offices",
-    official: state.official.official
-
+    official: state.official.official,
+    articles: state.official.articles
     /*     official: "state.google.officials"
 
  */
