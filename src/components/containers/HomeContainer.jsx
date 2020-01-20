@@ -35,10 +35,8 @@ class HomeContainer extends Component {
   // };
 
   render() {
-    console.log("apple", this.props.store);
     return (
       <div>
-        <h1>HomeContainer here</h1>
         <HomeView handleSubmit={this.handleSubmit} store={this.props.store} />
       </div>
     );

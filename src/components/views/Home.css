@@ -1,0 +1,47 @@
+/* Fonts */
+@font-face {
+    font-family: avenir;
+    src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-medium;
+    src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-black;
+    src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: roboto-slab;
+    src: url('../views/fonts/RobotoSlab-Regular.ttf');
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    font-family: avenir-medium;
+    font-size: 20px;
+    height: 142.5px;
+    width: 100%;
+}
+
+.centered input#address-entry {
+    background-color: white;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: 2px solid #4D86F7;
+    border-radius: 80px;
+    width: 500px;
+    height: 30px;
+    font-family: avenir;
+    font-size: 17px;
+    font-style: italic;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -1,15 +1,18 @@
-import React from "react";
+import React, {Component} from "react";
 import "./App.css";
 import RoutesContainer from "./components/routes/RoutesContainer";
+import NavbarContainer from "./components/containers/NavbarContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
+class App extends Component {
+  render () {
+    return (
+      <div className="App">
+        {/* Navbar is below */}
+        <NavbarContainer />
         <RoutesContainer />
-      </header>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default App;
