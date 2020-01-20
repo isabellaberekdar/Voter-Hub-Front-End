@@ -16,7 +16,7 @@ const RoutesView = props => {
       {/* placeOrCounty and placeOrCountyName are optional */}
       <Route
         exact
-        path="/official/:state/:index"
+        path="/official/:division/:officeIndex/:officialIndex"
         component={OfficialContainer}
       />
       {/*         <Route exact path="/Official" component={OfficialContainer} />

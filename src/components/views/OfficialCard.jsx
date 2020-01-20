@@ -9,9 +9,14 @@ const OfficialCard = props => {
   console.log(props.officialIndex);
 
   let officialPageUrl =
-    "/" + props.division + "/" + props.officeIndex + "/" + props.officialIndex;
-  // html.replace(":", "%3A");
-  // html.replace("/", "%2F");
+    "/" +
+    "official" +
+    "/" +
+    props.division.replace(/\//gi, "%2F").replace(/:/gi, "%3A") +
+    "/" +
+    props.officeIndex +
+    "/" +
+    props.officialIndex;
   console.log(officialPageUrl);
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"

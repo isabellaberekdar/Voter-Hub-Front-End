@@ -14,6 +14,7 @@ const OfficialView = props => {
     title: "Title of Your Article" //this.props.title
   };
 
+  console.log(props);
   return (
     <div>
       <h2>OfficialView here</h2>
@@ -22,10 +23,10 @@ const OfficialView = props => {
       <p>Office</p>
       <p>Official</p>
       <div className="disqus-container">
-        <Disqus.DiscussionEmbed
+        {/* <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
-        />
+        /> */}
       </div>
     </div>
   );
