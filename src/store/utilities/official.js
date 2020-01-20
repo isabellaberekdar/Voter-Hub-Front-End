@@ -30,22 +30,6 @@ const getPhoto = photo => {
 };
 
 // THUNK CREATORS
-export const getOfficialThunk = address => async dispatch => {
-  console.log(address);
-  try {
-    // Query the api for the officials associated with the given address
-    const data = await axios
-      .get
-      // `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
-      ();
-    console.log(data);
-    dispatch(getOfficial(data));
-  } catch (error) {
-    console.log("Error in getOfficialThunk:", error);
-  }
-};
-
-// THUNK CREATORS
 export const getOfficialsThunk = address => async dispatch => {
   // console.log(address);
   try {
@@ -60,8 +44,75 @@ export const getOfficialsThunk = address => async dispatch => {
   }
 };
 
+
+
+
+
+
+/* 
+ocd-division/country:us
+ocd-division/country:us/state:ny
+ocd-division/country:us/state:ny/county:new_york
+ocd-division/country:us/state:ny/place:new_york
+more?
+
+president/ VP:
+ocd-division/country:us
+
+Senator/Governor/Lieutenant Governor:
+ocd-division/country:us/state:ny
+
+New York City Comptroller/New York Public Advocate/Mayor
+ocd-division/country:us/state:ny/place:new_york
+
+Manhattan District Attorney/New York Manhattan Borough President
+ocd-division/country:us/state:ny/county:new_york
+
+NY Attorney General/NY State Comptroller
+ocd-division/country:us/state:ny
+ 
+-index of the rep in the array (defaults to 0)
+*/
+// index should be based on this api call:
+// https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=NY
+// because the index will not be useful if the api call varies
+
+/* 
+  Information that should be passed into the thunk:
+  -state: 'NY', 'CA', etc
+*/
+
+export const getOfficialThunk = (state, index = 0) => async dispatch => {
+  try {
+
+    let url = `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${state}`
+    /* 
+    if (placeOrCounty) {
+      url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}%2F${placeOrCounty}%3A${placeOrCountyName}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
+    }
+    else {
+      url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
+    }  */
+
+    // Get the official
+    const {data} = await axios.get(url)
+    console.log('DATA: ', data.officials[index])
+    dispatch(getOfficial(data.officials[index]))
+
+  } catch (error) {
+    console.log("Error in getOfficialThunk:", error)
+  }
+}
+
+
+
+
+
+
+
 // see if there is a faster way to get the id
 // senate only?
+// Middle initial???? maybe better to search by phone number
 export const getPhotoThunk = (first, last, state) => async dispatch => {
   try {
     // get small list of local officials

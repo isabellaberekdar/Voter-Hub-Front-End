@@ -1,38 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
-import HomeView from "../views/HomeView";
-import {
-  getOfficialsThunk,
-  getPhotoThunk
-} from "../../store/utilities/official";
+import HomeView from "../views/HomeView"
+import { getOfficialThunk } from "../../store/utilities/official"
 
 class HomeContainer extends Component {
-  constructor(props) {
-    super(props);
+/*   constructor(props) {
+    super(props)
   }
-
-  componentDidMount = () => {
-    this.props.getOfficialsThunk({
-      city: "New York",
-      state: "NY",
-      zip: "10065"
-    });
-  };
-
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   });
-  // };
-
-  // handleSubmit = event => {
-  //   event.preventDefault();
-
-  //   // needs validation
-  //   // this doesn't work because inputValue is not currently an address object
-  //   // this.props.getOfficial(this.state.inputValue);
-  // };
+ */
+  componentDidMount() {
+    this.props.getSingleOfficialThunk('ocd-division/country:us/state:ny/county:new_york', 0)
+  }
 
   render() {
     return (
@@ -53,10 +32,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getPhotoThunk: (first, last, state) =>
-      dispatch(getPhotoThunk(first, last, state)),
-    getOfficialsThunk: address => dispatch(getOfficialsThunk(address))
-  };
-};
+    getSingleOfficialThunk: (divisionId, index) => dispatch(getOfficialThunk(divisionId, index))
+  }
+}
 
 export default connect(mapState, mapDispatch)(HomeContainer);
