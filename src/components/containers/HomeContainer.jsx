@@ -9,8 +9,12 @@ import {
 
 class HomeContainer extends Component {
   constructor(props) {
-    super(props)
-    console.log("here")
+    super(props);
+
+    this.state = ({
+      placeholder: "Enter your address to find who represents you..."
+    })
+    
   }
 
   componentDidMount() {
@@ -25,10 +29,28 @@ class HomeContainer extends Component {
     })
   }
 
+  focusFunc = () => {
+    this.setState({
+      placeholder: ""
+    })
+  }
+
+  unfocusFunc = () => {
+    this.setState({
+      placeholder: "Enter your address to find who represents you..."
+    })
+  }
+
+
   render() {
     return (
       <div>
-        <HomeView handleSubmit={this.handleSubmit} store={this.props.store} />
+        <HomeView 
+          placeholderText={this.state.placeholder} 
+          focusFunc={this.focusFunc} 
+          unfocusFunc={this.unfocusFunc}
+          handleSubmit={this.handleSubmit} 
+          store={this.props.store} />
       </div>
     )
   }

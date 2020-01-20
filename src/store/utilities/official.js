@@ -88,9 +88,11 @@ export const getOfficialThunk = (
     // Get the official
     const { data } = await axios.get(url)
     console.log("DATA: ", data)
+    console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official: data.officials[officialIndex]
+      official:
+        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
     console.log(payload)
     dispatch(getOfficial(payload))
