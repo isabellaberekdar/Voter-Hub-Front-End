@@ -3,10 +3,9 @@ import { createLogger } from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
-import officialsReducer from "./utilities/officials";
-import officialReducer from "./utilities/official";
+import * as reducers from "../reducers";
 
-const rootReducer = combineReducers({ officialsReducer, officialReducer });
+const rootReducer = combineReducers(reducers);
 const logger = createLogger({ collapsed: true });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, logger)

@@ -1,27 +1,13 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from "react";
 import "./App.css";
-
-import { HomeContainer, NotFound, OfficialContainer } from "./components";
+import RoutesContainer from "./components/routes/RoutesContainer";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <navbar>Navbar here</navbar>
-        <Switch>
-          {/* <Route exact path='/' component={Homepage} /> */}
-          <Route exact path="/" component={HomeContainer} />
-          <Route
-            exact
-            path="/official/:division/:office/:index"
-            component={OfficialContainer}
-          />
-          <Route component={NotFound} />
-          <div></div>
-        </Switch>
-        <footer>Footer here</footer>
-      </Router>
+      <header className="App-header">
+        <RoutesContainer />
+      </header>
     </div>
   );
 }

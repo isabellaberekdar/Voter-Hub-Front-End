@@ -2,26 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
 import HomeView from "../views/HomeView";
-
-import { getOfficialsThunk } from "../../store/utilities/officials";
+import {
+  getOfficialsThunk,
+  getPhotoThunk
+} from "../../store/utilities/official";
 
 class HomeContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { divisions: {}, offices: [], officials: [] };
   }
 
   componentDidMount = () => {
-    this.props
-      .getOfficial({ city: "New York", state: "NY", zip: "10065" })
-      .then(
-        this.setState({
-          // data: this.props.store
-          // offices: this.props.store.offices,
-          // officials: this.props.store.officials
-        })
-      )
-      .then("orange", console.log(this.state));
+    this.props.getOfficialsThunk({
+      city: "New York",
+      state: "NY",
+      zip: "10065"
+    });
   };
 
   // handleChange = event => {
@@ -40,12 +36,6 @@ class HomeContainer extends Component {
 
   render() {
     console.log("apple", this.props.store);
-    // if (this.props.store) {
-    //   console.log("meow", this.props.store.divisions);
-    //   console.log("meow", this.props.store.offices);
-    //   console.log("meow", this.props.store.officials);
-    // }
-
     return (
       <div>
         <h1>HomeContainer here</h1>
@@ -56,12 +46,18 @@ class HomeContainer extends Component {
 }
 
 const mapState = state => {
-  return { store: state.officialsReducer.officials };
+  console.log(state);
+  return {
+    photo: state.official,
+    store: state.official.officials
+  };
 };
 
 const mapDispatch = dispatch => {
   return {
-    getOfficial: address => dispatch(getOfficialsThunk(address))
+    getPhotoThunk: (first, last, state) =>
+      dispatch(getPhotoThunk(first, last, state)),
+    getOfficialsThunk: address => dispatch(getOfficialsThunk(address))
   };
 };
 
