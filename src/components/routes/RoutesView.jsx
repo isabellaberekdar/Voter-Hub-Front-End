@@ -14,8 +14,9 @@ const RoutesView = (props) => {
  */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-      
-        <Route exact path="/official/:state"component={OfficialContainer} /> 
+        
+        {/* placeOrCounty and placeOrCountyName are optional */}
+        <Route exact path="/official/*"component={OfficialContainer} /> 
 
 {/*         <Route exact path="/Official" component={OfficialContainer} />
  */}        <Route component={NotFound} />

@@ -83,36 +83,12 @@ ocd-division/country:us/state:ny
 
 */
 
-export const getOfficialThunk = (divisionId, index = 0) => async dispatch => {
+// Note: I think this function won't work for the president/vp
+export const getOfficialThunk = (state, placeOrCounty = null, placeOrCountyName = null, index = 0) => async dispatch => {
   try {
-    // divisionId will look something like: ocd-division/country:us/state:ny/place:new_york
-    // split this by / first
-    const query = divisionId.split('/')  
-
-    // To do: state will not exist for the pres/vp so this needs to change
-
-
-    // Now looks like: [ocd-division, country:us, state:ny, place:new_york]
-    // Get the state from query[2]
-    const state = query[2].split(':')[1]
-
-
-    // If query[3] exists, we want to know if it specifies a place or county and what the name of it is
-    let placeOrCounty = null
-    let placeOrCountyName = null
-    if (query.length > 3) {
-      [ placeOrCounty, placeOrCountyName ] = query[3].split(':')
-    }
-    
-    console.log('query: ', query)
-    console.log('state: ', state)
-
-    console.log('placeOrCounty: ', placeOrCounty)
-    console.log('placeOrCountyName: ', placeOrCountyName)
     let url = ''
     if (placeOrCounty) {
       url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}%2F${placeOrCounty}%3A${placeOrCountyName}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
-      
     }
     else {
       url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`

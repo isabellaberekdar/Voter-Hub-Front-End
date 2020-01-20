@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { action } from "../../store/utilities/Official"; // Get the action creator for ____?
 import OfficialView from "../views/OfficialView";
 import {getOfficialThunk} from '../../store/utilities/official' 
 
 
 class OfficialContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+  componentDidMount() {
+    // Fetch the object from the Google api that has information about the government official
 
+    // First, get the necessary values from the url
+    const [state, placeOrCounty, placeOrCountyName, index] = this.props.match.params[0].split('/')
+    console.log(state, placeOrCounty, placeOrCountyName, index)
+    this.props.getOfficial(state, placeOrCounty, placeOrCountyName, index)
+    console.log(this.props)
+  }
   render() {
     return (
       <div>
@@ -37,7 +41,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getOfficial: (divisionId, index) => dispatch(getOfficialThunk(divisionId, index))
+    getOfficial: (state, placeOrCounty, placeOrCountyName, index) => dispatch(getOfficialThunk(state, placeOrCounty, placeOrCountyName, index))
 
   };
 };
