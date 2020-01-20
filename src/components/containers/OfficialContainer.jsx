@@ -12,14 +12,25 @@ class OfficialContainer extends Component {
     return (
       <div>
         <h1>OfficialContainer here</h1>
-        <OfficialView />
+        <OfficialView
+          division="division here"
+          office="office here"
+          official="official here"
+        />
       </div>
     );
   }
 }
 
 const mapState = state => {
-  return {};
+  // let studentInfo = state.studentReducer.allStudents[ownProps.match.params.id];
+  return {
+    // studentInfo: studentInfo,
+    // campus: state.campusReducer.allCampuses[studentInfo.campus],
+    division: "state.google.divisions",
+    office: "state.google.offices",
+    official: "state.google.officials"
+  };
 };
 
 const mapDispatch = dispatch => {
