@@ -22,6 +22,7 @@ const OfficialCard = props => {
                 href={
                   "https://www.facebook.com/" + props.official.channels[key].id
                 }
+                target="blank"
               >
                 https://www.facebook.com/{props.official.channels[key].id}
               </a>
@@ -36,6 +37,7 @@ const OfficialCard = props => {
             <p>
               <a
                 href={"https://twitter.com/" + props.official.channels[key].id}
+                target="blank"
               >
                 https://twitter.com/{props.official.channels[key].id}
               </a>
@@ -53,6 +55,7 @@ const OfficialCard = props => {
                   "https://www.youtube.com/user/" +
                   props.official.channels[key].id
                 }
+                target="blank"
               >
                 https://www.youtube.com/user/{props.official.channels[key].id}
               </a>
@@ -82,16 +85,18 @@ const OfficialCard = props => {
 
   return (
     <div className="official-card">
-      <h3>OfficialCard here</h3>
-      <p>{props.office.name}</p>
-      <p>{props.office.divisionId}</p>
+      <center>
+        <h2><b>{props.office.name}</b></h2>
+        <h3>{props.official.name}</h3>
+        <p><b>Party: </b>{props.official.party}</p>
+      </center>
+      {/* <p>{props.office.divisionId}</p> */}
       {/* Some offices don't have levels or roles, so we need to check if they have them before trying to access them by index, or else it will result in an error. */}
-      {props.office.levels ? <p>{props.office.levels[0]}</p> : <div></div>}
-      {props.office.roles ? <p>{props.office.roles[0]}</p> : <div></div>}
-      <p>{props.official.name}</p>
-      <p>{props.official.party}</p>
+      {/* {props.office.levels ? <p>{props.office.levels[0]}</p> : <div></div>}
+      {props.office.roles ? <p>{props.office.roles[0]}</p> : <div></div>} */}
+      
       {props.official.photoUrl ? (
-        <img src={props.official.photoUrl} width="200px" />
+        <center><img src={props.official.photoUrl} width="130px" /></center>
       ) : (
         <div></div>
       )}
@@ -111,13 +116,13 @@ const OfficialCard = props => {
       {/* Officials will usually have one phone, url, and email */}
       {props.official.phones ? <p>{props.official.phones[0]}</p> : <div></div>}
       {props.official.urls ? (
-        <a href={props.official.urls[0]}>{props.official.urls[0]}</a>
+        <a href={props.official.urls[0]}  target="blank">{props.official.urls[0]}  </ a>
       ) : (
         <div></div>
       )}
       {props.official.emails ? (
         <p>
-          <a href={"mailto:" + props.official.emails[0]}>
+          <a href={"mailto:" + props.official.emails[0]} target="blank">
             {props.official.emails[0]}
           </a>
         </p>
