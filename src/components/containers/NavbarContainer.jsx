@@ -9,6 +9,7 @@ class NavbarContainer extends Component {
     render() {
       return (
         // <RoutesView isLoggedIn={this.props.isLoggedIn} />
+        <div>
         <div className="navbar">
             <div className="left-navbar-content">
                 <img src='/images/siteicon.png' width="28px" height="28px"></img>
@@ -25,13 +26,6 @@ class NavbarContainer extends Component {
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Signup</Link>
             </div>
-        </div>
-        <div className="navbar-links">
-          <Link to="/">Home</Link>
-          <Link to="/Official">Officials</Link>
-          <Link>Upcoming Events</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
         </div>
       </div>
     )
