@@ -10,16 +10,18 @@ const RoutesView = (props) => {
     <Switch>
         {/* Routes placed within this section are available to all visitors */}
         {/* <navbar>Navbar here</navbar> */}
-        <Route exact path="/" component={HomeContainer} />
-
+{/*         <Route exact path="/" component={HomeContainer} />
+ */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-      
-      
-        {/* <Route exact path='/' component={Homepage} /> */}
-        <Route exact path="/Official" component={OfficialContainer} />
-        <Route component={NotFound} />
-        <div></div>
+        
+        {/* placeOrCounty and placeOrCountyName are optional */}
+        <Route exact path="/official/:state/:index"component={OfficialContainer} /> 
+
+{/*         <Route exact path="/Official" component={OfficialContainer} />
+ */}        <Route component={NotFound} />
+
+
         <footer>Footer here</footer>
     
 
