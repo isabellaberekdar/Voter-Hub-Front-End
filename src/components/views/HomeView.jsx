@@ -1,10 +1,7 @@
 import React from "react";
 
 import { OfficialCard } from "..";
-
-// If you need cards or styling, you can uncomment the lines here to import
-// import "./HomeView.css";
-// import { OfficialCard } from "../";
+import "./Home.css";
 
 const HomeView = props => {
   console.log("meow", props.data);
@@ -129,20 +126,24 @@ const HomeView = props => {
   console.log(props);
   return (
     <div>
-      <h2>HomeView here</h2>
-      <form onSubmit={props.handleSubmit}>
-        <label>Your address</label>
-        <input
-          type="text"
-          name="address"
-          placeholder="Enter your address here..."
-          onChange={props.handleChange}
-          value={props.address_input}
-        />
-        <input className="test-submit-button" type="submit" />
-      </form>
-
-      {officialCards}
+      <div className="header">
+        <img src="/images/homeheader.png" alt="header of homepage" width="100%" />
+        <div className="centered">
+          <form onSubmit={props.handleSubmit}>
+            <input
+              type="text"
+              name="address"
+              placeholder="Enter your address to find who represents you..."
+              onChange={props.handleChange}
+              value={props.address_input}
+              id="address-entry"
+            />
+          </form>
+          </div>
+        </div>
+        <div className="home-content">
+          {officialCards}
+        </div>
     </div>
   );
 };

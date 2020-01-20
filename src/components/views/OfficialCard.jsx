@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 // import PropTypes from "prop-types";
 
-import "../views/OfficialCard.css";
+import "../views/OfficialCard.css"
 
 const OfficialCard = props => {
-  console.log(props.office.divisionId);
-  console.log(props.officeIndex);
-  console.log(props.officialIndex);
+  console.log(props.office.divisionId)
+  console.log(props.officeIndex)
+  console.log(props.officialIndex)
 
   let officialPageUrl =
     "/" +
@@ -16,11 +16,11 @@ const OfficialCard = props => {
     "/" +
     props.officeIndex +
     "/" +
-    props.officialIndex;
-  console.log(officialPageUrl);
+    props.officialIndex
+  console.log(officialPageUrl)
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
-  let channels = [];
+  let channels = []
   if (props.official.channels) {
     for (let key in props.official.channels) {
       if (props.official.channels.hasOwnProperty(key)) {
@@ -35,11 +35,12 @@ const OfficialCard = props => {
                 href={
                   "https://www.facebook.com/" + props.official.channels[key].id
                 }
+                target="blank"
               >
                 https://www.facebook.com/{props.official.channels[key].id}
               </a>
             </p>
-          );
+          )
         } else if (props.official.channels[key].type == "Twitter") {
           // console.log(
           //   "Twitter: ",
@@ -49,11 +50,12 @@ const OfficialCard = props => {
             <p>
               <a
                 href={"https://twitter.com/" + props.official.channels[key].id}
+                target="blank"
               >
                 https://twitter.com/{props.official.channels[key].id}
               </a>
             </p>
-          );
+          )
         } else if (props.official.channels[key].type == "YouTube") {
           // console.log(
           //   "YouTube: ",
@@ -66,11 +68,12 @@ const OfficialCard = props => {
                   "https://www.youtube.com/user/" +
                   props.official.channels[key].id
                 }
+                target="blank"
               >
                 https://www.youtube.com/user/{props.official.channels[key].id}
               </a>
             </p>
-          );
+          )
         }
       }
     }
@@ -79,14 +82,14 @@ const OfficialCard = props => {
   // Some officials don't have an address.
   // The address is an array holding a single object of address lines. Kind of weird.
   // Some addresses have a line2 and line3 etc in addition to just a line1 (Andrew M. Cuomo). So we'll have to iterate through them somehow, ignoring any that are just blank strings "".
-  let addressLines = [];
+  let addressLines = []
   if (props.official.address) {
     for (let index in props.official.address) {
       if (props.official.address.hasOwnProperty(index)) {
         for (let key in props.official.address[0]) {
           if (props.official.address[0][key] !== "") {
-            console.log(props.official.address[0][key]);
-            addressLines.push(<p>{props.official.address[0][key]}</p>);
+            console.log(props.official.address[0][key])
+            addressLines.push(<p>{props.official.address[0][key]}</p>)
           }
         }
       }
@@ -95,17 +98,26 @@ const OfficialCard = props => {
 
   return (
     <div className="official-card">
-      <h3>OfficialCard here</h3>
       <a href={officialPageUrl}>officialPageUrl</a>
-      <p>{props.office.name}</p>
-      <p>{props.office.divisionId}</p>
+      <center>
+        <h2>
+          <b>{props.office.name}</b>
+        </h2>
+        <h3>{props.official.name}</h3>
+        <p>
+          <b>Party: </b>
+          {props.official.party}
+        </p>
+      </center>
+      {/* <p>{props.office.divisionId}</p> */}
       {/* Some offices don't have levels or roles, so we need to check if they have them before trying to access them by index, or else it will result in an error. */}
-      {props.office.levels ? <p>{props.office.levels[0]}</p> : <div></div>}
-      {props.office.roles ? <p>{props.office.roles[0]}</p> : <div></div>}
-      <p>{props.official.name}</p>
-      <p>{props.official.party}</p>
+      {/* {props.office.levels ? <p>{props.office.levels[0]}</p> : <div></div>}
+      {props.office.roles ? <p>{props.office.roles[0]}</p> : <div></div>} */}
+
       {props.official.photoUrl ? (
-        <img src={props.official.photoUrl} width="200px" />
+        <center>
+          <img src={props.official.photoUrl} width="130px" />
+        </center>
       ) : (
         <div></div>
       )}
@@ -125,13 +137,15 @@ const OfficialCard = props => {
       {/* Officials will usually have one phone, url, and email */}
       {props.official.phones ? <p>{props.official.phones[0]}</p> : <div></div>}
       {props.official.urls ? (
-        <a href={props.official.urls[0]}>{props.official.urls[0]}</a>
+        <a href={props.official.urls[0]} target="blank">
+          {props.official.urls[0]}{" "}
+        </a>
       ) : (
         <div></div>
       )}
       {props.official.emails ? (
         <p>
-          <a href={"mailto:" + props.official.emails[0]}>
+          <a href={"mailto:" + props.official.emails[0]} target="blank">
             {props.official.emails[0]}
           </a>
         </p>
@@ -140,8 +154,8 @@ const OfficialCard = props => {
       )}
       {channels}
     </div>
-  );
-};
+  )
+}
 
 // StudentCard.propTypes = {
 //   image: PropTypes.string.isRequired,
@@ -152,4 +166,4 @@ const OfficialCard = props => {
 //   buttonText: PropTypes.string.isRequired
 // };
 
-export default OfficialCard;
+export default OfficialCard
