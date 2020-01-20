@@ -27,6 +27,7 @@ const HomeView = props => {
             official={
               props.store.officials[props.store.offices[i].officialIndices[j]]
             }
+            index={j}
           />
         );
       }

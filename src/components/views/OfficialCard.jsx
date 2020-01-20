@@ -5,7 +5,6 @@ import "../views/OfficialCard.css";
 
 const OfficialCard = props => {
   console.log(props);
-  console.log(props.official.address);
 
   {
     /* Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ with the type is "Facebook" */
@@ -15,10 +14,10 @@ const OfficialCard = props => {
     for (let key in props.official.channels) {
       if (props.official.channels.hasOwnProperty(key)) {
         if (props.official.channels[key].type == "Facebook") {
-          console.log(
-            "Facebook: ",
-            "https://www.facebook.com/" + props.official.channels[key].id
-          );
+          // console.log(
+          //   "Facebook: ",
+          //   "https://www.facebook.com/" + props.official.channels[key].id
+          // );
           channels.push(
             <p>
               <a
@@ -31,10 +30,10 @@ const OfficialCard = props => {
             </p>
           );
         } else if (props.official.channels[key].type == "Twitter") {
-          console.log(
-            "Twitter: ",
-            "https://twitter.com/" + props.official.channels[key].id
-          );
+          // console.log(
+          //   "Twitter: ",
+          //   "https://twitter.com/" + props.official.channels[key].id
+          // );
           channels.push(
             <p>
               <a
@@ -45,10 +44,10 @@ const OfficialCard = props => {
             </p>
           );
         } else if (props.official.channels[key].type == "YouTube") {
-          console.log(
-            "YouTube: ",
-            "https://www.youtube.com/user/" + props.official.channels[key].id
-          );
+          // console.log(
+          //   "YouTube: ",
+          //   "https://www.youtube.com/user/" + props.official.channels[key].id
+          // );
           channels.push(
             <p>
               <a
