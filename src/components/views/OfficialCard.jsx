@@ -84,23 +84,46 @@ const OfficialCard = props => {
   // Some addresses have a line2 and line3 etc in addition to just a line1 (Andrew M. Cuomo). So we'll have to iterate through them somehow, ignoring any that are just blank strings "".
   let addressLines = []
   if (props.official.address) {
-    for (let index in props.official.address) {
-      if (props.official.address.hasOwnProperty(index)) {
-        for (let key in props.official.address[0]) {
-          if (props.official.address[0][key] !== "") {
-            console.log(props.official.address[0][key])
-            addressLines.push(<p>{props.official.address[0][key]}</p>)
-          }
+    if (props.official.address.hasOwnProperty(0)) {
+      let lines = []
+      let line2 = ""
+      for (let key in props.official.address[0]) {
+        if (["line1", "line2", "line3", "line4"].includes(key)) {
+          // console.log(props.official.address[0][key])
+          lines.push(<p>{props.official.address[0][key]}</p>)
+        } else if (key === "city") {
+          // console.log(props.official.address[0][key])
+          line2 = line2 + props.official.address[0][key]
+        } else if (key === "state") {
+          // console.log(props.official.address[0][key])
+          line2 = line2 + ", " + props.official.address[0][key]
+        } else if (key === "zip") {
+          // console.log(props.official.address[0][key])
+          line2 = line2 + " " + props.official.address[0][key]
         }
       }
+      addressLines.push(lines)
+      addressLines.push(<p>{line2}</p>)
     }
   }
+  //   for (let index in props.official.address) {
+  //     if (props.official.address.hasOwnProperty(index)) {
+  //       for (let key in props.official.address[0]) {
+
+  //         if (props.official.address[0][key] !== "") {
+  //           console.log(props.official.address[0][key])
+  //           addressLines.push(<p>{props.official.address[0][key]}</p>)
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   return (
     <div className="official-card">
       <a href={officialPageUrl}>officialPageUrl</a>
       <center>
-        <h2>
+        <h2 id="office-name">
           <b>{props.office.name}</b>
         </h2>
         <h3>{props.official.name}</h3>
@@ -119,7 +142,9 @@ const OfficialCard = props => {
           <img src={props.official.photoUrl} width="130px" />
         </center>
       ) : (
-        <div></div>
+        <center>
+          <img src="./images/placeholder.png" target="blank" height="162.5px"></img>
+        </center>
       )}
 
       {props.official.address ? (

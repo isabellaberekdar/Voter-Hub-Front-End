@@ -24,6 +24,10 @@
   src: url('../views/fonts/RobotoSlab-Bold.ttf');
 }
 
+h2#office-name {
+  height: 50px;
+}
+
 .official-card {
   display: inline-block;
   min-height: 650px;

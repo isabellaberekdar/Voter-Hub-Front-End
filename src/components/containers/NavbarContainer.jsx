@@ -11,7 +11,7 @@ class NavbarContainer extends Component {
         // <RoutesView isLoggedIn={this.props.isLoggedIn} />
         <div className="navbar">
             <div className="left-navbar-content">
-                <img src='./images/siteicon.png' width="28px" height="28px"></img>
+                <img src='images/siteicon.png' width="28px" height="28px"></img>
                 <div>
                     <Link to="/">
                         <h1>Voter Hub</h1>
