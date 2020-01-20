@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { action } from "../../store/utilities/Official"; // Get the action creator for ____?
 import OfficialView from "../views/OfficialView";
+import {getOfficialThunk} from '../../store/utilities/official' 
+
 
 class OfficialContainer extends Component {
   constructor(props) {
@@ -12,18 +14,32 @@ class OfficialContainer extends Component {
     return (
       <div>
         <h1>OfficialContainer here</h1>
-        <OfficialView />
+        <OfficialView
+          division="division here"
+          office="office here"
+          official="official here"
+        />
       </div>
     );
   }
 }
 
 const mapState = state => {
-  return {};
+  // let studentInfo = state.studentReducer.allStudents[ownProps.match.params.id];
+  return {
+    // studentInfo: studentInfo,
+    // campus: state.campusReducer.allCampuses[studentInfo.campus],
+    division: "state.google.divisions",
+    office: "state.google.offices",
+    official: "state.google.officials"
+  };
 };
 
 const mapDispatch = dispatch => {
-  return {};
+  return {
+    getOfficial: (divisionId, index) => dispatch(getOfficialThunk(divisionId, index))
+
+  };
 };
 
 export default connect(mapState, mapDispatch)(OfficialContainer);

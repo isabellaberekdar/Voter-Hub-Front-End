@@ -1,9 +1,10 @@
-import axios from "axios"
+import axios from "axios";
 
 // ACTION TYPES
-const GET_SINGLE_OFFICIAL = "GET_SINGLE_OFFICIAL"
-const GET_OFFICIAL = "GET_OFFICIAL"
-const GET_PHOTO = "GET_PHOTO"
+const GET_OFFICIAL = "GET_OFFICIAL";
+const GET_OFFICIALS = "GET_OFFICIALS";
+const GET_PHOTO = "GET_PHOTO";
+
 // ACTION CREATORS
 /* ** move api keys out ** */
 
@@ -11,68 +12,41 @@ const getOfficial = official => {
   return {
     type: GET_OFFICIAL,
     payload: official
-  }
-}
+  };
+};
+
+const getOfficials = officials => {
+  return {
+    type: GET_OFFICIALS,
+    payload: officials
+  };
+};
 
 const getPhoto = photo => {
   return {
     type: GET_PHOTO,
     payload: photo
-  }
-}
-
-const getSingleOfficial = official => {
-  return {
-    type: GET_SINGLE_OFFICIAL,
-    payload: official
-  }
-}
+  };
+};
 
 // THUNK CREATORS
-export const getOfficialThunk = address => async dispatch => {
+export const getOfficialsThunk = address => async dispatch => {
+  // console.log(address);
   try {
     // Query the api for the officials associated with the given address
-    const data = await axios.get(
-      `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
-    )
-    console.log(data)
-    dispatch(getOfficial(data))
-  } catch (error) {
-    console.log("Error in getOfficialThunk:", error)
-  }
-}
-
-// see if there is a faster way to get the id
-// senate only?
-// Note: can get larger photos by replacing '225x275' with '450x550' or 'original'
-export const getPhotoThunk = (first, last, state) => async dispatch => {
-  try {
-    // get small list of local officials
     const { data } = await axios.get(
-      `https://api.propublica.org/congress/v1/members/senate/${state}/current.json`,
-      {
-        headers: {
-          "X-API-Key": "5nyWHyGLejmxUBanKJgsUjLedZa1IpLHIDxJVTr3"
-        }
-      }
-    )
-
-    // look for the official with the given name
-    const person = data.results.find(
-      person => person.first_name === first && person.last_name === last
-    )
-
-    // use the id to find their photo
-    if (person) {
-      const photo = `https://theunitedstates.io/images/congress/225x275/${person.id}.jpg`
-      dispatch(getPhoto(photo))
-    } else {
-      // if -1, the official was not found. Supply a default photo
-    }
+      `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
+    );
+    console.log("canteloupe", data);
+    dispatch(getOfficials(data));
   } catch (error) {
-    console.log("Error in getPhotoThunk:", error)
+    console.log("Error in getOfficialsThunk:", error);
   }
-}
+};
+
+
+
+
 
 
 /* 
@@ -106,9 +80,10 @@ ocd-division/country:us/state:ny
   -The position of the official in the array. Defaults to 0
 
   page links should look like /NY/place/nameofplace/index
+
 */
 
- export const getSingleOfficialThunk = (divisionId, index = 0) => async dispatch => {
+export const getOfficialThunk = (divisionId, index = 0) => async dispatch => {
   try {
     // divisionId will look something like: ocd-division/country:us/state:ny/place:new_york
     // split this by / first
@@ -146,55 +121,73 @@ ocd-division/country:us/state:ny
     // Get the official
     const {data} = await axios.get(url)
     console.log('DATA: ', data.officials[index])
-    dispatch(getSingleOfficial(data.officials[index]))
+    dispatch(getOfficial(data.officials[index]))
 
   } catch (error) {
-    console.log("Error in getSingleOfficialThunk:", error)
+    console.log("Error in getOfficialThunk:", error)
   }
 }
 
 
 
 
-/* export const getSingleOfficialThunk = (first, last, state, index = 0, placeOrCounty = '', placeOrCountyName = '') => async dispatch => {
+
+
+
+// see if there is a faster way to get the id
+// senate only?
+export const getPhotoThunk = (first, last, state) => async dispatch => {
   try {
-    let url = ''
-    if (placeOrCounty === '') {
-      url = 
+    // get small list of local officials
+    const { data } = await axios.get(
+      `https://api.propublica.org/congress/v1/members/senate/${state}/current.json`,
+      {
+        headers: {
+          "X-API-Key": "5nyWHyGLejmxUBanKJgsUjLedZa1IpLHIDxJVTr3"
+        }
+      }
+    );
+    // look for the official with the given name
+    const person = data.results.find(
+      person => person.first_name === first && person.last_name === last
+    );
+    // use the id to find their photo
+    if (person) {
+      const photo = `https://theunitedstates.io/images/congress/225x275/${person.id}.jpg`;
+      dispatch(getPhoto(photo));
+    } else {
+      // if -1, the official was not found. Supply a default photo
     }
-    else {
-      url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}%2F${placeOrCounty} %3A${placeOrCountyName}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
-    } 
-    const data = await axios.get(
-      url
-    )    
   } catch (error) {
-    console.log("Error in getSingleOfficialThunk:", error)
+    console.log("Error in getPhotoThunk:", error);
   }
-} */
+};
+
+const initialState = {};
 
 // REDUCER
-const reducer = (state = {}, action) => {
+const officialReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_OFFICIAL:
+    case GET_OFFICIALS:
       // create a new object, copy over everything from state, then add the new officials data that was fetched
       return {
         ...state,
         officials: action.payload
-      }
+      };
+    case GET_OFFICIAL:
+      // create a new object, copy over everything from state, then add the new officials data that was fetched
+      return {
+        ...state,
+        official: action.payload
+      };
     case GET_PHOTO:
       return {
         ...state,
         photo: action.payload
-      }
-    case GET_SINGLE_OFFICIAL:
-      return {
-        ...state,
-        singleOfficial: action.payload
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default reducer
+export default officialReducer;

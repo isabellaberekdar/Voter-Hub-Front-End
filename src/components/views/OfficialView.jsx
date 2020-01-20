@@ -2,7 +2,7 @@ import React from "react";
 import Disqus from "disqus-react";
 
 // If you need cards or styling, you can uncomment the lines here to import
-import { OfficialCard } from "..";
+// import { OfficialCard } from "..";
 import "./OfficialView.css";
 
 const OfficialView = props => {
@@ -17,7 +17,10 @@ const OfficialView = props => {
   return (
     <div>
       <h2>OfficialView here</h2>
-      <OfficialCard />
+      {/* <OfficialCard /> */}
+      <p>Division</p>
+      <p>Office</p>
+      <p>Official</p>
       <div className="disqus-container">
         <Disqus.DiscussionEmbed
           shortname={disqusShortname}
