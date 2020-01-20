@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
-import { getOfficialThunk } from "../../store/utilities/official"
+import { getOfficialThunk, getPhotoThunk } from "../../store/utilities/official"
 
 class OfficialContainer extends Component {
   componentDidMount() {
@@ -12,13 +12,20 @@ class OfficialContainer extends Component {
     const index = this.props.match.params.index
     console.log(state, index)
     this.props.getOfficial(state, index)
-    console.log(this.props)
+    // check if there is a photo. If not, go find one
+
+
   }
+  
   render() {
+    console.log(this.props.official)
     return (
       <div>
-        <h1>OfficialContainer here</h1>
-        <OfficialView division='division here' office='office here' official='official here' />
+        <h1>OfficialContainer here</h1>{
+          this.props.official &&
+         <img src={this.props.official.photoUrl} />
+        }
+         <OfficialView division='division here' office='office here' official='official here' />
       </div>
     )
   }
@@ -31,13 +38,18 @@ const mapState = state => {
     // campus: state.campusReducer.allCampuses[studentInfo.campus],
     division: "state.google.divisions",
     office: "state.google.offices",
-    official: "state.google.officials"
-  }
+    official: state.official.official
+
+/*     official: "state.google.officials"
+
+ */  }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getOfficial: (state, index) => dispatch(getOfficialThunk(state, index))
+    getOfficial: (state, index) => dispatch(getOfficialThunk(state, index)),
+    getPhoto: (number, state) => dispatch(getPhotoThunk(number, state))
+
   }
 }
 

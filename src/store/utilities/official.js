@@ -112,6 +112,7 @@ export const getOfficialThunk = (state, index = 0) => async dispatch => {
 
 // see if there is a faster way to get the id
 // senate only?
+// Middle initial???? maybe better to search by phone number
 export const getPhotoThunk = (first, last, state) => async dispatch => {
   try {
     // get small list of local officials
