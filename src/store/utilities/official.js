@@ -70,29 +70,29 @@ ocd-division/country:us/state:ny/county:new_york
 
 NY Attorney General/NY State Comptroller
 ocd-division/country:us/state:ny
-
+ 
 -index of the rep in the array (defaults to 0)
 */
+// index should be based on this api call:
+// https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=NY
+// because the index will not be useful if the api call varies
 
 /* 
   Information that should be passed into the thunk:
-  -the divisionId: ocd-division/country:us/state:ny
-  -The position of the official in the array. Defaults to 0
-
-  page links should look like /NY/place/nameofplace/index
-
+  -state: 'NY', 'CA', etc
 */
 
-// Note: I think this function won't work for the president/vp
-export const getOfficialThunk = (state, placeOrCounty = null, placeOrCountyName = null, index = 0) => async dispatch => {
+export const getOfficialThunk = (state, index = 0) => async dispatch => {
   try {
-    let url = ''
+
+    let url = `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${state}`
+    /* 
     if (placeOrCounty) {
       url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}%2F${placeOrCounty}%3A${placeOrCountyName}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
     }
     else {
       url = `https://www.googleapis.com/civicinfo/v2/representatives/ocd-division%2Fcountry%3Aus%2Fstate%3A${state}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
-    } 
+    }  */
 
     // Get the official
     const {data} = await axios.get(url)

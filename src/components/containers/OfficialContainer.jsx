@@ -1,30 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import OfficialView from "../views/OfficialView";
-import {getOfficialThunk} from '../../store/utilities/official' 
-
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import OfficialView from "../views/OfficialView"
+import { getOfficialThunk } from "../../store/utilities/official"
 
 class OfficialContainer extends Component {
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
 
     // First, get the necessary values from the url
-    const [state, placeOrCounty, placeOrCountyName, index] = this.props.match.params[0].split('/')
-    console.log(state, placeOrCounty, placeOrCountyName, index)
-    this.props.getOfficial(state, placeOrCounty, placeOrCountyName, index)
+    const state = this.props.match.params.state
+    const index = this.props.match.params.index
+    console.log(state, index)
+    this.props.getOfficial(state, index)
     console.log(this.props)
   }
   render() {
     return (
       <div>
         <h1>OfficialContainer here</h1>
-        <OfficialView
-          division="division here"
-          office="office here"
-          official="official here"
-        />
+        <OfficialView division='division here' office='office here' official='official here' />
       </div>
-    );
+    )
   }
 }
 
@@ -36,14 +32,13 @@ const mapState = state => {
     division: "state.google.divisions",
     office: "state.google.offices",
     official: "state.google.officials"
-  };
-};
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
-    getOfficial: (state, placeOrCounty, placeOrCountyName, index) => dispatch(getOfficialThunk(state, placeOrCounty, placeOrCountyName, index))
+    getOfficial: (state, index) => dispatch(getOfficialThunk(state, index))
+  }
+}
 
-  };
-};
-
-export default connect(mapState, mapDispatch)(OfficialContainer);
+export default connect(mapState, mapDispatch)(OfficialContainer)
