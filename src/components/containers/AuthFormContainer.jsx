@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { auth, logout } from "../../thunks";
 import { AuthFormView } from "../views";
+import { Redirect } from "react-router-dom"
+import { withRouter } from "react-router-dom"
+
 
 // Smart container;
 class AuthFormContainer extends Component {
@@ -24,6 +27,9 @@ class AuthFormContainer extends Component {
   }
 
   render() {
+    if(this.props.isLoggedIn) 
+      return <Redirect to="/"/>
+
     return (
       <AuthFormView
         name={this.props.name}
@@ -37,6 +43,13 @@ class AuthFormContainer extends Component {
     );
   }
 };
+
+
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.user.id,
+  }
+}
 
 // Map state to props;
 const mapLogin = state => {
@@ -71,3 +84,4 @@ const mapDispatch = dispatch => {
 export const Login = connect(mapLogin, mapDispatch)(AuthFormContainer);
 export const Signup = connect(mapSignup, mapDispatch)(AuthFormContainer);
 export const Logout = connect(null, mapDispatch)(AuthFormContainer);
+export default withRouter(connect(mapState, mapDispatch)(AuthFormContainer));

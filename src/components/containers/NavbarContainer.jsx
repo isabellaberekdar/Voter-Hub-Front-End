@@ -7,24 +7,16 @@ import { me } from "../../thunks"
 import "../views/Navbar.css"
 
 class NavbarContainer extends Component {
-    // handleLogout = () => {
-    //   logout();
-    // }
 
     render() {
       console.log(this.props)
-      let logInOrOut; 
+      let logInOrOut, logInLink, logOutLink;
       if(!this.props.isLoggedIn){
-        logInOrOut = <div>
-          <Link to="/login">Login</Link>
-          <Link to="/signup" >Signup</Link>
-        </div>
+        logInLink = <Link to="/login">Login</Link>
+        logOutLink = <Link to="/signup" >Signup</Link>
       }
       else{
-        logInOrOut = <div>
-          {/* <button onClick={this.handleLogout}>Logout</button> */}
-          <Link to="/login" onClick={this.props.logout}>Logout</Link>
-        </div>
+        logInOrOut = <Link to="/" onClick={this.props.logout}>Logout</Link>
       }
 
       return (
@@ -41,17 +33,13 @@ class NavbarContainer extends Component {
             </div>
             <div className="navbar-links">
                 <Link to="/">Home</Link>  
-<<<<<<< HEAD
                 <Link to="/Official">Officials</Link>
                 <Link>Upcoming Events</Link>  
                 {/* <Link to="/login">Login</Link>
                 <Link to="/signup">Signup</Link> */}
+                {logInLink}
+                {logOutLink}
                 {logInOrOut}
-=======
-                <Link>Your Stream</Link>  
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
->>>>>>> 93f2c1858e1be390889149090b1ee334a8e73610
             </div>
         </div>
       </div>
