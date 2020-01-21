@@ -21,8 +21,7 @@ class NavbarContainer extends Component {
             </div>
             <div className="navbar-links">
                 <Link to="/">Home</Link>  
-                <Link to="/Official">Officials</Link>
-                <Link>Upcoming Events</Link>  
+                <Link>Your Stream</Link>  
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Signup</Link>
             </div>

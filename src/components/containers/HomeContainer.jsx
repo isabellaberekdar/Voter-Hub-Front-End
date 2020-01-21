@@ -35,7 +35,7 @@ class HomeContainer extends Component {
   blurFunc = event => {
     console.log("unfocusing");
     this.setState({
-      placeholder: "Enter your address to find who represents you..."
+      placeholder: "Enter Address..."
     })
     if(event.target.value.trim() === "") {
       this.setState({
