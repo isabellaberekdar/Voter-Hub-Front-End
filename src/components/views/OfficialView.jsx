@@ -118,14 +118,13 @@ const OfficialView = props => {
         <div className="portrait">
           {official.photoUrl ? (
             <center>
-              <img src={official.photoUrl} width="130px" />
+              <img src={official.photoUrl}/>
             </center>
           ) : (
             <center>
               <img
                 src="/images/placeholder.png"
                 target="blank"
-                width='130px'
               ></img>
             </center>
           )}

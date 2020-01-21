@@ -139,6 +139,16 @@ h3#join-discussion-title {
     white-space: nowrap;
   }
 
+  .text > a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .text > a:visited {
+    color: white;
+    text-decoration: none;
+  }
+
   .container {
       position: relative;
       width: 100%;
