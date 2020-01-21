@@ -25,6 +25,12 @@ const OfficialView = props => {
     official = props.officialObject.official
   }
 
+  let firstName = ""
+  let lastName = ""
+  if (official.name) {
+    firstName = official.name.substring(0, official.name.lastIndexOf(" "))
+    lastName = official.name.substring(official.name.lastIndexOf(" ") + 1)
+  }
   console.log(office)
   console.log(official)
 
@@ -36,38 +42,35 @@ const OfficialView = props => {
         if (official.channels[key].type == "Facebook") {
           channels.push(
             <p>
-              <img className="social-icon" src="/images/socialfacebook.svg" />
               <a
                 href={"https://www.facebook.com/" + official.channels[key].id}
                 target="blank"
               >
-                https://www.facebook.com/{official.channels[key].id}
+                <img className="social-icon" src="/images/socialfacebook.svg" />
               </a>
             </p>
           )
         } else if (official.channels[key].type == "Twitter") {
           channels.push(
             <p>
-              <img className="social-icon" src="/images/socialtwitter.svg" />
               <a
                 href={"https://twitter.com/" + official.channels[key].id}
                 target="blank"
               >
-                https://twitter.com/{official.channels[key].id}
+                <img className="social-icon" src="/images/socialtwitter.svg" />
               </a>
             </p>
           )
         } else if (official.channels[key].type == "YouTube") {
           channels.push(
             <p>
-              <img className="social-icon" src="/images/socialyoutube.svg" />
               <a
                 href={
                   "https://www.youtube.com/user/" + official.channels[key].id
                 }
                 target="blank"
               >
-                https://www.youtube.com/user/{official.channels[key].id}
+                <img className="social-icon" src="/images/socialyoutube.svg" />
               </a>
             </p>
           )
@@ -125,8 +128,14 @@ const OfficialView = props => {
             </center>
           )}
         </div>
+
         <div className="info">
-          <p>{official.name}</p>
+          <p className="first-name">
+            <b>{firstName}</b>
+          </p>
+          <p className="last-name">
+            <b>{lastName.toUpperCase()}</b>
+          </p>
           <p>
             <b>District: </b>
             {divisionId}
@@ -139,7 +148,14 @@ const OfficialView = props => {
             <b>Party: </b>
             {official.party}
           </p>
-
+          {official.phones ? (
+            <p>
+              <b>Phone: </b>
+              {official.phones[0]}
+            </p>
+          ) : (
+            <div></div>
+          )}
           {official.emails ? (
             <p>
               <b>Email: </b>
@@ -160,14 +176,25 @@ const OfficialView = props => {
           ) : (
             <div></div>
           )}
-          {/* {official.address ? <div>{addressLines}</div> : <div></div>}
-          {official.phones ? <p>{official.phones[0]}</p> : <div></div>} */}
+          {/* {official.address ? <div>{addressLines}</div> : <div></div>} */}
 
-          {official.channels ? channels : <div></div>}
+          {official.channels ? (
+            <div className="social-media-div">
+              <p>
+                <b>Social Media: </b>
+              </p>
+              <div className="social-media-bar">{channels}</div>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
+
         <div className="map"></div>
       </div>
+
       <div className="twitter"></div>
+
       <div className="bing-news"></div>
 
       <div className="disqus-container">
