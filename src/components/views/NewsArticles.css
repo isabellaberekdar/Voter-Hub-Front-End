@@ -1,7 +1,28 @@
 .articles-container {
+  background-color: #F0F0F0;
 
+  /* border-left: 5px solid black; */
 }
 
 .article {
-  
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  /* color: #4df76e */
+}
+
+/* 
+.article > img {
+  width: 700;
+  height: 393;
+}
+ */
+
+
+.article > a {
+  text-decoration: none;
+}
+
+.article-text {
+  margin-left: 20px;
 }

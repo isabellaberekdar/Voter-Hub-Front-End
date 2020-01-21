@@ -2,12 +2,10 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
 import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
-import NewsArticlesContainer from '../views/NewsArticlesContainer'
 
 class OfficialContainer extends Component {
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
-
     // First, get the necessary values from the url
     const state = this.props.match.params.state
     const index = this.props.match.params.index
@@ -27,9 +25,6 @@ class OfficialContainer extends Component {
     return (
       <div>
         <h1>OfficialContainer here</h1>
-        {this.props.official && <img src={this.props.official.photoUrl} />}
-        {this.props.official && <NewsArticlesContainer official={this.props.official.official.name} />}
-        <OfficialView division='division here' office='office here' official='official here' />
         <OfficialView officialObject={this.props.official} />
       </div>
     )

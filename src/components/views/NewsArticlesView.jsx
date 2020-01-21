@@ -9,12 +9,11 @@ const NewsArticlesView = props => {
         ? props.articles.map(article => {
             return (
               <div className='article' key={article.name}>
-                <img src={article.articleThumbnail} />
-                <h3>{article.name}</h3>
-                {article.provider}
-                {article.datePublished}
-                {article.url}
-                {article.description}
+                {/* <img src={article.articleThumbnail} /> */}
+                  <span><i><b>{article.provider}</b></i></span>
+                  <a href={article.url}>{article.name}</a> {/* posted {article.datePublished} */}
+                  
+                  <span>{article.description}</span>
               </div>
             )
           })
