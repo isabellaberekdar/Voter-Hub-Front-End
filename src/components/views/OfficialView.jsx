@@ -201,7 +201,6 @@ const OfficialView = props => {
       <div className="bing-news"></div>
 
       <p>{output}</p>
-      <h1>Latest Headlines...</h1>
       {props.officialObject && <NewsArticlesContainer official={props.officialObject.official.name} />}
 
       <div className="disqus-container">

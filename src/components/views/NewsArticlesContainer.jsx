@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import NewsArticlesView from "./NewsArticlesView"
 import { getArticlesThunk } from "../../store/utilities/official"
 import { connect } from "react-redux"
+
 class NewsArticlesContainer extends React.Component {
   componentDidMount() {
     this.props.getArticles(this.props.official)

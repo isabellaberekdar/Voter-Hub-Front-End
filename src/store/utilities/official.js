@@ -68,7 +68,7 @@ export const getArticlesThunk = name => async dispatch => {
       return {
         name: article.name,
         url: article.url,
-        articleThumbnail: article.image.thumbnail.contentUrl,
+        /* articleThumbnail: article.image.thumbnail.contentUrl, */
         /* providerThumbnail: article.provider[0].image.thumbnail.contentUrl,  */
         description: article.description,
         provider: article.provider[0].name,

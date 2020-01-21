@@ -4,20 +4,26 @@ import "./NewsArticles.css"
 
 const NewsArticlesView = props => {
   return (
-    <div className='articles-container'>
-      {props.articles
-        ? props.articles.map(article => {
-            return (
-              <div className='article' key={article.name}>
-                {/* <img src={article.articleThumbnail} /> */}
-                  <span><i><b>{article.provider}</b></i></span>
+    <div className='headlines'>
+      <h2>Latest Headlines...</h2>
+      <div className='articles-container'>
+        {props.articles
+          ? props.articles.map(article => {
+              return (
+                <div className='article' key={article.name}>
+                  {/* <img src={article.articleThumbnail} /> */}
+                  <span className='headline'>
+                    <i>
+                      <b>{article.provider}</b>
+                    </i>
+                  </span>
                   <a href={article.url}>{article.name}</a> {/* posted {article.datePublished} */}
-                  
-                  <span>{article.description}</span>
-              </div>
-            )
-          })
-        : "There were no articles found about this official."}
+                  {article.description}
+                </div>
+              )
+            })
+          : "There were no articles found about this official."}
+      </div>
     </div>
   )
 }
