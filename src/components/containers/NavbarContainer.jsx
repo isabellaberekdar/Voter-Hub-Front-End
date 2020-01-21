@@ -10,14 +10,16 @@ class NavbarContainer extends Component {
 
     render() {
       console.log(this.props)
-      let logInOrOut, logInLink, logOutLink;
+      let logInOrOut, logInLink, logOutLink, displayUser;
       if(!this.props.isLoggedIn){
         logInLink = <Link to="/login">Login</Link>
         logOutLink = <Link to="/signup" >Signup</Link>
       }
       else{
         logInOrOut = <Link to="/" onClick={this.props.logout}>Logout</Link>
-      }
+        console.log("here is the user email@@@@@@@@", this.props);
+        displayUser = this.props.isLoggedIn ? `The current logged in user is: ${this.props.userEmail}` : ""
+      } 
 
       return (
         // <RoutesView isLoggedIn={this.props.isLoggedIn} />
@@ -40,6 +42,7 @@ class NavbarContainer extends Component {
                 {logInLink}
                 {logOutLink}
                 {logInOrOut}
+                {displayUser}
             </div>
         </div>
       </div>
@@ -50,6 +53,7 @@ class NavbarContainer extends Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
+    userEmail: state.user.email
   }
 }
 

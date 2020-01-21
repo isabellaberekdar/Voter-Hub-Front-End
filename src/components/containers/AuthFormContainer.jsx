@@ -24,6 +24,7 @@ class AuthFormContainer extends Component {
     event.preventDefault();
     const formName = event.target.name;
     this.props.loginOrSignup(this.state.email, this.state.password, formName);
+    console.log("user email", this.props.userEmail);
   }
 
   render() {
