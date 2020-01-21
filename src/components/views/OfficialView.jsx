@@ -25,6 +25,12 @@ const OfficialView = props => {
     official = props.officialObject.official
   }
 
+  let firstName = ""
+  let lastName = ""
+  if (official.name) {
+    firstName = official.name.substring(0, official.name.lastIndexOf(" "))
+    lastName = official.name.substring(official.name.lastIndexOf(" ") + 1)
+  }
   console.log(office)
   console.log(official)
 
@@ -34,40 +40,28 @@ const OfficialView = props => {
     for (let key in official.channels) {
       if (official.channels.hasOwnProperty(key)) {
         if (official.channels[key].type == "Facebook") {
-          // console.log(
-          //   "Facebook: ",
-          //   "https://www.facebook.com/" + official.channels[key].id
-          // );
           channels.push(
             <p>
               <a
                 href={"https://www.facebook.com/" + official.channels[key].id}
                 target="blank"
               >
-                https://www.facebook.com/{official.channels[key].id}
+                <img className="social-icon" src="/images/socialfacebook.svg" />
               </a>
             </p>
           )
         } else if (official.channels[key].type == "Twitter") {
-          // console.log(
-          //   "Twitter: ",
-          //   "https://twitter.com/" + official.channels[key].id
-          // );
           channels.push(
             <p>
               <a
                 href={"https://twitter.com/" + official.channels[key].id}
                 target="blank"
               >
-                https://twitter.com/{official.channels[key].id}
+                <img className="social-icon" src="/images/socialtwitter.svg" />
               </a>
             </p>
           )
         } else if (official.channels[key].type == "YouTube") {
-          // console.log(
-          //   "YouTube: ",
-          //   "https://www.youtube.com/user/" + official.channels[key].id
-          // );
           channels.push(
             <p>
               <a
@@ -76,7 +70,7 @@ const OfficialView = props => {
                 }
                 target="blank"
               >
-                https://www.youtube.com/user/{official.channels[key].id}
+                <img className="social-icon" src="/images/socialyoutube.svg" />
               </a>
             </p>
           )
@@ -113,47 +107,95 @@ const OfficialView = props => {
     }
   }
 
+  console.log(office)
   return (
     <div>
-      <h2>OfficialView here</h2>
+      {/* <h2>OfficialView here</h2> */}
 
-      <p>{divisionId}</p>
-      <p>{office.name}</p>
-      <p>{official.name}</p>
-      <p>{official.party}</p>
-      {official.photoUrl ? (
-        <center>
-          <img src={official.photoUrl} width="130px" />
-        </center>
-      ) : (
-        <center>
-          <img
-            src="/images/placeholder.png"
-            target="blank"
-            height="162.5px"
-          ></img>
-        </center>
-      )}
-      {official.address ? <div>{addressLines}</div> : <div></div>}
-      {official.phones ? <p>{official.phones[0]}</p> : <div></div>}
-      {official.urls ? (
-        <a href={official.urls[0]} target="blank">
-          {official.urls[0]}{" "}
-        </a>
-      ) : (
-        <div></div>
-      )}
-      {official.emails ? (
-        <p>
-          <a href={"mailto:" + official.emails[0]} target="blank">
-            {official.emails[0]}
-          </a>
-        </p>
-      ) : (
-        <div></div>
-      )}
+      <div className="triptych">
+        <div className="portrait">
+          {official.photoUrl ? (
+            <center>
+              <img src={official.photoUrl} width="130px" />
+            </center>
+          ) : (
+            <center>
+              <img
+                src="/images/placeholder.png"
+                target="blank"
+                height="162.5px"
+              ></img>
+            </center>
+          )}
+        </div>
 
-      {official.channels ? channels : <div></div>}
+        <div className="info">
+          <p className="first-name">
+            <b>{firstName}</b>
+          </p>
+          <p className="last-name">
+            <b>{lastName.toUpperCase()}</b>
+          </p>
+          <p>
+            <b>District: </b>
+            {divisionId}
+          </p>
+          <p>
+            <b>Title: </b>
+            {office.name}
+          </p>
+          <p>
+            <b>Party: </b>
+            {official.party}
+          </p>
+          {official.phones ? (
+            <p>
+              <b>Phone: </b>
+              {official.phones[0]}
+            </p>
+          ) : (
+            <div></div>
+          )}
+          {official.emails ? (
+            <p>
+              <b>Email: </b>
+              <a href={"mailto:" + official.emails[0]} target="blank">
+                {official.emails[0]}
+              </a>
+            </p>
+          ) : (
+            <div></div>
+          )}
+          {official.urls ? (
+            <p>
+              <b>Website: </b>
+              <a href={official.urls[0]} target="blank">
+                {official.urls[0]}{" "}
+              </a>
+            </p>
+          ) : (
+            <div></div>
+          )}
+          {/* {official.address ? <div>{addressLines}</div> : <div></div>} */}
+
+          {official.channels ? (
+            <div className="social-media-div">
+              <p>
+                <b>Social Media: </b>
+              </p>
+              <div className="social-media-bar">{channels}</div>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+
+        <div className="map"></div>
+      </div>
+
+      <div className="twitter"></div>
+
+      <div className="bing-news"></div>
 
       <div className="disqus-container">
         {/* <Disqus.DiscussionEmbed

@@ -2,10 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
 import HomeView from "../views/HomeView"
-import {
-  getOfficialThunk,
-  getOfficialsThunk
-} from "../../store/utilities/official"
+import { getOfficialsThunk } from "../../store/utilities/official"
 
 class HomeContainer extends Component {
   constructor(props) {
@@ -17,31 +14,15 @@ class HomeContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    // this.props.getSingleOfficialThunk(
-    //   "ocd-division/country:us/state:ny/county:new_york",
-    //   0
-    // )
-    // this.props.getOfficialsThunk({
-    //   city: "Sacramento",
-    //   state: "CA",
-    //   zip: "95811"
-    // })
-  }
+  componentDidMount() {}
 
   handleChange = event => {
     this.setState({ searchbarValue: event.target.value })
   }
 
-  // Addresses for testing:
-  // 695 Park Ave, New York, NY 10065
-  // 200 W. 24th Cheyenne, WY 82001
-  // 1340 Woodstock Rd, San Marino, CA 91108
-  // 2332 Margaret W Alexander Dr, Jackson, MS 39213
   handleSubmit = event => {
     event.preventDefault()
-    console.log("bar", this.state.searchbarValue)
-    // let url = "http://ctp-zip-api.herokuapp.com/zip/" + this.state.value
+    // console.log("bar", this.state.searchbarValue)
     this.props.getOfficialsThunk(this.state.searchbarValue)
   }
 
@@ -85,8 +66,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getSingleOfficialThunk: (divisionId, index) =>
-      dispatch(getOfficialThunk(divisionId, index)),
     getOfficialsThunk: searchbarValue =>
       dispatch(getOfficialsThunk(searchbarValue))
   }
