@@ -35,7 +35,6 @@ const getArticles = articles => {
   }
 }
 
-
 // THUNK CREATORS
 export const getOfficialsThunk = address => async dispatch => {
   // console.log(address);
@@ -44,7 +43,7 @@ export const getOfficialsThunk = address => async dispatch => {
     const { data } = await axios.get(
       `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
     )
-    console.log("canteloupe", data)
+    // console.log("cantaloupe", data)
     dispatch(getOfficials(data))
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error)
@@ -64,26 +63,39 @@ export const getArticlesThunk = name => async dispatch => {
         }
       }
     )
-    
-    dispatch(getArticles(data.value)) // Passes an array of articles
+
+    const articles = data.value.map(article => {
+      return {
+        name: article.name,
+        url: article.url,
+        articleThumbnail: article.image.thumbnail.contentUrl,
+        /* providerThumbnail: article.provider[0].image.thumbnail.contentUrl,  */
+        description: article.description,
+        provider: article.provider[0].name,
+        datePublished: article.datePublished
+      }
+    })
+
+    console.log(data.value)
+    console.log(articles)
+
+    dispatch(getArticles(articles)) // Passes an array of articles
   } catch (error) {
     console.log(error)
   }
 }
 
-export const getOfficialThunk = (state, index = 0) => async dispatch => {
+export const getOfficialThunk = (division, officeIndex, officialIndex) => async dispatch => {
   try {
-    let url = `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${state}`
-
+    let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
 
     // Get the official
     const { data } = await axios.get(url)
-    console.log("DATA: ", data)
-    console.log("rutabaga", officeIndex, officialIndex)
+    // console.log("DATA: ", data)
+    // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official:
-        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+      official: data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
     console.log(payload)
     dispatch(getOfficial(payload))
