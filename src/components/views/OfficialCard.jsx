@@ -91,12 +91,16 @@ const OfficialCard = props => {
 
   return (
     <div className="official-card">
-      <a href={officialPageUrl}>officialPageUrl</a>
+      {/* <a href={officialPageUrl}>officialPageUrl</a> */}
       <center>
         <h2 id="office-name">
-          <b>{props.office.name}</b>
+          <a href={officialPageUrl}>
+            <b>{props.office.name}</b>
+          </a>
         </h2>
-        <h3>{props.official.name}</h3>
+        <h3>
+          <a href={officialPageUrl}>{props.official.name}</a>
+        </h3>
         <p>
           <b>Party: </b>
           {props.official.party}
@@ -105,7 +109,9 @@ const OfficialCard = props => {
 
       {props.official.photoUrl ? (
         <center>
-          <img src={props.official.photoUrl} width="130px" />
+          <a href={officialPageUrl}>
+            <img src={props.official.photoUrl} width="130px" />
+          </a>
         </center>
       ) : (
         <center>
