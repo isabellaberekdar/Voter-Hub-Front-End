@@ -4,10 +4,9 @@ import axios from "axios"
 const GET_OFFICIAL = "GET_OFFICIAL"
 const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
+const GET_ARTICLES = "GET_ARTICLES"
 
 // ACTION CREATORS
-/* ** move api keys out ** */
-
 const getOfficial = official => {
   return {
     type: GET_OFFICIAL,
@@ -29,6 +28,13 @@ const getPhoto = photo => {
   }
 }
 
+const getArticles = articles => {
+  return {
+    type: GET_ARTICLES,
+    payload: articles
+  }
+}
+
 // THUNK CREATORS
 export const getOfficialsThunk = searchbarValue => async dispatch => {
   // console.log(address);
@@ -37,51 +43,49 @@ export const getOfficialsThunk = searchbarValue => async dispatch => {
     const { data } = await axios.get(
       `https://www.googleapis.com/civicinfo/v2/representatives?address=${searchbarValue}&key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
     )
-    // console.log("canteloupe", data)
+    // console.log("cantaloupe", data)
     dispatch(getOfficials(data))
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error)
   }
 }
 
-/* 
-ocd-division/country:us
-ocd-division/country:us/state:ny
-ocd-division/country:us/state:ny/county:new_york
-ocd-division/country:us/state:ny/place:new_york
-more?
+export const getArticlesThunk = name => async dispatch => {
+  try {
+    const key = process.env.REACT_APP_MICROSOFT_KEY
 
-president/ VP:
-ocd-division/country:us
+    // Query the microsoft api for news articles about the given person
+    const { data } = await axios.get(
+      `https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=${name}&count=5&offset=0&mkt=en-us&safeSearch=Off`,
+      {
+        headers: {
+          "Ocp-Apim-Subscription-Key": key
+        }
+      }
+    )
 
-Senator/Governor/Lieutenant Governor:
-ocd-division/country:us/state:ny
+    const articles = data.value.map(article => {
+      return {
+        name: article.name,
+        url: article.url,
+        articleThumbnail: article.image,
+        /* providerThumbnail: article.provider[0].image.thumbnail.contentUrl,  */
+        description: article.description,
+        provider: article.provider[0].name,
+        datePublished: article.datePublished
+      }
+    })
 
-New York City Comptroller/New York Public Advocate/Mayor
-ocd-division/country:us/state:ny/place:new_york
+    console.log(data.value)
+    console.log(articles)
 
-Manhattan District Attorney/New York Manhattan Borough President
-ocd-division/country:us/state:ny/county:new_york
+    dispatch(getArticles(articles)) // Passes an array of articles
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-NY Attorney General/NY State Comptroller
-ocd-division/country:us/state:ny
- 
--index of the rep in the array (defaults to 0)
-*/
-// index should be based on this api call:
-// https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=NY
-// because the index will not be useful if the api call varies
-
-/* 
-  Information that should be passed into the thunk:
-  -state: 'NY', 'CA', etc
-*/
-
-export const getOfficialThunk = (
-  division,
-  officeIndex,
-  officialIndex
-) => async dispatch => {
+export const getOfficialThunk = (division, officeIndex, officialIndex) => async dispatch => {
   try {
     let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
 
@@ -91,8 +95,7 @@ export const getOfficialThunk = (
     // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official:
-        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+      official: data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
     console.log(payload)
     dispatch(getOfficial(payload))
@@ -152,6 +155,11 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         photo: action.payload
+      }
+    case GET_ARTICLES:
+      return {
+        ...state,
+        articles: action.payload
       }
     default:
       return state

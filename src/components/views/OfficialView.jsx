@@ -1,5 +1,7 @@
 import React from "react"
 import Disqus from "disqus-react"
+import NewsArticlesContainer from '../views/NewsArticlesContainer'
+
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
@@ -116,14 +118,13 @@ const OfficialView = props => {
         <div className="portrait">
           {official.photoUrl ? (
             <center>
-              <img src={official.photoUrl} width="130px" />
+              <img src={official.photoUrl}/>
             </center>
           ) : (
             <center>
               <img
                 src="/images/placeholder.png"
                 target="blank"
-                height="162.5px"
               ></img>
             </center>
           )}
@@ -197,11 +198,14 @@ const OfficialView = props => {
 
       <div className="bing-news"></div>
 
+      <p>{output}</p>
+      {props.officialObject && <NewsArticlesContainer official={props.officialObject.official.name} />}
+
       <div className="disqus-container">
-        {/* <Disqus.DiscussionEmbed
+        <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
-        /> */}
+        />
       </div>
     </div>
   )
