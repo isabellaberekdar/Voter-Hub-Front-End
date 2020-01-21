@@ -4,44 +4,48 @@ import { OfficialCard } from ".."
 import "./Home.css"
 
 const HomeView = props => {
-  // console.log(props)
-  let officialCards = []
+  console.log("pumpkin", props.store)
 
+  let officialCards = []
   if (props.store) {
     if (props.store.divisions) {
       for (let key in props.store.divisions) {
         if (props.store.divisions.hasOwnProperty(key)) {
-          for (
-            let i = 0;
-            i < props.store.divisions[key].officeIndices.length;
-            i++
-          ) {
+          // Sometimes a division will not have any office indices, so you have to check before trying to access it
+          // e.g. "ocd-division/country:us/state:ny/supreme_court:1"
+          if (props.store.divisions[key].officeIndices) {
             for (
-              let j = 0;
-              j <
-              props.store.offices[props.store.divisions[key].officeIndices[i]]
-                .officialIndices.length;
-              j++
+              let i = 0;
+              i < props.store.divisions[key].officeIndices.length;
+              i++
             ) {
-              officialCards.push(
-                <OfficialCard
-                  office={
-                    props.store.offices[
-                      props.store.divisions[key].officeIndices[i]
-                    ]
-                  }
-                  official={
-                    props.store.officials[
+              for (
+                let j = 0;
+                j <
+                props.store.offices[props.store.divisions[key].officeIndices[i]]
+                  .officialIndices.length;
+                j++
+              ) {
+                officialCards.push(
+                  <OfficialCard
+                    office={
                       props.store.offices[
                         props.store.divisions[key].officeIndices[i]
-                      ].officialIndices[j]
-                    ]
-                  }
-                  division={key}
-                  officeIndex={i}
-                  officialIndex={j}
-                />
-              )
+                      ]
+                    }
+                    official={
+                      props.store.officials[
+                        props.store.offices[
+                          props.store.divisions[key].officeIndices[i]
+                        ].officialIndices[j]
+                      ]
+                    }
+                    division={key}
+                    officeIndex={i}
+                    officialIndex={j}
+                  />
+                )
+              }
             }
           }
         }
