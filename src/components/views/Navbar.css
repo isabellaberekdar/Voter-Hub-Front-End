@@ -19,10 +19,15 @@
     src: url('../views/fonts/RobotoSlab-Regular.ttf');
 }
 
+@font-face {
+    font-family: besley-medium;
+    src: url('../views/fonts/besleymed.otf') format('opentype');
+}
+
 .navbar {
     background-color: white;
     font-size: 1.5rem;
-    /*   */
+    top: 0;
     padding-left: 10px;
     display: flex;
     justify-content: space-between;
@@ -63,7 +68,7 @@
 
 .navbar-links {
     /* padding-top: 12px; */
-    font-family: avenir-medium;
+    font-family: avenir-black;
     display: flex;
     background-color: #142849;
     color: white;
@@ -72,10 +77,10 @@
 .navbar-links a {
     transition: color 0.13s ease;
     color: white;
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 14px;
-    font-size: 18px;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-top: 17px;
+    font-size: 14px;
 }
 
 
@@ -88,5 +93,5 @@
 }
 
 .navbar-links a:hover {
-    color: #4D86F7;
+    color: rgb(77, 213, 247);
 }

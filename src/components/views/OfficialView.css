@@ -1,5 +1,114 @@
+/* Fonts */
+@font-face {
+  font-family: avenir;
+  src: url("../views/fonts/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-medium;
+  src: url("../views/fonts/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-black;
+  src: url("../views/fonts/Avenir-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: roboto-slab;
+  src: url("../views/fonts/RobotoSlab-Regular.ttf");
+}
+
+/* ----------------------------------------------------------------------------------- */
+
 .disqus-container {
   padding-top: 50px;
   width: 60%;
   margin: auto;
 }
+
+div.triptych {
+  display: flex;
+  height: 500px;
+}
+
+div.triptych > div.portrait {
+  width: 30%;
+  background-color: #e84a3d;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+div.triptych > div.portrait img {
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+div.triptych > div.info {
+  width: 40%;
+  background-color: white;
+  height: 100%;
+  padding-left: 50px;
+}
+
+div.info > p.first-name {
+  font-family: roboto-slab;
+  font-size: 40px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+div.info > p.last-name {
+  font-family: roboto-slab;
+  font-size: 60px;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  color: #4d86f7;
+}
+
+div.info > p,
+div.social-media-div > p {
+  color: #293b59;
+  font-size: 25px;
+  font-family: avenir;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+div.social-media-bar {
+  display: flex;
+  margin-left: 50px;
+  margin-top: -10px;
+}
+
+div.triptych > div.map {
+  width: 30%;
+  background-color: #293b59;
+  height: 100%;
+}
+
+a > img.social-icon {
+  height: 40px;
+  margin-top: 0px;
+  margin-right: 30px;
+}
+
+/* 
+periwinkle
+#4d86f7
+
+white
+#ffffff
+
+navy
+#293b59
+
+red
+#e84a3d
+
+green
+#4df76e
+*/

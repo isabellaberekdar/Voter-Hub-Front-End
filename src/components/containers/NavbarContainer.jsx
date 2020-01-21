@@ -41,11 +41,17 @@ class NavbarContainer extends Component {
             </div>
             <div className="navbar-links">
                 <Link to="/">Home</Link>  
+<<<<<<< HEAD
                 <Link to="/Official">Officials</Link>
                 <Link>Upcoming Events</Link>  
                 {/* <Link to="/login">Login</Link>
                 <Link to="/signup">Signup</Link> */}
                 {logInOrOut}
+=======
+                <Link>Your Stream</Link>  
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link>
+>>>>>>> 93f2c1858e1be390889149090b1ee334a8e73610
             </div>
         </div>
       </div>
