@@ -67,11 +67,19 @@
 }
 
 .navbar-links {
-    /* padding-top: 12px; */
     font-family: avenir-black;
     display: flex;
     background-color: #142849;
     color: white;
+}
+
+p#current-user-message {
+    display: flex;
+    margin: 0px;
+    font-family: avenir;
+    font-size: 14px;
+    padding-top: 17px;
+    padding-right: 30px;
 }
 
 .navbar-links a {
@@ -84,7 +92,7 @@
 }
 
 
-.navbar-links a:not(:last-child) {
+.navbar-links a:not(:nth-child(4)) {
     border-right: 2px solid #4D86F7;
 }
 

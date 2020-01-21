@@ -45,6 +45,7 @@
 .footer a {
     text-decoration: underline;
     margin-right: 5px;
+    color: #293B59;
 }
 
 .footer a:visited {
