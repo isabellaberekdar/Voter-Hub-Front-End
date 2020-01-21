@@ -40,6 +40,7 @@ class AuthFormContainer extends Component {
         handleSubmit={this.handleSubmit}
         isLoggedIn={this.props.isLoggedIn}
         userEmail={this.props.userEmail}
+        thisPage={this.props.location.pathname}
       />
     );
   }
@@ -56,7 +57,7 @@ const mapState = state => {
 const mapLogin = state => {
   return {
     name: "login",
-    displayName: "Login",
+    displayName: "login",
     error: state.user.error,
     isLoggedIn: !!state.user.id,
     userEmail: state.user.email
@@ -67,7 +68,7 @@ const mapLogin = state => {
 const mapSignup = state => {
   return {
     name: "signup",
-    displayName: "Sign Up",
+    displayName: "sign up",
     error: state.user.error,
     isLoggedIn: !!state.user.id,
     userEmail: state.user.email

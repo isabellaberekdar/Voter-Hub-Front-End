@@ -132,7 +132,7 @@ const HomeView = props => {
             <div className="container">
              <img src="/images/speaker.png" alt="speaker icon" height="230px" className="quick"/>
              <div className="overlay">
-               <div className="text"><Link to=" ">Go to Speaker of <br></br>the House's Page »</Link></div>
+               <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus%2Fstate%3Aca%2Fcd%3A12/0/0">Go to Speaker of <br></br>the House's Page »</Link></div>
              </div>
             </div>
           </div>
