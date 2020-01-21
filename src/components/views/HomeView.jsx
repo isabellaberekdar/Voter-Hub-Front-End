@@ -4,6 +4,8 @@ import { OfficialCard } from "..";
 import { Message } from "..";
 import { MessageBoard } from "..";
 import MessageBoardCollection from "./MessageBoardCollection";
+import MessageBoardCollectionContainer from "../containers/MessageBoardCollection";
+// import MessageBoardCollectionContainer from "..";
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import "./HomeView.css";
@@ -30,6 +32,7 @@ const HomeView = props => {
       <OfficialCard />
       <MessageBoard subject="Message Board" messages={msgs} />
       <MessageBoardCollection official="Obama" messageBoardArray={msgboards} />
+      <MessageBoardCollectionContainer/>
     </div>
   );
 };
