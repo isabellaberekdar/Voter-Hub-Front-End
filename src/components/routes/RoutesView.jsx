@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Login, Signup } from '../containers';
 import { HomeContainer, NotFound, OfficialContainer } from "../../components";
+import MessageBoardCollectionContainer from '../containers/MessageBoardCollection';
 
 const RoutesView = (props) => {
   const { isLoggedIn } = props;
@@ -15,6 +16,7 @@ const RoutesView = (props) => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
       
+        <Route exact path="/messageboardcontainer" component={MessageBoardCollectionContainer}/>
       
         {/* <Route exact path='/' component={Homepage} /> */}
         <Route exact path="/Official" component={OfficialContainer} />
