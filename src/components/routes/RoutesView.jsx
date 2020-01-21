@@ -1,6 +1,6 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
-import { Login, Signup } from "../containers"
+import { Login, Signup, Logout } from "../containers"
 import { HomeContainer, NotFound, OfficialContainer } from "../../components"
 
 const RoutesView = props => {
@@ -9,9 +9,10 @@ const RoutesView = props => {
   return (
     <Switch>
       {/* Routes placed within this section are available to all visitors */}
-      <Route exact path="/" component={HomeContainer} />
+      <Route exact path="/" component={HomeContainer} id="homepage"/>
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
+      <Route exact path="/logout" component={Logout} />
       {/* placeOrCounty and placeOrCountyName are optional */}
       <Route
         exact

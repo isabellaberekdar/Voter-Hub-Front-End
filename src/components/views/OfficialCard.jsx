@@ -92,70 +92,59 @@ const OfficialCard = props => {
   return (
     <div className="official-card">
       {/* <a href={officialPageUrl}>officialPageUrl</a> */}
-      <center>
-        <h2 id="office-name">
-          <a href={officialPageUrl}>
-            <b>{props.office.name}</b>
-          </a>
-        </h2>
-        <h3>
-          <a href={officialPageUrl}>{props.official.name}</a>
-        </h3>
-        <p>
-          <b>Party: </b>
-          {props.official.party}
-        </p>
-      </center>
-
       {props.official.photoUrl ? (
-        <center>
           <a href={officialPageUrl}>
-            <img src={props.official.photoUrl} width="130px" />
+            <img src={props.official.photoUrl} target="blank" height="300px" className="image" />
           </a>
-        </center>
       ) : (
-        <center>
           <a href={officialPageUrl}>
             <img
               src="/images/placeholder.png"
               target="blank"
-              height="162.5px"
+              height="300px"
+              className="image"
             ></img>
           </a>
-        </center>
       )}
+      
+      <div className="official-content">
+          <h2 id="office-name">
+            <a href={officialPageUrl}>
+              <b>{props.office.name}</b>
+            </a>
+          </h2>
+          <h3 id="officials-name">
+            <a href={officialPageUrl}>{props.official.name}</a>
+          </h3>
+          <p id="party">
+            <b><u>Party</u>: </b>
+            {props.official.party}
+          </p>
 
-      {props.official.address ? <div>{addressLines}</div> : <div></div>}
-      {/* Officials will usually have one phone, url, and email */}
-      {props.official.phones ? <p>{props.official.phones[0]}</p> : <div></div>}
-      {props.official.urls ? (
-        <a href={props.official.urls[0]} target="blank">
-          {props.official.urls[0]}{" "}
-        </a>
-      ) : (
-        <div></div>
-      )}
-      {props.official.emails ? (
-        <p>
-          <a href={"mailto:" + props.official.emails[0]} target="blank">
-            {props.official.emails[0]}
+        <p id="address">{props.official.address ? <div>{addressLines}</div> : <div></div>}</p>
+        
+        {/* Officials will usually have one phone, url, and email */}
+        {props.official.phones ? <p id="phone-num">{props.official.phones[0]}</p> : <div></div>}
+        {props.official.urls ? (
+          <a href={props.official.urls[0]} target="blank" id="channels">
+            {props.official.urls[0]}{" "}
           </a>
-        </p>
-      ) : (
-        <div></div>
-      )}
-      {channels}
+        ) : (
+          <div></div>
+        )}
+        {props.official.emails ? (
+          <p id="mail">
+            <a href={"mailto:" + props.official.emails[0]} target="blank">
+              {props.official.emails[0]}
+            </a>
+          </p>
+        ) : (
+          <div></div>
+        )}
+        <p id="channels">{channels}</p>
+      </div>
     </div>
   )
 }
-
-// StudentCard.propTypes = {
-//   image: PropTypes.string.isRequired,
-//   firstName: PropTypes.string.isRequired,
-//   lastName: PropTypes.string.isRequired,
-//   campus: PropTypes.string.isRequired,
-//   onClick: PropTypes.func.isRequired,
-//   buttonText: PropTypes.string.isRequired
-// };
 
 export default OfficialCard
