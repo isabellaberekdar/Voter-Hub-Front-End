@@ -14,3 +14,9 @@ export { default as OfficialCard } from "./views/OfficialCard.jsx";
 export { default as NotFound } from "./views/NotFound.jsx";
 
 export { default as AuthFormView } from "./views/AuthFormView";
+
+export { default as Message } from "./views/Message";
+export { default as MessageBoard } from "./views/MessageBoard";
+export { default as MessageBoardCollection } from "./views/MessageBoardCollection";
+
+// export { default as MessageBoardCollectionContainer } from "./containers/MessageBoardCollection";
