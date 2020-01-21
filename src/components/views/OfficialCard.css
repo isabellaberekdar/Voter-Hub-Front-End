@@ -24,19 +24,73 @@
   src: url('../views/fonts/RobotoSlab-Bold.ttf');
 }
 
-h2#office-name {
-  height: 50px;
-}
-
 .official-card {
   display: inline-block;
-  min-height: 650px;
   vertical-align: top;
-  padding: 12px; 
   border: 2px solid #E84A3D;
+  background-color: white;
+  color: #142849;
   margin: 20px;
-  width: 250px;
+  width: 660px;
+  height: 300px;
   font-family: avenir;
   font-size: 14px;
   word-wrap: break-word;
+  line-height: 0.8;
+  text-align: left;
+}
+
+.official-card a {
+  color: #142849;
+  
+}
+
+.official-card a:visited {
+  color: #142849;
+}
+
+.official-content {
+  float: left;
+  padding-left: 10px;
+  
+}
+
+#office-name {
+  font-family: roboto-slab;
+}
+
+#office-name a {
+  text-decoration: none;
+}
+
+#officials-name a {
+  text-decoration: none;
+  font-family: avenir-black;
+  font-size: 18px;
+}
+
+#party {
+  font-family: avenir-black;
+}
+
+#address {
+  line-height: .2;
+}
+
+#mail {
+  font-family: avenir-medium;
+}
+
+#phone-num {
+  font-family: avenir-black;
+}
+
+#channels {
+  font-family: avenir-medium;
+  line-height: 0.2;
+  word-wrap: break-word;
+}
+
+.image {
+  float: left;
 }
