@@ -1,0 +1,252 @@
+/* Fonts */
+@font-face {
+    font-family: avenir;
+    src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-medium;
+    src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-black;
+    src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: roboto-slab;
+    src: url('../views/fonts/RobotoSlab-Regular.ttf');
+}
+
+@font-face {
+    font-family: besley-medium;
+    src: url('../views/fonts/besleymed.otf') format('opentype');
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    font-family: avenir-medium;
+    font-size: 20px;
+    height: 252px;
+    width: 100%;
+}
+
+.find-rep-title {
+    font-family: besley-medium;
+    color: #293B59;
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    font-size: 33px;
+    transform: translate(-10%, -40%);
+}
+
+.find-rep-description {
+    font-family: avenir-medium;
+    color: grey;
+    position: absolute;
+    text-align: left;
+    font-size: 20px;
+    width: 800px;
+    top: 35%;
+    left: 15%;
+    transform: translate(-6%, -40%);
+}
+
+h3#join-discussion-title {
+    font-family: roboto-slab;
+    font-size: 28px;
+    color: #293B59;
+    text-align: center;
+    width: 100%;
+}
+
+.centered input#address-entry {
+    background: white url(/images/search.png) no-repeat 510px 10px/30px 30px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: 2px solid #4D86F7;
+    border-radius: 80px;
+    width: 500px;
+    height: 30px;
+    font-family: avenir;
+    font-size: 17px;
+    font-style: italic;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: avenir-medium;
+    margin: 0px;
+    padding: 0px;
+}
+
+.column {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1 1 auto;
+}
+
+.row img:not(.quick) {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.row img.quick{
+    margin-left: 0px;
+    margin-right: 0px;
+    display: block;
+    width: 100%;
+
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(41, 59, 89, .8);
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: .5s ease;
+  }
+
+  .text {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+  }
+
+  .container {
+      position: relative;
+      width: 100%;
+  }
+
+  .container:hover .overlay {
+    width: 100%;
+  }
+
+.column#one {
+    background-color: #4D86F7;
+    margin: 0px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    width: 33%;
+    height: 170px;
+}
+
+.column#two {
+    background-color: rgb(41, 59, 89);
+    margin: 0px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    width: 33%;
+    height: 170px;
+}
+
+.column#three {
+    background-color: #E84A3D;
+    margin: 0px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    width: 33%;
+    height: 170px;
+}
+
+.column#quick-look {
+    background-color: #E84A3D;
+    padding-top: 30px;
+    padding-bottom: 0px;
+    width: 40%;
+    height: 200px;
+}
+
+.column#pres {
+    width: 20%;
+    height: 200px;
+    padding: 0px;
+    background-blend-mode: multiply;
+    background: rgba(41, 59, 89, 50);
+}
+
+.column#vp {
+    width: 20%;
+    height: 200px;
+    padding: 0px;
+    background-blend-mode: multiply;
+    background: rgba(41, 59, 89, 50);
+}
+
+.column#speaker {
+    width: 20%;
+    height: 200px;
+    padding: 0px;
+    background-blend-mode: multiply;
+    background: rgba(41, 59, 89, 50);
+}
+
+p#quick-look-title {
+    text-align: left;
+    padding-left: 80px;
+    font-family: avenir-black;
+    font-size: 35px;
+    margin-bottom: 0px;
+    margin-top: 30px;
+}
+
+p#quick-look-text {
+    text-align: left;
+    padding-left: 80px;
+    font-family: avenir-medium;
+    font-size: 18px;
+}
+
+h2#sign-up-title {
+    font-family: roboto-slab;
+    font-size: 22px;
+    color: #293B59;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.home-body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-content {
+    flex: 1 0 auto;
+}
+
+.home-content RoutesContainer Switch Route :not(#homepage) {
+    padding: 20px;
+}
+
+.home-content:not(#nonhome) {
+    font-family: avenir;
+}

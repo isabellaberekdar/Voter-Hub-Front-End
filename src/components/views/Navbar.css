@@ -1,0 +1,105 @@
+/* Fonts */
+@font-face {
+    font-family: avenir;
+    src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-medium;
+    src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-black;
+    src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: roboto-slab;
+    src: url('../views/fonts/RobotoSlab-Regular.ttf');
+}
+
+@font-face {
+    font-family: besley-medium;
+    src: url('../views/fonts/besleymed.otf') format('opentype');
+}
+
+.navbar {
+    background-color: white;
+    font-size: 1.5rem;
+    top: 0;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: avenir-black;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    border-bottom: 3px solid #4D86F7;
+    box-shadow: 0 5px 5px -5px silver;
+}
+
+.navbar h1 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 28px;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.left-navbar-content a:visited {
+    color: #142849;
+}
+
+.left-navbar-content {
+    display: flex;
+    margin-left: 15px;
+    color: #142849;
+    padding: 0.5rem;
+}
+
+.left-navbar-content img {
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+.navbar-links {
+    font-family: avenir-black;
+    display: flex;
+    background-color: #142849;
+    color: white;
+}
+
+p#current-user-message {
+    display: flex;
+    margin: 0px;
+    font-family: avenir;
+    font-size: 14px;
+    padding-top: 17px;
+    padding-right: 30px;
+}
+
+.navbar-links a {
+    transition: color 0.13s ease;
+    color: white;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-top: 17px;
+    font-size: 14px;
+}
+
+
+.navbar-links a:not(:nth-child(4)) {
+    border-right: 2px solid #4D86F7;
+}
+
+.navbar-links a:visited {
+    color: white;
+}
+
+.navbar-links a:hover {
+    color: rgb(77, 213, 247);
+}

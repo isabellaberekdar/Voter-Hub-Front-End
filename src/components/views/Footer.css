@@ -1,0 +1,96 @@
+/* Fonts */
+@font-face {
+    font-family: avenir;
+    src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-medium;
+    src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: avenir-black;
+    src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: roboto-slab;
+    src: url('../views/fonts/RobotoSlab-Regular.ttf');
+}
+
+@font-face {
+    font-family: roboto-slab-bold;
+    src: url('../views/fonts/RobotoSlab-Bold.ttf');
+}
+
+/* Footer class */
+.footer {
+    background-color: white;
+    font-family: avenir-medium;
+    padding: 15px;
+    color: #293B59;
+    border-top: 3px solid #E84A3D;
+    font-size: 12px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    /* display: flex; */
+}
+
+.footer p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.footer a {
+    text-decoration: underline;
+    margin-right: 5px;
+    color: #293B59;
+}
+
+.footer a:visited {
+    text-decoration: none;
+    color: #293B59;
+}
+
+.footer p:first-child {
+    display: inline-block;
+    margin-top: 0px;
+    margin-right: 50px;
+    margin-left: 20px;
+    padding: 0px;
+}
+
+.footer p:nth-child(2)  {
+    font-family: roboto-slab-bold;
+    font-style: bold;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+    margin: 0px;
+    margin-right: 50px;
+}
+
+.footer p:nth-child(2) p {
+    font-family: avenir-medium;
+    font-size: 12px;
+    margin: 0px;
+}
+
+.footer p:nth-child(3) {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px;
+    margin: 0px;
+}
+
+.footer p#logo-text {
+    padding-top: 30px;
+    margin: 0px;
+    font-family: avenir-black;
+    font-size: 20px;
+    float: right;
+}
+
+
