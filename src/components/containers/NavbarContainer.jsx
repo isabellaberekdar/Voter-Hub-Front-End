@@ -1,12 +1,31 @@
 import React, { Component } from "react"
 import { withRouter } from "react-router-dom"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { logout } from "../../thunks";
 import { connect } from "react-redux"
 import { me } from "../../thunks"
 import "../views/Navbar.css"
 
 class NavbarContainer extends Component {
+    handleLogout = () => {
+      logout();
+    }
+
     render() {
+      let logInOrOut; 
+      if(!this.props.isLoggedIn){
+        logInOrOut = <div>
+          <Link to="/login">Login</Link>
+          <Link to="/signup" >Signup</Link>
+        </div>
+      }
+      else{
+        logInOrOut = <div>
+          {/* <button onClick={this.handleLogout}>Logout</button> */}
+          <Link to="/logout" onClick={this.handleLogout}>Logout</Link>
+        </div>
+      }
+
       return (
         // <RoutesView isLoggedIn={this.props.isLoggedIn} />
         <div>
@@ -23,8 +42,9 @@ class NavbarContainer extends Component {
                 <Link to="/">Home</Link>  
                 <Link to="/Official">Officials</Link>
                 <Link>Upcoming Events</Link>  
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
+                {/* <Link to="/login">Login</Link>
+                <Link to="/signup">Signup</Link> */}
+                {logInOrOut}
             </div>
         </div>
       </div>
@@ -34,8 +54,16 @@ class NavbarContainer extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   }
 }
 
-export default withRouter(connect(mapState)(NavbarContainer))
+// Map dispatch to props;
+const mapDispatch = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  }
+};
+
+export default withRouter(connect(mapState)(NavbarContainer));
+export const Logout = connect(null, mapDispatch)(NavbarContainer);

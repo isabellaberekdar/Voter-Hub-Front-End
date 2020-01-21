@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { auth } from "../../thunks";
+import { auth, logout } from "../../thunks";
 import { AuthFormView } from "../views";
 
 // Smart container;
@@ -63,9 +63,11 @@ const mapSignup = state => {
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
-    loginOrSignup: (email, password, formName) => dispatch(auth(email, password, formName))
+    loginOrSignup: (email, password, formName) => dispatch(auth(email, password, formName)),
+    logout: () => dispatch(logout())
   }
 };
 
 export const Login = connect(mapLogin, mapDispatch)(AuthFormContainer);
 export const Signup = connect(mapSignup, mapDispatch)(AuthFormContainer);
+export const Logout = connect(null, mapDispatch)(AuthFormContainer);

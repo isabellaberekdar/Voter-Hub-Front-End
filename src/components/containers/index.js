@@ -1,2 +1,2 @@
 // Barrel file for container components;
-export { Login, Signup } from "./AuthFormContainer";
+export { Login, Signup, Logout } from "./AuthFormContainer";
