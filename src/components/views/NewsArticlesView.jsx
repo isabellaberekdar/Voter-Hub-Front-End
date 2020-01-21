@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import "./NewsArticles.css"
 
 const NewsArticlesView = props => {
+ 
   return (
     <div className='headlines'>
       <h2>Latest Headlines...</h2>
@@ -11,7 +12,8 @@ const NewsArticlesView = props => {
           ? props.articles.map(article => {
               return (
                 <div className='article' key={article.name}>
-                  {/* <img src={article.articleThumbnail} /> */}
+                  {/* article.articleThumbnail && <img src={article.articleThumbnail.thumbnail.contentUrl} /> */}
+                  { console.log()}
                   <span className='headline'>
                     <i>
                       <b>{article.provider}</b>

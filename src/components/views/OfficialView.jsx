@@ -3,7 +3,6 @@ import Disqus from "disqus-react"
 import NewsArticlesContainer from '../views/NewsArticlesContainer'
 
 
-
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
 import "./OfficialView.css"
@@ -126,7 +125,7 @@ const OfficialView = props => {
               <img
                 src="/images/placeholder.png"
                 target="blank"
-                height="162.5px"
+                width='130px'
               ></img>
             </center>
           )}
