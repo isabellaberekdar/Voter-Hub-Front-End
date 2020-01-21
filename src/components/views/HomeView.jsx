@@ -1,5 +1,5 @@
 import React from "react"
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { OfficialCard } from ".."
 import "./Home.css"
 
@@ -116,7 +116,7 @@ const HomeView = props => {
             <div className="container">
               <img src="/images/pres.png" alt="pres icon" height="230px" className="quick"/>
               <div className="overlay">
-                <div className="text">Go to President's Page »</div>
+                <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus/0/0">Go to President's Page »</Link></div>
               </div>
             </div>
           </div>
@@ -124,7 +124,7 @@ const HomeView = props => {
             <div className="container">
               <img src="/images/vp.png" alt="vp icon" height="230px" className="quick"/>
               <div className="overlay">
-                <div className="text">Go to Vice President's Page »</div>
+                <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus/1/0">Go to Vice President's Page »</Link></div>
               </div>
             </div>
           </div>
@@ -132,7 +132,7 @@ const HomeView = props => {
             <div className="container">
              <img src="/images/speaker.png" alt="speaker icon" height="230px" className="quick"/>
              <div className="overlay">
-               <div className="text">Go to Speaker of <br></br>the House's Page »</div>
+               <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus%2Fstate%3Aca%2Fcd%3A12/0/0">Go to Speaker of <br></br>the House's Page »</Link></div>
              </div>
             </div>
           </div>

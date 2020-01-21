@@ -35,7 +35,7 @@
   height: 300px;
   font-family: avenir;
   font-size: 14px;
-  word-wrap: break-word;
+  word-break: break-all;
   line-height: 0.8;
   text-align: left;
 }
