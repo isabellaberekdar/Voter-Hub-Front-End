@@ -9,12 +9,11 @@ import {
 
 class HomeContainer extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = ({
+    this.state = {
       placeholder: "Enter your address to find who represents you..."
-    })
-    
+    }
   }
 
   componentDidMount() {
@@ -41,23 +40,23 @@ class HomeContainer extends Component {
     })
   }
 
-
   render() {
     return (
       <div>
-        <HomeView 
-          placeholderText={this.state.placeholder} 
-          focusFunc={this.focusFunc} 
+        <HomeView
+          placeholderText={this.state.placeholder}
+          focusFunc={this.focusFunc}
           unfocusFunc={this.unfocusFunc}
-          handleSubmit={this.handleSubmit} 
-          store={this.props.store} />
+          handleSubmit={this.handleSubmit}
+          store={this.props.store}
+        />
       </div>
     )
   }
 }
 
 const mapState = state => {
-  console.log(state)
+  // console.log(state)
   return {
     photo: state.official,
     store: state.official.officials

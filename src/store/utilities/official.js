@@ -37,7 +37,7 @@ export const getOfficialsThunk = address => async dispatch => {
     const { data } = await axios.get(
       `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M&address=${address.city}-${address.state}-${address.zip}`
     )
-    console.log("canteloupe", data)
+    // console.log("canteloupe", data)
     dispatch(getOfficials(data))
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error)
@@ -87,8 +87,8 @@ export const getOfficialThunk = (
 
     // Get the official
     const { data } = await axios.get(url)
-    console.log("DATA: ", data)
-    console.log("rutabaga", officeIndex, officialIndex)
+    // console.log("DATA: ", data)
+    // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
       official:

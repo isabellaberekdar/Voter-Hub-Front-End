@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
-import { OfficialCard } from "..";
-import "./Home.css";
+import { OfficialCard } from ".."
+import "./Home.css"
 
 const HomeView = props => {
-  console.log("meow", props.data);
-  let officialCards = [];
+  // console.log("meow", props.data)
+  let officialCards = []
 
   if (props.store) {
     // let officials_info = [];
@@ -51,16 +51,16 @@ const HomeView = props => {
               //     ].officialIndices[j]
               //   ]
               // );
-              console.log(
-                key,
-                i,
-                j,
-                props.store.officials[
-                  props.store.offices[
-                    props.store.divisions[key].officeIndices[i]
-                  ].officialIndices[j]
-                ]
-              );
+              // console.log(
+              //   key,
+              //   i,
+              //   j,
+              //   props.store.officials[
+              //     props.store.offices[
+              //       props.store.divisions[key].officeIndices[i]
+              //     ].officialIndices[j]
+              //   ]
+              // )
 
               officialCards.push(
                 <OfficialCard
@@ -80,7 +80,7 @@ const HomeView = props => {
                   officeIndex={i}
                   officialIndex={j}
                 />
-              );
+              )
               // print out the official's index in the entire officials array, and the official object
               // console.log(
               //   "OFFICIAL",
@@ -123,11 +123,15 @@ const HomeView = props => {
     // console.log(officials_info);
   }
 
-  console.log(props);
+  // console.log(props);
   return (
     <div>
       <div className="header">
-        <img src="/images/homeheader.png" alt="header of homepage" width="100%" />
+        <img
+          src="/images/homeheader.png"
+          alt="header of homepage"
+          width="100%"
+        />
         <div className="centered">
           <form onSubmit={props.handleSubmit}>
             <input
@@ -141,13 +145,13 @@ const HomeView = props => {
               id="address-entry"
             />
           </form>
-          </div>
         </div>
-        <div className="home-content">
-          <center>{officialCards}</center>
-        </div>
+      </div>
+      <div className="home-content">
+        <center>{officialCards}</center>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeView;
+export default HomeView

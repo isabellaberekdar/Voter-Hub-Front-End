@@ -4,9 +4,10 @@ import React from "react"
 import "../views/OfficialCard.css"
 
 const OfficialCard = props => {
-  console.log(props.office.divisionId)
-  console.log(props.officeIndex)
-  console.log(props.officialIndex)
+  // console.log(props.office.divisionId)
+  // console.log(props.officeIndex)
+  // console.log(props.officialIndex)
+  // console.log("CARD PROPS", props)
 
   let officialPageUrl =
     "/" +
@@ -17,67 +18,7 @@ const OfficialCard = props => {
     props.officeIndex +
     "/" +
     props.officialIndex
-  console.log(officialPageUrl)
-
-  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
-  let channels = []
-  if (props.official.channels) {
-    for (let key in props.official.channels) {
-      if (props.official.channels.hasOwnProperty(key)) {
-        if (props.official.channels[key].type == "Facebook") {
-          // console.log(
-          //   "Facebook: ",
-          //   "https://www.facebook.com/" + props.official.channels[key].id
-          // );
-          channels.push(
-            <p>
-              <a
-                href={
-                  "https://www.facebook.com/" + props.official.channels[key].id
-                }
-                target="blank"
-              >
-                https://www.facebook.com/{props.official.channels[key].id}
-              </a>
-            </p>
-          )
-        } else if (props.official.channels[key].type == "Twitter") {
-          // console.log(
-          //   "Twitter: ",
-          //   "https://twitter.com/" + props.official.channels[key].id
-          // );
-          channels.push(
-            <p>
-              <a
-                href={"https://twitter.com/" + props.official.channels[key].id}
-                target="blank"
-              >
-                https://twitter.com/{props.official.channels[key].id}
-              </a>
-            </p>
-          )
-        } else if (props.official.channels[key].type == "YouTube") {
-          // console.log(
-          //   "YouTube: ",
-          //   "https://www.youtube.com/user/" + props.official.channels[key].id
-          // );
-          channels.push(
-            <p>
-              <a
-                href={
-                  "https://www.youtube.com/user/" +
-                  props.official.channels[key].id
-                }
-                target="blank"
-              >
-                https://www.youtube.com/user/{props.official.channels[key].id}
-              </a>
-            </p>
-          )
-        }
-      }
-    }
-  }
+  // console.log(officialPageUrl)
 
   // Some officials don't have an address.
   // The address is an array holding a single object of address lines. Kind of weird.
@@ -106,18 +47,6 @@ const OfficialCard = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
-  //   for (let index in props.official.address) {
-  //     if (props.official.address.hasOwnProperty(index)) {
-  //       for (let key in props.official.address[0]) {
-
-  //         if (props.official.address[0][key] !== "") {
-  //           console.log(props.official.address[0][key])
-  //           addressLines.push(<p>{props.official.address[0][key]}</p>)
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   return (
     <div className="official-card">
@@ -143,22 +72,15 @@ const OfficialCard = props => {
         </center>
       ) : (
         <center>
-          <img src="./images/placeholder.png" target="blank" height="162.5px"></img>
+          <img
+            src="./images/placeholder.png"
+            target="blank"
+            height="162.5px"
+          ></img>
         </center>
       )}
 
-      {props.official.address ? (
-        <div>
-          {addressLines}
-          {/* <p>{props.official.address[0].line1}</p>
-          <p>
-            {props.official.address[0].city}, {props.official.address[0].state}{" "}
-            {props.official.address[0].zip}
-          </p> */}
-        </div>
-      ) : (
-        <div></div>
-      )}
+      {props.official.address ? <div>{addressLines}</div> : <div></div>}
       {/* Officials will usually have one phone, url, and email */}
       {props.official.phones ? <p>{props.official.phones[0]}</p> : <div></div>}
       {props.official.urls ? (
@@ -177,7 +99,6 @@ const OfficialCard = props => {
       ) : (
         <div></div>
       )}
-      {channels}
     </div>
   )
 }
