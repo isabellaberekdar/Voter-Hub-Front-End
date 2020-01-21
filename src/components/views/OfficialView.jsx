@@ -128,7 +128,7 @@ const OfficialView = props => {
       ) : (
         <center>
           <img
-            src="./images/placeholder.png"
+            src="/images/placeholder.png"
             target="blank"
             height="162.5px"
           ></img>

@@ -4,9 +4,6 @@ import React from "react"
 import "../views/OfficialCard.css"
 
 const OfficialCard = props => {
-  // console.log(props.office.divisionId)
-  // console.log(props.officeIndex)
-  // console.log(props.officialIndex)
   // console.log("CARD PROPS", props)
 
   let officialPageUrl =
@@ -20,6 +17,54 @@ const OfficialCard = props => {
     props.officialIndex
   // console.log(officialPageUrl)
 
+  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
+  let channels = []
+  if (props.official.channels) {
+    for (let key in props.official.channels) {
+      if (props.official.channels.hasOwnProperty(key)) {
+        if (props.official.channels[key].type == "Facebook") {
+          channels.push(
+            <p>
+              <a
+                href={
+                  "https://www.facebook.com/" + props.official.channels[key].id
+                }
+                target="blank"
+              >
+                https://www.facebook.com/{props.official.channels[key].id}
+              </a>
+            </p>
+          )
+        } else if (props.official.channels[key].type == "Twitter") {
+          channels.push(
+            <p>
+              <a
+                href={"https://twitter.com/" + props.official.channels[key].id}
+                target="blank"
+              >
+                https://twitter.com/{props.official.channels[key].id}
+              </a>
+            </p>
+          )
+        } else if (props.official.channels[key].type == "YouTube") {
+          channels.push(
+            <p>
+              <a
+                href={
+                  "https://www.youtube.com/user/" +
+                  props.official.channels[key].id
+                }
+                target="blank"
+              >
+                https://www.youtube.com/user/{props.official.channels[key].id}
+              </a>
+            </p>
+          )
+        }
+      }
+    }
+  }
+
   // Some officials don't have an address.
   // The address is an array holding a single object of address lines. Kind of weird.
   // Some addresses have a line2 and line3 etc in addition to just a line1 (Andrew M. Cuomo). So we'll have to iterate through them somehow, ignoring any that are just blank strings "".
@@ -30,16 +75,12 @@ const OfficialCard = props => {
       let line2 = ""
       for (let key in props.official.address[0]) {
         if (["line1", "line2", "line3", "line4"].includes(key)) {
-          // console.log(props.official.address[0][key])
           lines.push(<p>{props.official.address[0][key]}</p>)
         } else if (key === "city") {
-          // console.log(props.official.address[0][key])
           line2 = line2 + props.official.address[0][key]
         } else if (key === "state") {
-          // console.log(props.official.address[0][key])
           line2 = line2 + ", " + props.official.address[0][key]
         } else if (key === "zip") {
-          // console.log(props.official.address[0][key])
           line2 = line2 + " " + props.official.address[0][key]
         }
       }
@@ -61,10 +102,6 @@ const OfficialCard = props => {
           {props.official.party}
         </p>
       </center>
-      {/* <p>{props.office.divisionId}</p> */}
-      {/* Some offices don't have levels or roles, so we need to check if they have them before trying to access them by index, or else it will result in an error. */}
-      {/* {props.office.levels ? <p>{props.office.levels[0]}</p> : <div></div>}
-      {props.office.roles ? <p>{props.office.roles[0]}</p> : <div></div>} */}
 
       {props.official.photoUrl ? (
         <center>
@@ -99,6 +136,7 @@ const OfficialCard = props => {
       ) : (
         <div></div>
       )}
+      {channels}
     </div>
   )
 }
