@@ -7,29 +7,62 @@ class MessageBoardCollectionContainer extends Component {
     constructor(){
         super();
         this.state = {
-            officials : []
+            // officials : [],
+            msgBoardArray: []
         }
     }
     
-    getOfficialsArray = async () => {
-        var res = await axios.get("http://localhost:5000/api/messages/messageboardcollection");
-        await this.setState({ officials: res.data});
-        console.log(this.state.officials);
-        // console.log("messages array: ", this.state.officials[0].messageboards);
+    // getOfficialsArray = async () => {
+    //     var res = await axios.get("http://localhost:5000/api/messages/messageboardcollection");
+    //     await this.setState({ officials: res.data});
+    //     console.log("this official", this.state.officials);
+    //     // console.log("messages array: ", this.state.officials[0].messageboards);
+    // }
+    getMessageBoards = async () => {
+        var res = await axios.get("http://localhost:5000/api/messages/messageboard");
+        await this.setState({ msgBoardArray: res.data});
+        console.log("this msgBoard", this.state.msgBoardArray);
     }
     
     componentDidMount() {
-        this.getOfficialsArray(); 
+        // this.getOfficialsArray(); 
+        this.getMessageBoards();
     }
+    //life cycle: constructor, render, componentDidMount, re-render
     render(){
-        let officialDisplay = this.state.officials.map(offi => 
-            <div>
-                <h3>Official: {offi.officialName}</h3>
-                {/* <div>{offi.messageboards}</div> */}
-            </div>
-        )
+        let officialId = 1;
+        if(this.state.msgBoardArray.length > 0){
+            var threads = this.state.msgBoardArray.map(msgBoard => 
+                <div>
+                    {
+                        msgBoard.officialId === officialId ? 
+                        <li>
+                            {msgBoard.subject}
+                            <ol>
+                                {
+                                    msgBoard.messages.map(message => <div>
+                                        <li>{message.user}: {'\xa0\xa0\xa0\xa0\xa0\xa0\xa0'} {message.text}</li>
+                                    </div>) 
+                                }
+                            </ol>
+                        </li>
+                        : 
+                        <div></div>    
+                    }
+
+                </div>
+            )
+
+        }   
+
+        // console.log(`message board ${this.state.officials}`)
+
+        // let threads = this.state.officials[0].messageboards.map(msgboard => 
+        //     <li>{msgboard.subject}</li>
+        // );
         return <div>
-            {officialDisplay}
+            {/* <h3>{this.state.officials[0]}</h3> */}
+            {threads}
         </div>
     }
 }
