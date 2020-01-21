@@ -115,11 +115,13 @@ const OfficialCard = props => {
         </center>
       ) : (
         <center>
-          <img
-            src="./images/placeholder.png"
-            target="blank"
-            height="162.5px"
-          ></img>
+          <a href={officialPageUrl}>
+            <img
+              src="/images/placeholder.png"
+              target="blank"
+              height="162.5px"
+            ></img>
+          </a>
         </center>
       )}
 
