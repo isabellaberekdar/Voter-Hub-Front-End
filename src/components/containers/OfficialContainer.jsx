@@ -24,7 +24,8 @@ class OfficialContainer extends Component {
   render() {
     return (
       <div>
-        <h1>OfficialContainer here</h1>
+        {/* <h1>OfficialContainer here</h1> */}
+        {this.props.official && <img src={this.props.official.photoUrl} />}
         <OfficialView officialObject={this.props.official} />
       </div>
     )

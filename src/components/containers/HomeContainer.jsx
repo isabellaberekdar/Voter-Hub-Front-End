@@ -2,31 +2,28 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
 import HomeView from "../views/HomeView"
-import {
-  getOfficialThunk,
-  getOfficialsThunk
-} from "../../store/utilities/official"
+import { getOfficialsThunk } from "../../store/utilities/official"
 
 class HomeContainer extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = ({
-      placeholder: "Enter your address to find who represents you..."
-    })
-    
+    this.state = {
+      placeholder: "Enter your address to find who represents you...",
+      searchbarValue: ""
+    }
   }
 
-  componentDidMount() {
-    this.props.getSingleOfficialThunk(
-      "ocd-division/country:us/state:ny/county:new_york",
-      0
-    )
-    this.props.getOfficialsThunk({
-      city: "Sacramento",
-      state: "CA",
-      zip: "95811"
-    })
+  componentDidMount() {}
+
+  handleChange = event => {
+    this.setState({ searchbarValue: event.target.value })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    // console.log("bar", this.state.searchbarValue)
+    this.props.getOfficialsThunk(this.state.searchbarValue)
   }
 
   focusFunc = () => {
@@ -41,23 +38,26 @@ class HomeContainer extends Component {
     })
   }
 
-
   render() {
+    console.log(this.props.store)
     return (
       <div>
-        <HomeView 
-          placeholderText={this.state.placeholder} 
-          focusFunc={this.focusFunc} 
+        <HomeView
+          placeholderText={this.state.placeholder}
+          searchbarValue={this.state.searchbarValue}
+          focusFunc={this.focusFunc}
           unfocusFunc={this.unfocusFunc}
-          handleSubmit={this.handleSubmit} 
-          store={this.props.store} />
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          store={this.props.store}
+        />
       </div>
     )
   }
 }
 
 const mapState = state => {
-  console.log(state)
+  // console.log(state)
   return {
     photo: state.official,
     store: state.official.officials
@@ -66,9 +66,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getSingleOfficialThunk: (divisionId, index) =>
-      dispatch(getOfficialThunk(divisionId, index)),
-    getOfficialsThunk: address => dispatch(getOfficialsThunk(address))
+    getOfficialsThunk: searchbarValue =>
+      dispatch(getOfficialsThunk(searchbarValue))
   }
 }
 
