@@ -9,7 +9,7 @@ class HomeContainer extends Component {
     super(props)
 
     this.state = {
-      placeholder: "Enter your address to find who represents you...",
+      placeholder: "Enter Address...",
       searchbarValue: ""
     }
   }
@@ -32,10 +32,16 @@ class HomeContainer extends Component {
     })
   }
 
-  unfocusFunc = () => {
+  blurFunc = event => {
+    console.log("unfocusing");
     this.setState({
       placeholder: "Enter your address to find who represents you..."
     })
+    if(event.target.value.trim() === "") {
+      this.setState({
+        searchbarValue: this.state.placeholder
+      })
+    }
   }
 
   render() {
@@ -46,7 +52,7 @@ class HomeContainer extends Component {
           placeholderText={this.state.placeholder}
           searchbarValue={this.state.searchbarValue}
           focusFunc={this.focusFunc}
-          unfocusFunc={this.unfocusFunc}
+          blurFunc={this.blurFunc}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           store={this.props.store}

@@ -9,7 +9,7 @@ const RoutesView = props => {
   return (
     <Switch>
       {/* Routes placed within this section are available to all visitors */}
-      <Route exact path="/" component={HomeContainer} />
+      <Route exact path="/" component={HomeContainer} id="homepage"/>
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       {/* placeOrCounty and placeOrCountyName are optional */}

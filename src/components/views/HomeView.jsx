@@ -58,18 +58,24 @@ const HomeView = props => {
     <div>
       <div className="header">
         <img
-          src="/images/homeheader.png"
+          src="/images/homeheader2.png"
           alt="header of homepage"
           width="100%"
         />
         <div className="centered">
+          <h2 className="find-rep-title">Find Your Representatives</h2>
+          <h3 className="find-rep-description">
+            Enter your full address below to find your representatives, 
+            how to contact them, their voting and bill history,
+            and their latest social media and news mentions!
+          </h3>
           <form onSubmit={props.handleSubmit}>
             <input
               type="text"
               name="address"
               placeholder={props.placeholderText}
               onFocus={props.focusFunc}
-              onblur={props.unfocusFunc}
+              onBlur={props.blurFunc}
               onChange={props.handleChange}
               value={props.address_input}
               id="address-entry"

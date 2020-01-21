@@ -19,13 +19,40 @@
     src: url('../views/fonts/RobotoSlab-Regular.ttf');
 }
 
+@font-face {
+    font-family: besley-medium;
+    src: url('../views/fonts/besleymed.otf') format('opentype');
+}
+
 .header {
     position: relative;
     text-align: center;
     font-family: avenir-medium;
     font-size: 20px;
-    height: 142.5px;
+    height: 252px;
     width: 100%;
+}
+
+.find-rep-title {
+    font-family: besley-medium;
+    color: #293B59;
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    font-size: 33px;
+    transform: translate(-10%, -40%);
+}
+
+.find-rep-description {
+    font-family: avenir-medium;
+    color: grey;
+    position: absolute;
+    text-align: left;
+    font-size: 20px;
+    width: 800px;
+    top: 35%;
+    left: 15%;
+    transform: translate(-6%, -40%);
 }
 
 .centered input#address-entry {
@@ -41,13 +68,22 @@
     font-size: 17px;
     font-style: italic;
     position: absolute;
-    top: 50%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
+.home-body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .home-content {
     flex: 1 0 auto;
+}
+
+.home-content RoutesContainer Switch Route :not(#homepage) {
     padding: 20px;
 }
 

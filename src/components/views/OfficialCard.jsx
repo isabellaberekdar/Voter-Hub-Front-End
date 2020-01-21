@@ -110,7 +110,7 @@ const OfficialCard = props => {
       {props.official.photoUrl ? (
         <center>
           <a href={officialPageUrl}>
-            <img src={props.official.photoUrl} width="130px" />
+            <img src={props.official.photoUrl} height="162.5px" />
           </a>
         </center>
       ) : (
