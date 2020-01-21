@@ -7,11 +7,12 @@ import { me } from "../../thunks"
 import "../views/Navbar.css"
 
 class NavbarContainer extends Component {
-    handleLogout = () => {
-      logout();
-    }
+    // handleLogout = () => {
+    //   logout();
+    // }
 
     render() {
+      console.log(this.props)
       let logInOrOut; 
       if(!this.props.isLoggedIn){
         logInOrOut = <div>
@@ -22,7 +23,7 @@ class NavbarContainer extends Component {
       else{
         logInOrOut = <div>
           {/* <button onClick={this.handleLogout}>Logout</button> */}
-          <Link to="/logout" onClick={this.handleLogout}>Logout</Link>
+          <Link to="/login" onClick={this.props.logout}>Logout</Link>
         </div>
       }
 
@@ -65,5 +66,5 @@ const mapDispatch = dispatch => {
   }
 };
 
-export default withRouter(connect(mapState)(NavbarContainer));
-export const Logout = connect(null, mapDispatch)(NavbarContainer);
+export default withRouter(connect(mapState, mapDispatch)(NavbarContainer));
+// export const Logout = connect(null, mapDispatch)(NavbarContainer);
