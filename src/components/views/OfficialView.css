@@ -36,6 +36,10 @@ div.triptych > div.map {
   height: 100%;
 }
 
+p > img.social-icon {
+  height: 40px;
+}
+
 /* 
 periwinkle
 #4d86f7

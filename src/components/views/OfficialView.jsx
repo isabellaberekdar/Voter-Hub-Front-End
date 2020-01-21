@@ -34,12 +34,9 @@ const OfficialView = props => {
     for (let key in official.channels) {
       if (official.channels.hasOwnProperty(key)) {
         if (official.channels[key].type == "Facebook") {
-          // console.log(
-          //   "Facebook: ",
-          //   "https://www.facebook.com/" + official.channels[key].id
-          // );
           channels.push(
             <p>
+              <img className="social-icon" src="/images/socialfacebook.svg" />
               <a
                 href={"https://www.facebook.com/" + official.channels[key].id}
                 target="blank"
@@ -49,12 +46,9 @@ const OfficialView = props => {
             </p>
           )
         } else if (official.channels[key].type == "Twitter") {
-          // console.log(
-          //   "Twitter: ",
-          //   "https://twitter.com/" + official.channels[key].id
-          // );
           channels.push(
             <p>
+              <img className="social-icon" src="/images/socialtwitter.svg" />
               <a
                 href={"https://twitter.com/" + official.channels[key].id}
                 target="blank"
@@ -64,12 +58,9 @@ const OfficialView = props => {
             </p>
           )
         } else if (official.channels[key].type == "YouTube") {
-          // console.log(
-          //   "YouTube: ",
-          //   "https://www.youtube.com/user/" + official.channels[key].id
-          // );
           channels.push(
             <p>
+              <img className="social-icon" src="/images/socialyoutube.svg" />
               <a
                 href={
                   "https://www.youtube.com/user/" + official.channels[key].id
@@ -113,35 +104,10 @@ const OfficialView = props => {
     }
   }
 
+  console.log(office)
   return (
     <div>
-      <h2>OfficialView here</h2>
-
-      <p>{divisionId}</p>
-      <p>{office.name}</p>
-      <p>{official.name}</p>
-      <p>{official.party}</p>
-
-      {official.address ? <div>{addressLines}</div> : <div></div>}
-      {official.phones ? <p>{official.phones[0]}</p> : <div></div>}
-      {official.urls ? (
-        <a href={official.urls[0]} target="blank">
-          {official.urls[0]}{" "}
-        </a>
-      ) : (
-        <div></div>
-      )}
-      {official.emails ? (
-        <p>
-          <a href={"mailto:" + official.emails[0]} target="blank">
-            {official.emails[0]}
-          </a>
-        </p>
-      ) : (
-        <div></div>
-      )}
-
-      {official.channels ? channels : <div></div>}
+      {/* <h2>OfficialView here</h2> */}
 
       <div className="triptych">
         <div className="portrait">
@@ -159,7 +125,46 @@ const OfficialView = props => {
             </center>
           )}
         </div>
-        <div className="info"></div>
+        <div className="info">
+          <p>{official.name}</p>
+          <p>
+            <b>District: </b>
+            {divisionId}
+          </p>
+          <p>
+            <b>Title: </b>
+            {office.name}
+          </p>
+          <p>
+            <b>Party: </b>
+            {official.party}
+          </p>
+
+          {official.emails ? (
+            <p>
+              <b>Email: </b>
+              <a href={"mailto:" + official.emails[0]} target="blank">
+                {official.emails[0]}
+              </a>
+            </p>
+          ) : (
+            <div></div>
+          )}
+          {official.urls ? (
+            <p>
+              <b>Website: </b>
+              <a href={official.urls[0]} target="blank">
+                {official.urls[0]}{" "}
+              </a>
+            </p>
+          ) : (
+            <div></div>
+          )}
+          {/* {official.address ? <div>{addressLines}</div> : <div></div>}
+          {official.phones ? <p>{official.phones[0]}</p> : <div></div>} */}
+
+          {official.channels ? channels : <div></div>}
+        </div>
         <div className="map"></div>
       </div>
       <div className="twitter"></div>
