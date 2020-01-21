@@ -16,17 +16,22 @@ class OfficialContainer extends Component {
     // check if there is a photo. If not, go find one
     this.props.getArticles('Andrew Cuomo')
 
-    console.log("ARTICLES")
+    const division = this.props.match.params.division
+    const officeIndex = this.props.match.params.officeIndex
+    const officialIndex = this.props.match.params.officialIndex
+    // console.log("kumquat", division, officeIndex, officialIndex)
+
+    this.props.getOfficialThunk(division, officeIndex, officialIndex)
   }
   
   render() {
-    console.log(this.props.articles)
     return (
       <div>
         <h1>OfficialContainer here</h1>
         {this.props.official && <img src={this.props.official.photoUrl} />}
         <NewsArticles articles={this.props.articles} />
- */}        <OfficialView division='division here' office='office here' official='official here' />
+        <OfficialView division='division here' office='office here' official='official here' />
+        <OfficialView officialObject={this.props.official} />
       </div>
     )
   }

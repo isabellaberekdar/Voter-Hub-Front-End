@@ -78,8 +78,15 @@ export const getOfficialThunk = (state, index = 0) => async dispatch => {
 
     // Get the official
     const { data } = await axios.get(url)
-    console.log("DATA: ", data.officials[index])
-    dispatch(getOfficial(data.officials[index]))
+    console.log("DATA: ", data)
+    console.log("rutabaga", officeIndex, officialIndex)
+    let payload = {
+      office: data.offices[officeIndex],
+      official:
+        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+    }
+    console.log(payload)
+    dispatch(getOfficial(payload))
   } catch (error) {
     console.log("Error in getOfficialThunk:", error)
   }

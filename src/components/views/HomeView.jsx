@@ -133,7 +133,9 @@ const HomeView = props => {
             <input
               type="text"
               name="address"
-              placeholder="Enter your address to find who represents you..."
+              placeholder={props.placeholderText}
+              onFocus={props.focusFunc}
+              onblur={props.unfocusFunc}
               onChange={props.handleChange}
               value={props.address_input}
               id="address-entry"
@@ -142,7 +144,7 @@ const HomeView = props => {
           </div>
         </div>
         <div className="home-content">
-          {officialCards}
+          <center>{officialCards}</center>
         </div>
     </div>
   );
