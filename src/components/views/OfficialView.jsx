@@ -120,8 +120,40 @@ const OfficialView = props => {
       <p>{divisionId}</p>
       <p>{office.name}</p>
       <p>{official.name}</p>
-      {addressLines}
-      {channels}
+      <p>{official.party}</p>
+      {official.photoUrl ? (
+        <center>
+          <img src={official.photoUrl} width="130px" />
+        </center>
+      ) : (
+        <center>
+          <img
+            src="./images/placeholder.png"
+            target="blank"
+            height="162.5px"
+          ></img>
+        </center>
+      )}
+      {official.address ? <div>{addressLines}</div> : <div></div>}
+      {official.phones ? <p>{official.phones[0]}</p> : <div></div>}
+      {official.urls ? (
+        <a href={official.urls[0]} target="blank">
+          {official.urls[0]}{" "}
+        </a>
+      ) : (
+        <div></div>
+      )}
+      {official.emails ? (
+        <p>
+          <a href={"mailto:" + official.emails[0]} target="blank">
+            {official.emails[0]}
+          </a>
+        </p>
+      ) : (
+        <div></div>
+      )}
+
+      {official.channels ? channels : <div></div>}
 
       <div className="disqus-container">
         {/* <Disqus.DiscussionEmbed
