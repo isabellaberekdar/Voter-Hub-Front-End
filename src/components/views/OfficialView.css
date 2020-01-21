@@ -3,3 +3,48 @@
   width: 60%;
   margin: auto;
 }
+
+div.triptych {
+  display: flex;
+  height: 500px;
+}
+
+div.triptych > div.portrait {
+  width: 30%;
+  background-color: #e84a3d;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+div.triptych > div.portrait img {
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+div.triptych > div.info {
+  width: 40%;
+  background-color: white;
+  height: 100%;
+}
+
+div.triptych > div.map {
+  width: 30%;
+  background-color: #293b59;
+  height: 100%;
+}
+
+/* 
+periwinkle
+#4d86f7
+white
+#ffffff
+navy
+#293b59
+red
+#e84a3d
+green
+#4df76e
+*/

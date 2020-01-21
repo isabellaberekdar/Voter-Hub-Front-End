@@ -121,19 +121,7 @@ const OfficialView = props => {
       <p>{office.name}</p>
       <p>{official.name}</p>
       <p>{official.party}</p>
-      {official.photoUrl ? (
-        <center>
-          <img src={official.photoUrl} width="130px" />
-        </center>
-      ) : (
-        <center>
-          <img
-            src="/images/placeholder.png"
-            target="blank"
-            height="162.5px"
-          ></img>
-        </center>
-      )}
+
       {official.address ? <div>{addressLines}</div> : <div></div>}
       {official.phones ? <p>{official.phones[0]}</p> : <div></div>}
       {official.urls ? (
@@ -154,6 +142,28 @@ const OfficialView = props => {
       )}
 
       {official.channels ? channels : <div></div>}
+
+      <div className="triptych">
+        <div className="portrait">
+          {official.photoUrl ? (
+            <center>
+              <img src={official.photoUrl} width="130px" />
+            </center>
+          ) : (
+            <center>
+              <img
+                src="/images/placeholder.png"
+                target="blank"
+                height="162.5px"
+              ></img>
+            </center>
+          )}
+        </div>
+        <div className="info"></div>
+        <div className="map"></div>
+      </div>
+      <div className="twitter"></div>
+      <div className="bing-news"></div>
 
       <div className="disqus-container">
         {/* <Disqus.DiscussionEmbed
