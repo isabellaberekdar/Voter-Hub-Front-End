@@ -58,7 +58,7 @@ const HomeView = props => {
     <div>
       <div className="header">
         <img
-          src="/images/homeheader2.png"
+          src="/images/homeheader3.png"
           alt="header of homepage"
           width="100%"
         />
