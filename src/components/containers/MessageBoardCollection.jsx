@@ -7,25 +7,36 @@ class MessageBoardCollectionContainer extends Component {
     constructor(){
         super();
         this.state = {
-            // officials : [],
-            msgBoardArray: []
+            msgBoardArray: [],
+            inputText: ""
         }
     }
-    
-    // getOfficialsArray = async () => {
-    //     var res = await axios.get("http://localhost:5000/api/messages/messageboardcollection");
-    //     await this.setState({ officials: res.data});
-    //     console.log("this official", this.state.officials);
-    //     // console.log("messages array: ", this.state.officials[0].messageboards);
-    // }
-    getMessageBoards = async () => {
+
+    handleChange = (event) => {
+        this.setState({inputText: event.target.value});
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        // console.log("submitted");
+
+        let message = {
+            
+        }
+        axios.post(`http://localhost:5000/api/messages`, { message })
+            .then(res => {
+                console.log(res);
+            })
+
+    }
+
+    getMessageBoards = async () => {    
         var res = await axios.get("http://localhost:5000/api/messages/messageboard");
         await this.setState({ msgBoardArray: res.data});
         console.log("this msgBoard", this.state.msgBoardArray);
     }
     
     componentDidMount() {
-        // this.getOfficialsArray(); 
         this.getMessageBoards();
     }
     //life cycle: constructor, render, componentDidMount, re-render
@@ -38,12 +49,17 @@ class MessageBoardCollectionContainer extends Component {
                         msgBoard.officialId === officialId ? 
                         <li>
                             {msgBoard.subject}
+                            <br/>
+                            Message Board ID: {msgBoard.id}
                             <ol>
-                                {
-                                    msgBoard.messages.map(message => <div>
-                                        <li>{message.user}: {'\xa0\xa0\xa0\xa0\xa0\xa0\xa0'} {message.text}</li>
-                                    </div>) 
-                                }
+                                <form onSubmit={this.handleSubmit}>
+                                    {
+                                        msgBoard.messages.map(message => <div>
+                                            <li>{message.user}: {'\xa0\xa0\xa0\xa0\xa0\xa0\xa0'} {message.text}</li>
+                                        </div>) 
+                                    }
+                                    <input type="text" placeholder="Aa" value={this.state.inputText} onChange={this.handleChange}/>
+                                </form>
                             </ol>
                         </li>
                         : 
@@ -55,13 +71,7 @@ class MessageBoardCollectionContainer extends Component {
 
         }   
 
-        // console.log(`message board ${this.state.officials}`)
-
-        // let threads = this.state.officials[0].messageboards.map(msgboard => 
-        //     <li>{msgboard.subject}</li>
-        // );
         return <div>
-            {/* <h3>{this.state.officials[0]}</h3> */}
             {threads}
         </div>
     }
