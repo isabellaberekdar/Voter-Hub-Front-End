@@ -164,10 +164,13 @@ export const getCidThunk = nameObj => async dispatch => {
     )
     let legislators = data.response.legislator
     // console.log("celery", legislators)
+
+    // DON'T DELETE THE FOLLOWING LINES, in case phone numbers end up being insufficient
     // Finds the legislator in legislators with the same last name (first name won't be sufficient)
     // const found = legislators.find(element =>
     //   element["@attributes"].firstlast.includes(nameObj.lastName)
     // )
+
     // Finds the legislator in legislators with the same phone number
     const found = legislators.find(
       element =>

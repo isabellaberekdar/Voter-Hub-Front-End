@@ -34,9 +34,9 @@ class OfficialContainer extends Component {
   }
 
   render() {
-    console.log("beet", this.props)
+    // console.log("beet", this.props)
     if (this.props.official) {
-      console.log("pepper", this.props)
+      // console.log("pepper", this.props)
       let nameObj = {}
       let stateAbbrev = this.props.official.office.divisionId.substring(
         this.props.official.office.divisionId.lastIndexOf("state:") + 6
