@@ -5,7 +5,8 @@ import {
   getOfficialThunk,
   getPhotoThunk,
   getArticlesThunk,
-  getCidThunk
+  getCidThunk,
+  storeName
 } from "../../store/utilities/official"
 
 class OfficialContainer extends Component {
@@ -33,6 +34,44 @@ class OfficialContainer extends Component {
   }
 
   render() {
+    console.log("beet", this.props)
+    if (this.props.official) {
+      console.log("pepper", this.props)
+      let nameObj = {}
+      let stateAbbrev = this.props.official.office.divisionId.substring(
+        this.props.official.office.divisionId.lastIndexOf("state:") + 6
+      )
+      if (stateAbbrev.includes("/")) {
+        stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
+      }
+      let firstName = this.props.official.official.name.substring(
+        0,
+        this.props.official.official.name.indexOf(" ")
+      )
+      firstName = firstName.replace(".", "")
+      let lastName = this.props.official.official.name.substring(
+        this.props.official.official.name.lastIndexOf(" ") + 1
+      )
+      let phone = this.props.official.official.phones[0]
+        .replace("(", "")
+        .replace(")", "")
+        .replace("-", "")
+        .replace(" ", "")
+      // console.log({
+      //   stateAbbrev: stateAbbrev,
+      //   firstName: firstName,
+      //   lastName: lastName,
+      //   phone: phone
+      // })
+
+      this.props.storeName({
+        stateAbbrev: stateAbbrev,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone
+      })
+    }
+
     return (
       <div>
         {/* <h1>OfficialContainer here</h1> */}
@@ -44,9 +83,12 @@ class OfficialContainer extends Component {
 }
 
 const mapState = state => {
+  // console.log("turnip", state.official.official)
+  // you can't access/destructure anything deeper here than state.official.official because there are times at the beginning of loading when it is still undefined
+  // however, you can map it to the props of this component, and access the innards later once they come into existence
   return {
-    division: "state.google.divisions",
-    office: "state.google.offices",
+    division: "",
+    office: "",
     official: state.official.official,
     articles: state.official.articles
   }
@@ -59,7 +101,8 @@ const mapDispatch = dispatch => {
     getPhoto: (number, state) => dispatch(getPhotoThunk(number, state)),
     getArticles: name => dispatch(getArticlesThunk(name)),
     getCid: (stateAbbrev, fullName) =>
-      dispatch(getCidThunk(stateAbbrev, fullName))
+      dispatch(getCidThunk(stateAbbrev, fullName)),
+    storeName: nameObj => dispatch(storeName(nameObj))
   }
 }
 

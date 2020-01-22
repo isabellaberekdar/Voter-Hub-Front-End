@@ -6,6 +6,7 @@ const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
 const GET_CID = "GET_CID"
+const STORE_NAME = "STORE_NAME"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -33,6 +34,13 @@ const getArticles = articles => {
   return {
     type: GET_ARTICLES,
     payload: articles
+  }
+}
+
+export const storeName = info => {
+  return {
+    type: STORE_NAME,
+    payload: info
   }
 }
 
@@ -147,44 +155,20 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
   }
 }
 
-export const getCidThunk = (
-  stateAbbrev,
-  firstName,
-  lastName,
-  phone
-) => async dispatch => {
-  // console.log(stateAbbrev);
+export const getCidThunk = nameObj => async dispatch => {
+  // console.log("arugula", nameObj)
   try {
-    // Query the api for the officials associated with the given address
+    // Query the api for the officials associated with the given state abbrev
     const { data } = await axios.get(
-      `https://www.opensecrets.org/api/?method=getLegislators&id=${stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+      `https://www.opensecrets.org/api/?method=getLegislators&id=${nameObj.stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
     )
     let legislators = data.response.legislator
-    // data = data.filter(obj => {
-    //   return obj.name === 6
-    // })
-    console.log("carrot", legislators)
-    console.log("avocadoI", firstName, lastName, phone)
-    console.log("avocado", legislators)
-    // console.log(legislators[0]["@attributes"])
-    // const found = legislators.find(
-    //   element =>
-    //     element["@attributes"].firstlast.includes(firstName) &&
-    //     element["@attributes"].firstlast.includes(lastName)
+    // console.log("celery", legislators)
+    // Finds the legislator in legislators with the same last name (first name won't be sufficient)
+    // const found = legislators.find(element =>
+    //   element["@attributes"].firstlast.includes(nameObj.lastName)
     // )
-
-    // for (let i = 0; i < legislators.length; i++) {
-    //   console.log("rhubarb", legislators[i]["@attributes"].phone, phone)
-    //   console.log(
-    //     legislators[i]["@attributes"].phone
-    //       .replace("(", "")
-    //       .replace(")", "")
-    //       .replace("-", "")
-    //       .replace(" ", "")
-    //       .replace("-", ""),
-    //     phone
-    //   )
-    // }
+    // Finds the legislator in legislators with the same phone number
     const found = legislators.find(
       element =>
         element["@attributes"].phone
@@ -192,11 +176,10 @@ export const getCidThunk = (
           .replace(")", "")
           .replace("-", "")
           .replace(" ", "")
-          .replace("-", "") === phone
+          .replace("-", "") === nameObj.phone
     )
-    // console.log("elderberry", legislators[0]["@attributes"])
-    console.log("wheatgrass", found["@attributes"].cid)
-    // dispatch(getCid(found))
+    // console.log("wheatgrass", found["@attributes"].cid)
+    dispatch(getCid(found["@attributes"]))
   } catch (error) {
     console.log("Error in getCidThunk:", error)
   }
@@ -228,6 +211,16 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         articles: action.payload
+      }
+    case STORE_NAME:
+      return {
+        ...state,
+        nameObj: action.payload
+      }
+    case GET_CID:
+      return {
+        ...state,
+        cid: action.payload
       }
     default:
       return state

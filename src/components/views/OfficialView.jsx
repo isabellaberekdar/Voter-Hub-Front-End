@@ -26,23 +26,15 @@ const OfficialView = props => {
     identifier: official.name, //this.props.uniqueId
     title: official.name //this.props.title
   }
-  console.log(official)
-  console.log(window.location.href)
+  // console.log(official)
+  // console.log(window.location.href)
 
   let firstName = ""
   let lastName = ""
-  let phone = ""
   if (official.name) {
     firstName = official.name.substring(0, official.name.lastIndexOf(" "))
     lastName = official.name.substring(official.name.lastIndexOf(" ") + 1)
-    phone = official.phones[0]
-      .replace("(", "")
-      .replace(")", "")
-      .replace("-", "")
-      .replace(" ", "")
   }
-  // console.log(office)
-  // console.log(official)
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
   let channels = []
@@ -208,21 +200,7 @@ const OfficialView = props => {
         <NewsArticlesContainer official={props.officialObject.official.name} />
       )}
 
-      {props.officialObject && (
-        <FundingContainer
-          stateAbbrev={props.officialObject.office.divisionId.substring(
-            props.officialObject.office.divisionId.lastIndexOf(":") + 1
-          )}
-          firstName={props.officialObject.official.name.substring(
-            0,
-            official.name.indexOf(" ")
-          )}
-          lastName={props.officialObject.official.name.substring(
-            official.name.lastIndexOf(" ") + 1
-          )}
-          phone={phone}
-        />
-      )}
+      {props.officialObject && <FundingContainer />}
 
       {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed
