@@ -1,17 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
-// import "./Funding.css"
+import React from "react";
+import PropTypes from "prop-types";
+import "./Funding.css";
 
 const FundingView = props => {
   return (
-    <div>
-      <h2>Funding</h2>
-      <div>
+    <div className="funding-block">
+      <p id="down-triangle">▼</p>
+      <h2>Funding Records...</h2>
+      <div className="funding-info-container">
         {props.articles
           ? props.articles.map(article => {
               return (
-                <div key={article.name}>
-                  {/* {console.log()} */}
+                <div classname="funding" key={article.name}>
                   <span>
                     <i>
                       <b>{article.provider}</b>
@@ -21,7 +21,7 @@ const FundingView = props => {
                 </div>
               )
             })
-          : "There was no funding information found about this official."}
+          : <p id="no-funding-message">There was no funding information found about this official.</p>}
       </div>
     </div>
   )

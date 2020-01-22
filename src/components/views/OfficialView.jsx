@@ -128,10 +128,8 @@ const OfficialView = props => {
     }
   }
 
-  console.log(office)
   return (
-    <div>
-      {/* <h2>OfficialView here</h2> */}
+    <div className="triptych-container">
 
       <div className="triptych">
         <div className="portrait">
