@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom"
 import { Login, Signup, Logout } from "../containers"
 import { HomeContainer, NotFound, OfficialContainer } from "../../components"
 import MessageBoardCollectionContainer from '../containers/MessageBoardCollection';
+import MessageBoard from "../containers/MessageBoard";
 
 
 const RoutesView = props => {
@@ -16,6 +17,7 @@ const RoutesView = props => {
       <Route exact path="/signup" component={Signup} />
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/messageboardcontainer" component={MessageBoardCollectionContainer}/>
+      <Route exact path="/messageboard" component={MessageBoard}/>
       {/* placeOrCounty and placeOrCountyName are optional */}
       <Route
         exact
