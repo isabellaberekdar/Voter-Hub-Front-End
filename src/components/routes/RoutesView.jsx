@@ -19,7 +19,7 @@ const RoutesView = props => {
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/messageboardcontainer" component={MessageBoardCollectionContainer}/>
       <Route exact path="/messageboard" component={MessageBoard}/>
-      <Route exact path="/thread" component={Thread}/>
+      <Route exact path="/thread/:threadId" component={Thread}/>
       {/* placeOrCounty and placeOrCountyName are optional */}
       <Route
         exact

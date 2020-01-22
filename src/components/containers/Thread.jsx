@@ -1,8 +1,9 @@
-import MessageBoardCollection from "..";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import { getThreadThunk } from "../../store/utilities/message";
+import MessageBoardCollection from ".."
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import axios from "axios"
+import { getThreadThunk } from "../../store/utilities/message"
+import { MessageCard } from ".."
 
 class Thread extends Component {
   // constructor(){
@@ -25,15 +26,25 @@ class Thread extends Component {
   // }
 
   componentDidMount() {
-    this.props.getThread(2);
-    // this.getThread();
+    const id = this.props.match.params.threadId
+    this.props.getThread(id)
   }
 
   render() {
+    let messageDisplay
     if (this.props.messages) {
       console.log(this.props.messages)
+      messageDisplay = this.props.messages.messages.map(message => (
+        <li>{message.text}</li>
+      ))
     }
-    return <div>THREAD HERE</div>;
+
+    return (
+      <div>
+        THREAD HERE
+        {messageDisplay}
+      </div>
+    )
   }
 }
 
@@ -41,13 +52,13 @@ class Thread extends Component {
 const mapState = state => {
   return {
     messages: state.message.messages
-  };
-};
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
     getThread: threadId => dispatch(getThreadThunk(threadId))
-  };
-};
+  }
+}
 
-export default connect(mapState, mapDispatch)(Thread);
+export default connect(mapState, mapDispatch)(Thread)
