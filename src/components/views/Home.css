@@ -31,6 +31,8 @@
     font-size: 20px;
     height: 282px;
     width: 100%;
+    background-image: url('/images/homeheader3.png');
+    background-attachment: fixed;
 }
 
 .find-rep-title {

@@ -54,11 +54,12 @@
 }
 
 .official-card a#icon {
-  padding-right: 5px;
+  padding-right: 20px;
 }
 
 .official-content {
   float: left;
+  padding-top: 5px;
   padding-left: 15px;
   word-break: break-all;
 }
@@ -82,10 +83,12 @@
 
 #party {
   font-family: avenir-black;
+  padding-bottom: 3px;
 }
 
 #address {
   line-height: .2;
+  padding-bottom: 3px;
 }
 
 #mail {

@@ -57,16 +57,11 @@ const HomeView = props => {
   return (
     <div>
       <div className="header">
-        <img
-          src="/images/homeheader3.png"
-          alt="header of homepage"
-          width="100%"
-        />
         <div className="centered">
           <h2 className="find-rep-title">Find Your Representatives</h2>
           <h3 className="find-rep-description">
             Enter your full address below to find your representatives, 
-            how to contact them, their voting and bill history,
+            how to contact them, their funding records,
             and their latest social media and news mentions!
           </h3>
           <form onSubmit={props.handleSubmit}>
@@ -97,8 +92,8 @@ const HomeView = props => {
           <div className="column" id="two">
             <img src="/images/discourse.png" alt="discourse icon" width="50px"/> <br></br>
             Talk and discuss with others in <br></br>
-            your districts about the latest <br></br>
-            issues, elections, and concerns.
+            your districts about your <br></br>
+            representatives, issues, and concerns.
           </div>
           <div className="column" id="three">
             <img src="/images/whomyrep.png" alt="rep question icon" width="50px" /> <br></br>
