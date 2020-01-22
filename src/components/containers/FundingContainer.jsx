@@ -12,16 +12,15 @@ class FundingContainer extends React.Component {
 
   componentDidMount() {
     // this.props.getArticles(this.props.official)
-    this.props.getCid(this.props.nameObj)
+    this.props.getCid(this.props.nameObj).then(() => {
+      this.props.getFunders(this.props.cid.cid)
+    })
   }
 
   render() {
     // console.log("radicchio", this.props)
-    if (this.props.cid) {
-      this.props.getFunders(this.props.cid.cid)
-    }
 
-    return <FundingView cid={this.props.cid} />
+    return <FundingView cid={this.props.cid} funders={this.props.funders} />
   }
 }
 
@@ -33,7 +32,8 @@ const mapState = state => {
   return {
     // articles: state.official.articles
     nameObj: state.official.nameObj,
-    cid: state.official.cid
+    cid: state.official.cid,
+    funders: state.official.funders
   }
 }
 
