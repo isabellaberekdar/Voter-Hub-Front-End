@@ -4,6 +4,7 @@ import { Login, Signup, Logout } from "../containers"
 import { HomeContainer, NotFound, OfficialContainer } from "../../components"
 import MessageBoardCollectionContainer from '../containers/MessageBoardCollection';
 import MessageBoard from "../containers/MessageBoard";
+import Thread from "../containers/Thread";
 
 
 const RoutesView = props => {
@@ -18,6 +19,7 @@ const RoutesView = props => {
       <Route exact path="/logout" component={Logout} />
       <Route exact path="/messageboardcontainer" component={MessageBoardCollectionContainer}/>
       <Route exact path="/messageboard" component={MessageBoard}/>
+      <Route exact path="/thread" component={Thread}/>
       {/* placeOrCounty and placeOrCountyName are optional */}
       <Route
         exact

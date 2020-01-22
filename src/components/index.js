@@ -22,4 +22,6 @@ export { default as Message } from "./views/Message"
 export { default as MessageBoard } from "./views/MessageBoard"
 export { default as MessageBoardCollection } from "./views/MessageBoardCollection"
 
+export { default as MessageBoardContainer } from "./containers/MessageBoard"
+export { default as Thread } from "./containers/Thread"
 // export { default as MessageBoardCollectionContainer } from "./containers/MessageBoardCollection";

@@ -6,6 +6,7 @@ import axios from "axios"
 // ACTION TYPES
 const GET_MESSAGEBOARD = "GET_MESSAGEBOARD"
 const POST_MESSAGE = "POST_MESSAGE"
+const GET_THREAD = "GET_THREAD"
 
 // ACTION CREATORS
 
@@ -20,6 +21,13 @@ const postMessage = message => {
     return {
         type: POST_MESSAGE,
         payload: message
+    }
+}
+
+const getThread = messages => {
+    return {
+        type: GET_THREAD,
+        payload: messages
     }
 }
 
@@ -38,6 +46,22 @@ export const getMessageBoardThunk = messageBoardId => async dispatch => {
       console.log("Error in getOfficialsThunk:", error)
     }
   }
+//return all the threads 
+export const getThreadThunk = threadId => async dispatch => {
+    // console.log(address);
+    try {
+        console.log("penguin berry")
+      // Query the api for the officials associated with the given address
+      const { data } = await axios.get(
+        `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
+      )
+      console.log("cantaloupe berry", data)
+    dispatch(getThread(data))
+    } catch (error) {
+      console.log("Error in getThreadThunk:", error)
+    }
+  }
+
 
 
 
@@ -61,11 +85,17 @@ const initialState = {}
 // REDUCER
 const officialReducer = (state = initialState, action) => {
   switch (action.type) {
-      case GET_MESSAGEBOARD:
-          return {
-              ...state, 
-              threads: action.payload
-          }
+        case GET_MESSAGEBOARD:
+            return {
+                ...state, 
+                threads: action.payload
+            }
+        case GET_THREAD:
+            return {
+                ...state,
+                messages: action.payload
+            }
+        
     // case GET_OFFICIALS:
     //   // create a new object, copy over everything from state, then add the new officials data that was fetched
     //   return {
