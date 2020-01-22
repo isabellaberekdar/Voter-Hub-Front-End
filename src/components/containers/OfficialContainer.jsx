@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
 import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
+import Search from '../views/autocomplete'
+
 
 class OfficialContainer extends Component {
   componentDidMount() {
@@ -24,6 +26,7 @@ class OfficialContainer extends Component {
   render() {
     return (
       <div>
+        <Search />
         {/* <h1>OfficialContainer here</h1> */}
         {this.props.official && <img src={this.props.official.photoUrl} />}
         <OfficialView officialObject={this.props.official} />
