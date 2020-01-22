@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import FundingView from "../views/FundingView"
-import { getCidThunk, getFundersThunk } from "../../store/utilities/official"
+import { getCidThunk } from "../../store/utilities/official"
 import { connect } from "react-redux"
 
 class FundingContainer extends React.Component {
@@ -12,15 +12,12 @@ class FundingContainer extends React.Component {
 
   componentDidMount() {
     // this.props.getArticles(this.props.official)
-    this.props.getCid(this.props.nameObj).then(() => {
-      this.props.getFunders(this.props.cid.cid)
-    })
+    this.props.getCid(this.props.nameObj)
   }
 
   render() {
     // console.log("radicchio", this.props)
-
-    return <FundingView cid={this.props.cid} funders={this.props.funders} />
+    return <FundingView cid={this.props.cid} />
   }
 }
 
@@ -32,15 +29,13 @@ const mapState = state => {
   return {
     // articles: state.official.articles
     nameObj: state.official.nameObj,
-    cid: state.official.cid,
-    funders: state.official.funders
+    cid: state.official.cid
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getCid: nameObj => dispatch(getCidThunk(nameObj)),
-    getFunders: cid => dispatch(getFundersThunk(cid))
+    getCid: nameObj => dispatch(getCidThunk(nameObj))
   }
 }
 
