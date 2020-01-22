@@ -5,6 +5,7 @@ const GET_OFFICIAL = "GET_OFFICIAL"
 const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
+const GET_CID = "GET_CID"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -32,6 +33,13 @@ const getArticles = articles => {
   return {
     type: GET_ARTICLES,
     payload: articles
+  }
+}
+
+const getCid = info => {
+  return {
+    type: GET_CID,
+    payload: info
   }
 }
 
@@ -85,7 +93,11 @@ export const getArticlesThunk = name => async dispatch => {
   }
 }
 
-export const getOfficialThunk = (division, officeIndex, officialIndex) => async dispatch => {
+export const getOfficialThunk = (
+  division,
+  officeIndex,
+  officialIndex
+) => async dispatch => {
   try {
     let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
 
@@ -95,7 +107,8 @@ export const getOfficialThunk = (division, officeIndex, officialIndex) => async 
     // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official: data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+      official:
+        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
     console.log(payload)
     dispatch(getOfficial(payload))
@@ -131,6 +144,61 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
     }
   } catch (error) {
     console.log("Error in getPhotoThunk:", error)
+  }
+}
+
+export const getCidThunk = (
+  stateAbbrev,
+  firstName,
+  lastName,
+  phone
+) => async dispatch => {
+  // console.log(stateAbbrev);
+  try {
+    // Query the api for the officials associated with the given address
+    const { data } = await axios.get(
+      `https://www.opensecrets.org/api/?method=getLegislators&id=${stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+    )
+    let legislators = data.response.legislator
+    // data = data.filter(obj => {
+    //   return obj.name === 6
+    // })
+    console.log("carrot", legislators)
+    console.log("avocadoI", firstName, lastName, phone)
+    console.log("avocado", legislators)
+    // console.log(legislators[0]["@attributes"])
+    // const found = legislators.find(
+    //   element =>
+    //     element["@attributes"].firstlast.includes(firstName) &&
+    //     element["@attributes"].firstlast.includes(lastName)
+    // )
+
+    // for (let i = 0; i < legislators.length; i++) {
+    //   console.log("rhubarb", legislators[i]["@attributes"].phone, phone)
+    //   console.log(
+    //     legislators[i]["@attributes"].phone
+    //       .replace("(", "")
+    //       .replace(")", "")
+    //       .replace("-", "")
+    //       .replace(" ", "")
+    //       .replace("-", ""),
+    //     phone
+    //   )
+    // }
+    const found = legislators.find(
+      element =>
+        element["@attributes"].phone
+          .replace("(", "")
+          .replace(")", "")
+          .replace("-", "")
+          .replace(" ", "")
+          .replace("-", "") === phone
+    )
+    // console.log("elderberry", legislators[0]["@attributes"])
+    console.log("wheatgrass", found["@attributes"].cid)
+    // dispatch(getCid(found))
+  } catch (error) {
+    console.log("Error in getCidThunk:", error)
   }
 }
 
