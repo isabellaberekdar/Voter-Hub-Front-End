@@ -69,9 +69,9 @@ class MessageBoard extends Component {
                     {
                         msgBoard.officialId === officialId ? 
                         <li>
-                            {msgBoard.subject}
+                            <a href={`/thread/${msgBoard.id}`}>{msgBoard.subject}</a>
                             <br/>
-                            Message Board ID: {msgBoard.id}
+                            Thread ID: {msgBoard.id} <br/>
                         </li>
                         : 
                         <div></div>    

@@ -25,6 +25,10 @@ class Thread extends Component {
   //     // console.log("this msgBoard", this.state.msgBoardArray);
   // }
 
+  handleOnSubmit = () => {
+    
+  }
+
   componentDidMount() {
     const id = this.props.match.params.threadId
     this.props.getThread(id)
@@ -43,6 +47,7 @@ class Thread extends Component {
       <div>
         THREAD HERE
         {messageDisplay}
+        <input type="text" placeholder="Aa" onSubmit={this.handleOnSubmit}/>
       </div>
     )
   }
