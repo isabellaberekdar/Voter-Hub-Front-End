@@ -92,7 +92,7 @@ p#current-user-message {
 }
 
 
-.navbar-links a:not(:nth-child(4)) {
+.navbar-links a:not(:nth-child(3)) {
     border-right: 2px solid #4D86F7;
 }
 
