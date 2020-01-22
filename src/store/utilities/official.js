@@ -48,7 +48,7 @@ export const getOfficialsThunk = searchbarValue => async dispatch => {
     // console.log("cantaloupe", data)
     dispatch(getOfficials(data))
   } catch (error) {
-    console.log("Error in getOfficialsThunk:", error)
+    console.log(error)
   }
 }
 

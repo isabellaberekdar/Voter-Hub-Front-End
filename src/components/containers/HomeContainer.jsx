@@ -47,15 +47,11 @@ class HomeContainer extends Component {
   }
 
   handleScriptLoad = () => {
-
     /*global google*/
     this.autocomplete = new google.maps.places.Autocomplete(
       document.getElementById("address-entry"),
     )
-
-
     this.autocomplete.setFields(["address_components", "formatted_address"])
-
     this.autocomplete.addListener("place_changed", this.handleSelectAddress)
   }
 

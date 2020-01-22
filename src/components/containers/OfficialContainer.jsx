@@ -2,9 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
 import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
-import Search from '../views/autocomplete'
-
-
+import Search from '../views/SearchBar'
 class OfficialContainer extends Component {
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
