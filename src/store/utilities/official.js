@@ -7,6 +7,7 @@ const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
 const GET_CID = "GET_CID"
 const STORE_NAME = "STORE_NAME"
+const GET_FUNDERS = "GET_FUNDERS"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -48,6 +49,13 @@ const getCid = info => {
   return {
     type: GET_CID,
     payload: info
+  }
+}
+
+const getFunders = funders => {
+  return {
+    type: GET_FUNDERS,
+    payload: funders
   }
 }
 
@@ -158,14 +166,14 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
 export const getCidThunk = nameObj => async dispatch => {
   // console.log("arugula", nameObj)
   try {
-    // Query the api for the officials associated with the given state abbrev
+    // Query the OpenSecrets API for the officials associated with the given state abbrev
     const { data } = await axios.get(
       `https://www.opensecrets.org/api/?method=getLegislators&id=${nameObj.stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
     )
     let legislators = data.response.legislator
     // console.log("celery", legislators)
 
-    // DON'T DELETE THE FOLLOWING LINES, in case phone numbers end up being insufficient
+    // Don't delete the following lines, in case phone numbers end up being insufficient
     // Finds the legislator in legislators with the same last name (first name won't be sufficient)
     // const found = legislators.find(element =>
     //   element["@attributes"].firstlast.includes(nameObj.lastName)
@@ -185,6 +193,21 @@ export const getCidThunk = nameObj => async dispatch => {
     dispatch(getCid(found["@attributes"]))
   } catch (error) {
     console.log("Error in getCidThunk:", error)
+  }
+}
+
+export const getFundersThunk = cid => async dispatch => {
+  console.log("CID", cid)
+  try {
+    let url = `https://www.opensecrets.org/api/?method=candIndustry&cid=${cid}&cycle=2020&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+
+    // Get the top ten industries who contributed for the 2020 cycle
+    const { data } = await axios.get(url)
+    // console.log("MEOW")
+    // console.log("DATA: ", data.response.industries.industry)
+    dispatch(getFunders(data.response.industries.industry))
+  } catch (error) {
+    console.log("Error in getFundersThunk:", error)
   }
 }
 
@@ -224,6 +247,11 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         cid: action.payload
+      }
+    case GET_FUNDERS:
+      return {
+        ...state,
+        funders: action.payload
       }
     default:
       return state
