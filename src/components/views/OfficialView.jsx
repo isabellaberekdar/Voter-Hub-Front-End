@@ -1,21 +1,13 @@
 import React from "react"
 import Disqus from "disqus-react"
-import NewsArticlesContainer from '../views/NewsArticlesContainer'
-
+import NewsArticlesContainer from "../views/NewsArticlesContainer"
+import FundingContainer from "../containers/FundingContainer"
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
 import "./OfficialView.css"
 
 const OfficialView = props => {
-  // Disqus configuration information
-  const disqusShortname = "voterbundle" //found in your Disqus.com dashboard
-  const disqusConfig = {
-    url: "http://localhost:3000", //this.props.pageUrl
-    identifier: "article-id", //this.props.uniqueId
-    title: "Title of Your Article" //this.props.title
-  }
-
   // console.log("parsnip", props)
   let output = []
   let divisionId = ""
@@ -27,14 +19,22 @@ const OfficialView = props => {
     official = props.officialObject.official
   }
 
+  // Disqus configuration information
+  const disqusShortname = "voterbundle" //found in your Disqus.com dashboard
+  const disqusConfig = {
+    url: window.location.href, //this.props.pageUrl
+    identifier: official.name, //this.props.uniqueId
+    title: official.name //this.props.title
+  }
+  // console.log(official)
+  // console.log(window.location.href)
+
   let firstName = ""
   let lastName = ""
   if (official.name) {
     firstName = official.name.substring(0, official.name.lastIndexOf(" "))
     lastName = official.name.substring(official.name.lastIndexOf(" ") + 1)
   }
-  console.log(office)
-  console.log(official)
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
   let channels = []
@@ -118,14 +118,11 @@ const OfficialView = props => {
         <div className="portrait">
           {official.photoUrl ? (
             <center>
-              <img src={official.photoUrl}/>
+              <img src={official.photoUrl} />
             </center>
           ) : (
             <center>
-              <img
-                src="/images/placeholder.png"
-                target="blank"
-              ></img>
+              <img src="/images/placeholder.png" target="blank"></img>
             </center>
           )}
         </div>
@@ -199,14 +196,18 @@ const OfficialView = props => {
       <div className="bing-news"></div>
 
       <p>{output}</p>
-      {props.officialObject && <NewsArticlesContainer official={props.officialObject.official.name} />}
+      {props.officialObject && (
+        <NewsArticlesContainer official={props.officialObject.official.name} />
+      )}
 
-      <div className="disqus-container">
+      {props.officialObject && <FundingContainer />}
+
+      {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
         />
-      </div>
+      </div> */}
     </div>
   )
 }

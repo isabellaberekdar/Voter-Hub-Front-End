@@ -5,6 +5,8 @@ const GET_OFFICIAL = "GET_OFFICIAL"
 const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
+const GET_CID = "GET_CID"
+const STORE_NAME = "STORE_NAME"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -32,6 +34,20 @@ const getArticles = articles => {
   return {
     type: GET_ARTICLES,
     payload: articles
+  }
+}
+
+export const storeName = info => {
+  return {
+    type: STORE_NAME,
+    payload: info
+  }
+}
+
+const getCid = info => {
+  return {
+    type: GET_CID,
+    payload: info
   }
 }
 
@@ -85,7 +101,11 @@ export const getArticlesThunk = name => async dispatch => {
   }
 }
 
-export const getOfficialThunk = (division, officeIndex, officialIndex) => async dispatch => {
+export const getOfficialThunk = (
+  division,
+  officeIndex,
+  officialIndex
+) => async dispatch => {
   try {
     let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
 
@@ -95,7 +115,8 @@ export const getOfficialThunk = (division, officeIndex, officialIndex) => async 
     // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official: data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+      official:
+        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
     console.log(payload)
     dispatch(getOfficial(payload))
@@ -134,6 +155,39 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
   }
 }
 
+export const getCidThunk = nameObj => async dispatch => {
+  // console.log("arugula", nameObj)
+  try {
+    // Query the api for the officials associated with the given state abbrev
+    const { data } = await axios.get(
+      `https://www.opensecrets.org/api/?method=getLegislators&id=${nameObj.stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+    )
+    let legislators = data.response.legislator
+    // console.log("celery", legislators)
+
+    // DON'T DELETE THE FOLLOWING LINES, in case phone numbers end up being insufficient
+    // Finds the legislator in legislators with the same last name (first name won't be sufficient)
+    // const found = legislators.find(element =>
+    //   element["@attributes"].firstlast.includes(nameObj.lastName)
+    // )
+
+    // Finds the legislator in legislators with the same phone number
+    const found = legislators.find(
+      element =>
+        element["@attributes"].phone
+          .replace("(", "")
+          .replace(")", "")
+          .replace("-", "")
+          .replace(" ", "")
+          .replace("-", "") === nameObj.phone
+    )
+    // console.log("wheatgrass", found["@attributes"].cid)
+    dispatch(getCid(found["@attributes"]))
+  } catch (error) {
+    console.log("Error in getCidThunk:", error)
+  }
+}
+
 const initialState = {}
 
 // REDUCER
@@ -160,6 +214,16 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         articles: action.payload
+      }
+    case STORE_NAME:
+      return {
+        ...state,
+        nameObj: action.payload
+      }
+    case GET_CID:
+      return {
+        ...state,
+        cid: action.payload
       }
     default:
       return state
