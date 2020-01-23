@@ -171,7 +171,7 @@ h3#join-discussion-title {
   }
 
   .text:hover a {
-      padding-right: 25px;
+      padding-right:15px;
   }
 
   .text:hover a:after {
