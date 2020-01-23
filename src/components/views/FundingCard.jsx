@@ -3,23 +3,6 @@ import React from "react"
 import "./FundingCard.css"
 
 const FundingCard = props => {
-  console.log(props.funder["@attributes"])
-
-  {
-    console.log(props.funder["@attributes"].industry_name)
-  }
-  {
-    console.log(props.funder["@attributes"].industry_code)
-  }
-  {
-    console.log(props.funder["@attributes"].indivs)
-  }
-  {
-    console.log(props.funder["@attributes"].pacs)
-  }
-  {
-    console.log(props.funder["@attributes"].total)
-  }
   return (
     <div className="funding-card">
       <div className="octothorpe">#</div>
@@ -31,7 +14,11 @@ const FundingCard = props => {
           <b>Individual Contributions:</b> ${props.funder["@attributes"].indivs}
         </p>
         <p>
-          <b>PAC Contributions:</b> ${props.funder["@attributes"].pacs}
+          <b>
+            <a href="https://www.opensecrets.org/pacs/pacfaq.php">PAC</a>{" "}
+            Contributions:
+          </b>{" "}
+          ${props.funder["@attributes"].pacs}
         </p>
         <p>
           <b>Total Contributions:</b> ${props.funder["@attributes"].total}
