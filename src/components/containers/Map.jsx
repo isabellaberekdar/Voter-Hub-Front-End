@@ -1,13 +1,15 @@
 import { Map, GoogleApiWrapper } from "google-maps-react"
 import React from "react"
+
 const mapStyles = {
   width: "50%",
   height: "50%"
 }
+
 class GoogleMap extends React.Component {
-  this.state = {
+ /*  this.state = {
     stores: 
-  }
+  } */
   
   componentDidMount() {
     

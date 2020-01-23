@@ -3,6 +3,29 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { getMessageBoardThunk } from "../../store/utilities/message";
+import '../views/MessageBoard.css'
+const threads = [
+    {
+        id: 1,
+        subject: 'General'
+    },
+    {
+        id: 2,
+        subject: 'Thread title 2'
+    },
+    {
+        id: 3,
+        subject: 'Thread 3 :)'
+    },
+    {
+        id: 4,
+        subject: 'This is the fourth thread'
+    },
+    {
+        id: 5,
+        subject: 'Who is this?'
+    },
+]
 
 
 class MessageBoard extends Component {
@@ -61,35 +84,55 @@ class MessageBoard extends Component {
         this.props.getMessageBoard(1);
     }
     //life cycle: constructor, render, componentDidMount, re-render
+
+    
     render(){
         let officialId = 1;
-        if(this.state.msgBoardArray.length > 0){
-            var threads = this.state.msgBoardArray.map(msgBoard => 
-                <div>
-                    {
-                        msgBoard.officialId === officialId ? 
-                        <li>
-                            <a href={`/thread/${msgBoard.id}`}>{msgBoard.subject}</a>
-                            <br/>
-                            Thread ID: {msgBoard.id} <br/>
-                        </li>
-                        : 
-                        <div></div>    
-                    }
+        return (
+            <div>
+                {threads.map(thread => 
+                    <div>
+                        {
+                            <li>
+                                <a href={`/thread/${thread.id}`}>{thread.subject}</a>
+                                <br/>
+                                Thread ID: {thread.id} <br/>
+                            </li>
+                                
+                        }
+    
+                    </div>
+                )}
 
-                </div>
-            )
-
-        }   
-
-        return <div>
-            {threads}
-        </div>
+            </div>
+        )
+        }
     }
-}
+    
+    //map state to props
+    
+/*         if(this.state.msgBoardArray.length > 0){
+    var threads = this.state.msgBoardArray.map(msgBoard => 
+        <div>
+            {
+                msgBoard.officialId === officialId ? 
+                <li>
+                    <a href={`/thread/${msgBoard.id}`}>{msgBoard.subject}</a>
+                    <br/>
+                    Thread ID: {msgBoard.id} <br/>
+                </li>
+                : 
+                <div></div>    
+            }
 
-//map state to props
-const mapState = state => {
+        </div>
+    ) */
+
+/*  }  */  
+/* 
+return <div>
+{threads} */
+    const mapState = state => {
     return {
       userEmail: state.user.email
     }

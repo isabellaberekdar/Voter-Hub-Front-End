@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
+import MessageBoard from '../views/MessageBoard'
 import {
   getOfficialThunk,
   getPhotoThunk,
@@ -134,6 +135,7 @@ class OfficialContainer extends Component {
           officialObject={this.props.official}
           funders={this.props.funders}
         />
+        <MessageBoard />
       </div>
     )
   }
