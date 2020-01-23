@@ -1,6 +1,7 @@
-import React from "react"
-import PropTypes from "prop-types"
-import FundingCard from "../views/FundingCard"
+import React from "react";
+import PropTypes from "prop-types";
+import FundingCard from "../views/FundingCard";
+import '../views/Funding.css';
 
 class FundingContainer extends React.Component {
   constructor(props) {
@@ -9,12 +10,13 @@ class FundingContainer extends React.Component {
 
   render() {
     // console.log("radicchio", this.props)
-    let funderCards = this.props.funders.map(funder => (
-      <FundingCard funder={funder} />
+    let funderCards = this.props.funders.map((funder, index) => (
+      <FundingCard funder={funder} index={index+1}/>
     ))
     return (
-      <div className="funding-component">
-        <h2>Top 10 Industry Funders for the 2020 cycle:</h2>
+      <div className="funding-block">
+        <p id="funding-anchor" class="down-triangle">▼</p>
+        <h2 id="top-10-title">Top 10 Industry Funders for the 2020 Cycle</h2>
         <div className="funding-grid">{funderCards}</div>
       </div>
     )

@@ -1,16 +1,98 @@
+/* Fonts */
+@font-face {
+  font-family: avenir;
+  src: url("../views/fonts/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-medium;
+  src: url("../views/fonts/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-black;
+  src: url("../views/fonts/Avenir-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: roboto-slab;
+  src: url("../views/fonts/RobotoSlab-Regular.ttf");
+}
+
+@font-face {
+  font-family: besley-medium;
+  src: url("../views/fonts/besleymed.otf") format("opentype");
+}
+
+/**************************** FUNDING GRID ****************************/
+
 div.funding-grid {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  grid-gap: 25px;
+  grid-gap: 0px;
   grid-auto-flow: column;
+  width: 100%;
 }
+
+/**************************** FUNDING CARD ****************************/
 
 div.funding-card {
   display: flex;
-  border-style: solid;
+  /* border: 1px solid rgb(159, 57, 255); */
   border-radius: 10px;
 }
 
-div.octothorpe {
-  font-size: 200px;
+div.funding-card:first-child {
+  margin-left: 20px;
+}
+
+div.funding-card:nth-child(2) {
+  margin-left: 20px;
+}
+
+div.funding-card:nth-child(3) {
+  margin-left: 20px;
+}
+
+div.funding-card:last-child {
+  margin-right: 20px;
+}
+
+/**************************** FUNDING INFO ****************************/
+
+div.funding-info {
+  color: #293B59;
+  font-size: 14px;
+  margin-top: 20px;
+  width: 60%;
+  word-wrap: break-word;
+  padding: 5px;
+}
+
+div.funding-info p {
+  margin: 0px;
+  padding: 0px;
+}
+
+div.funding-info a {
+  color: #4D86F7;
+}
+
+/**************************** FUNDING INDUSTRY ****************************/
+
+p.funding-industry {
+  font-family: roboto-slab;
+  color: rgb(159, 57, 255);
+  font-size: 16px;
+}
+
+/**************************** FUNDING INDEX ****************************/
+
+div.index {
+  color: rgb(159, 57, 255);
+  font-family: avenir-black;
+  font-size: 130px;
+  font-style: italic;
+  margin-right: 20px;
+  /* letter-spacing: 5px; */
 }
