@@ -229,11 +229,8 @@ const OfficialView = props => {
           <FundingContainer funders={props.funders} id="funding-anchor" />
         )}
 
-        <MessageBoard officialId={props.officialId} />
+        <MessageBoard id="messageboard-anchor" officialId={props.officialId} />
         <h1 id="test"></h1>
-
-        {/* MESSAGEBOARD SECTION */}
-        <MessageBoardContainer id="messageboard-anchor" />
       </div>
     </div>
   )
