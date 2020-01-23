@@ -1,41 +1,40 @@
 /* Fonts */
 @font-face {
   font-family: avenir;
-  src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+  src: url("../views/fonts/AvenirLTStd-Book.otf") format("opentype");
 }
 
 @font-face {
   font-family: avenir-medium;
-  src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+  src: url("../views/fonts/AvenirLTStd-Medium.otf") format("opentype");
 }
 
 @font-face {
   font-family: avenir-black;
-  src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+  src: url("../views/fonts/Avenir-Black.otf") format("opentype");
 }
 
 @font-face {
   font-family: roboto-slab;
-  src: url('../views/fonts/RobotoSlab-Regular.ttf');
+  src: url("../views/fonts/RobotoSlab-Regular.ttf");
 }
 
 @font-face {
   font-family: besley-medium;
-  src: url('../views/fonts/besleymed.otf') format('opentype');
+  src: url("../views/fonts/besleymed.otf") format("opentype");
 }
 
 .headlines {
   background-color: rgba(245, 245, 245, 80);
   border-top: 5px solid #4df76e;
   /* background-image: linear-gradient(rgba(245, 245, 245, 80) 70%, rgba(77, 247, 111, 0.089)); */
-
 }
 
 .headlines > h2 {
   font-family: avenir-black;
   margin: 0px;
   margin-left: 80px;
-  color: #293B59;
+  color: #293b59;
   padding: 0px;
 }
 
@@ -55,10 +54,10 @@
   color: rgb(90, 90, 90);
 }
 
-.article {
+.articles-container > .article {
   margin: 20px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 5px;
+
   padding-left: 20px;
   border-left: 5px solid #4df76e;
   border-radius: 7px;
@@ -66,7 +65,25 @@
   /* color: #4df76e */
 }
 
-.article > span {
+.articles-container > .article > .article-content {
+  display: flex;
+}
+
+.articles-container > .article > .article-content > .article-thumbnail {
+  margin-top: 5px;
+}
+
+.article-thumbnail > img {
+  width: 130px;
+  margin-right: 10px;
+}
+
+.articles-container > .article > .article-content > .article-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-info > span {
   color: black;
 }
 /* .articles-container > h2 {
@@ -79,7 +96,7 @@
 }
  */
 
-.article > a {
+.article-info > a {
   text-decoration: none;
   color: #4d86f7;
   font-size: 18px;
@@ -88,7 +105,7 @@
   font-family: roboto-slab;
 }
 
-.article > a:visited {
+.article-info > a:visited {
   color: #4d86f7;
 }
 
@@ -107,11 +124,10 @@ p#article-description {
 }
 
 span.headline {
-  color: #293B59;
+  color: #293b59;
   font-family: avenir-black;
   padding-bottom: 4px;
 }
-
 
 b#timestamp {
   font-size: 14px;

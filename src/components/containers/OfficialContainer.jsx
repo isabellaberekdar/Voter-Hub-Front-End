@@ -7,7 +7,10 @@ import {
   getArticlesThunk,
   getCidThunk,
   getFundersThunk,
-  storeName
+  storeName,
+  storeState,
+  storeCD,
+  storeCoordsThunk
 } from "../../store/utilities/official"
 
 class OfficialContainer extends Component {
@@ -20,6 +23,7 @@ class OfficialContainer extends Component {
 
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
+
     // First, get the necessary values from the url
     const state = this.props.match.params.state
     const index = this.props.match.params.index
@@ -83,6 +87,38 @@ class OfficialContainer extends Component {
           }
         })
       )
+      .then(() => {
+        console.log("plantain", this.props.official.office.divisionId)
+      })
+      .then(() => {
+        let stateAbbrev
+        let cd
+        if (this.props.official.office.divisionId.includes("state:")) {
+          stateAbbrev = this.props.official.office.divisionId.substring(
+            this.props.official.office.divisionId.lastIndexOf("state:") + 6
+          )
+          if (stateAbbrev.includes("/")) {
+            stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
+          }
+          stateAbbrev = stateAbbrev.toUpperCase()
+          console.log(stateAbbrev)
+        } else {
+          storeState(undefined)
+        }
+
+        if (this.props.official.office.divisionId.includes("cd:")) {
+          cd = this.props.official.office.divisionId.substring(
+            this.props.official.office.divisionId.lastIndexOf("cd:") + 3
+          )
+          if (stateAbbrev.includes("/")) {
+            stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
+          }
+          console.log(cd)
+        } else {
+          storeCD(undefined)
+        }
+        this.props.storeCoords(stateAbbrev, cd)
+      })
   }
 
   render() {
@@ -124,8 +160,10 @@ const mapDispatch = dispatch => {
     getArticles: name => dispatch(getArticlesThunk(name)),
     getCid: nameObj => dispatch(getCidThunk(nameObj)),
     storeName: nameObj => dispatch(storeName(nameObj)),
-    getCid: nameObj => dispatch(getCidThunk(nameObj)),
-    getFunders: cid => dispatch(getFundersThunk(cid))
+    getFunders: cid => dispatch(getFundersThunk(cid)),
+    storeState: stateAbbrev => dispatch(storeState(stateAbbrev)),
+    storeCD: CD => dispatch(storeCD(CD)),
+    storeCoords: (state, cd) => dispatch(storeCoordsThunk(state, cd))
   }
 }
 
