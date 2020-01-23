@@ -7,6 +7,10 @@ const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
 const GET_CID = "GET_CID"
 const STORE_NAME = "STORE_NAME"
+const GET_FUNDERS = "GET_FUNDERS"
+const STORE_STATE = "STORE_STATE"
+const STORE_CD = "STORE_CD"
+const STORE_COORDS = "STORE_COORDS"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -44,10 +48,38 @@ export const storeName = info => {
   }
 }
 
-const getCid = info => {
+export const getCid = info => {
   return {
     type: GET_CID,
     payload: info
+  }
+}
+
+export const getFunders = funders => {
+  return {
+    type: GET_FUNDERS,
+    payload: funders
+  }
+}
+
+export const storeState = stateAbbrev => {
+  return {
+    type: STORE_STATE,
+    payload: stateAbbrev
+  }
+}
+
+export const storeCD = CD => {
+  return {
+    type: STORE_CD,
+    payload: CD
+  }
+}
+
+export const storeCoords = coords => {
+  return {
+    type: STORE_COORDS,
+    payload: coords
   }
 }
 
@@ -188,6 +220,51 @@ export const getCidThunk = nameObj => async dispatch => {
   }
 }
 
+export const getFundersThunk = cid => async dispatch => {
+  console.log("CID", cid)
+  try {
+    let url = `https://www.opensecrets.org/api/?method=candIndustry&cid=${cid}&cycle=2020&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+
+    // Get the top ten industries who contributed for the 2020 cycle
+    const { data } = await axios.get(url)
+    // console.log("MEOW")
+    // console.log("DATA: ", data.response.industries.industry)
+    dispatch(getFunders(data.response.industries.industry))
+  } catch (error) {
+    console.log("Error in getFundersThunk:", error)
+  }
+}
+
+export const storeCoordsThunk = (state, cd) => async dispatch => {
+  console.log(state, cd)
+  if (cd !== undefined) {
+    // if the congressional district IS defined, obtain the coords for the representative
+    try {
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
+      )
+      console.log("honeydew", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  } else if (state !== undefined) {
+    // if the cd is undefined but state is defined, obtain the coords for the senator
+    try {
+      console.log("cucumber")
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/states/${state}/shape.geojson`
+      )
+      console.log("coconut", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  }
+}
+
 const initialState = {}
 
 // REDUCER
@@ -225,6 +302,17 @@ const officialReducer = (state = initialState, action) => {
         ...state,
         cid: action.payload
       }
+    case GET_FUNDERS:
+      return {
+        ...state,
+        funders: action.payload
+      }
+    case STORE_STATE:
+      return { ...state, state: action.payload }
+    case STORE_CD:
+      return { ...state, cd: action.payload }
+    case STORE_COORDS:
+      return { ...state, coords: action.payload }
     default:
       return state
   }
