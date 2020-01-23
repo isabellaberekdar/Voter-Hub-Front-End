@@ -17,9 +17,9 @@ const OfficialCard = props => {
     props.officialIndex
   // console.log(officialPageUrl)
 
-  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. 
-  // If they do, we will then need to iterate through them to generate the elements. 
-  // Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. 
+  // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all.
+  // If they do, we will then need to iterate through them to generate the elements.
+  // Ideally, we should be able to identify the domain of the channel, so that we can link to it directly.
   // eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
   let channels = []
   if (props.official.channels) {
@@ -28,41 +28,57 @@ const OfficialCard = props => {
         if (props.official.channels[key].type == "Facebook") {
           channels.push(
             // <p>
-              <a
-                href={
-                  "https://www.facebook.com/" + props.official.channels[key].id
-                }
-                target="blank"
-                id="icon"
-              >
-                <img src="/images/facebook-card.svg" alt="homepage-icon" width="19px" height="19px"/>
-              </a>
+            <a
+              href={
+                "https://www.facebook.com/" + props.official.channels[key].id
+              }
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/facebook-card.svg"
+                alt="homepage-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
             // </p>
           )
         } else if (props.official.channels[key].type == "Twitter") {
           channels.push(
             // <p>
-              <a
-                href={"https://twitter.com/" + props.official.channels[key].id}
-                target="blank" id="icon"
-              >
-                <img src="/images/twitter-card.svg" alt="homepage-icon" width="19px" height="19px"/>
-              </a>
+            <a
+              href={"https://twitter.com/" + props.official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/twitter-card.svg"
+                alt="homepage-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
             // </p>
           )
         } else if (props.official.channels[key].type == "YouTube") {
           channels.push(
             // <p>
-              <a
-                href={
-                  "https://www.youtube.com/user/" +
-                  props.official.channels[key].id
-                }
-                target="blank"
-                id="icon"
-              >
-                <img src="/images/youtube-card.svg" alt="homepage-icon" width="19px" height="19px"/>
-              </a>
+            <a
+              href={
+                "https://www.youtube.com/user/" +
+                props.official.channels[key].id
+              }
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/youtube-card.svg"
+                alt="homepage-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
             // </p>
           )
         }
@@ -93,44 +109,60 @@ const OfficialCard = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
-  
-  console.log("SAEJFILSJEIFALESFILAS", typeof props.office.name);
+
+  console.log("SAEJFILSJEIFALESFILAS", typeof props.office.name)
 
   return (
     <div className="official-card">
       {props.official.photoUrl ? (
-          <a href={officialPageUrl}>
-            <img src={props.official.photoUrl} target="blank" width="240px" height="300px" className="image" />
-          </a>
+        <a href={officialPageUrl}>
+          <img
+            src={props.official.photoUrl}
+            target="blank"
+            width="240px"
+            height="300px"
+            className="image"
+            onError={e => {
+              e.target.onerror = null
+              e.target.src = "/images/placeholder.png"
+            }}
+          />
+        </a>
       ) : (
-          <a href={officialPageUrl}>
-            <img
-              src="/images/placeholder.png"
-              target="blank"
-              width="240px"
-              height="300px"
-              className="image"
-            ></img>
-          </a>
+        <a href={officialPageUrl}>
+          <img
+            src="/images/placeholder.png"
+            target="blank"
+            width="240px"
+            height="300px"
+            className="image"
+          ></img>
+        </a>
       )}
-      
-      <div className="official-content">
-          <h2 id="office-name">
-            <a href={officialPageUrl}>
-              <b>{props.office.name}</b>
-            </a>
-          </h2>
-          <h3 id="officials-name">
-            <a href={officialPageUrl} target="blank">{props.official.name}</a>
-          </h3>
-          <p id="party">
-            {props.official.party}
-          </p>
 
-        <p id="address">{props.official.address ? <div>{addressLines}</div> : <div></div>}</p>
-        
+      <div className="official-content">
+        <h2 id="office-name">
+          <a href={officialPageUrl}>
+            <b>{props.office.name}</b>
+          </a>
+        </h2>
+        <h3 id="officials-name">
+          <a href={officialPageUrl} target="blank">
+            {props.official.name}
+          </a>
+        </h3>
+        <p id="party">{props.official.party}</p>
+
+        <p id="address">
+          {props.official.address ? <div>{addressLines}</div> : <div></div>}
+        </p>
+
         {/* Officials will usually have one phone, url, and email */}
-        {props.official.phones ? <p id="phone-num">{props.official.phones[0]}</p> : <div></div>}
+        {props.official.phones ? (
+          <p id="phone-num">{props.official.phones[0]}</p>
+        ) : (
+          <div></div>
+        )}
         {props.official.urls ? (
           <a href={props.official.urls[0]} target="blank" id="channels">
             Official Website
