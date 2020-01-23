@@ -246,7 +246,19 @@ export const getFundersThunk = cid => async dispatch => {
 export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   console.log(state, cd, zip)
 
-  async function countryCoords() {}
+  async function countryCoords() {
+    try {
+      console.log("cucumber")
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://raw.githubusercontent.com/johan/world.geo.json/master/countries/USA.geo.json`
+      )
+      console.log("raspberry", data.features[0].geometry)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  }
   async function stateCoords(state) {
     try {
       console.log("cucumber")
