@@ -1,5 +1,6 @@
 import React from "react"
 import { Switch, Route } from "react-router-dom"
+import './Routes.css';
 import { Login, Signup, Logout } from "../containers"
 import { HomeContainer, NotFound, OfficialContainer } from "../../components"
 import MessageBoardCollectionContainer from '../containers/MessageBoardCollection';
@@ -11,7 +12,7 @@ const RoutesView = props => {
   const { isLoggedIn } = props
 
   return (
-    <Switch>
+    <Switch id="routes">
       {/* Routes placed within this section are available to all visitors */}
       <Route exact path="/" component={HomeContainer} id="homepage"/>
       <Route exact path="/login" component={Login} />
@@ -29,7 +30,6 @@ const RoutesView = props => {
       {/*         <Route exact path="/Official" component={OfficialContainer} />
        */}{" "}
       <Route component={NotFound} />
-      <footer>Footer here</footer>
       {/* {isLoggedIn && (
         <Switch> */}
       {/* Routes placed within this section are only available after

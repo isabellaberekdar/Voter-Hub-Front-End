@@ -16,20 +16,19 @@ const NewsArticlesView = props => {
             s = s.substring(0, s.indexOf('T'));
               return (
                 <div className='article' key={article.name}>
-                  {/* article.articleThumbnail && <img src={article.articleThumbnail.thumbnail.contentUrl} /> */}
-                  { console.log()}
+                  {/* {article.articleThumbnail} && <img src={article.articleThumbnail.thumbnail.contentUrl} /> */}
                   <span className='headline'>
                     <i>
                       <b>{article.provider}</b>
                     </i>
                   </span>
                   <a 
-                    href={article.url} target="blank">{article.name}</a> <b>posted {s}</b>
-                  {article.description}
+                    href={article.url} target="blank">{article.name}</a> <b id="timestamp">posted {s}</b>
+                  <p id="article-description">{article.description}</p>
                 </div>
               )
             })
-          : "There were no articles found about this official."}
+          : <p id="no-articles-found">There were no articles found about this official.</p>}
       </div>
     </div>
   )

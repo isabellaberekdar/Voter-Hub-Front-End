@@ -57,16 +57,11 @@ const HomeView = props => {
   return (
     <div>
       <div className="header">
-        <img
-          src="/images/homeheader2.png"
-          alt="header of homepage"
-          width="100%"
-        />
         <div className="centered">
           <h2 className="find-rep-title">Find Your Representatives</h2>
           <h3 className="find-rep-description">
             Enter your full address below to find your representatives, 
-            how to contact them, their voting and bill history,
+            how to contact them, their funding records,
             and their latest social media and news mentions!
           </h3>
           <form onSubmit={props.handleSubmit}>
@@ -97,8 +92,8 @@ const HomeView = props => {
           <div className="column" id="two">
             <img src="/images/discourse.png" alt="discourse icon" width="50px"/> <br></br>
             Talk and discuss with others in <br></br>
-            your districts about the latest <br></br>
-            issues, elections, and concerns.
+            your districts about your <br></br>
+            representatives, issues, and concerns.
           </div>
           <div className="column" id="three">
             <img src="/images/whomyrep.png" alt="rep question icon" width="50px" /> <br></br>
@@ -116,7 +111,7 @@ const HomeView = props => {
             <div className="container">
               <img src="/images/pres.png" alt="pres icon" height="230px" className="quick"/>
               <div className="overlay">
-                <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus/0/0">Go to President's Page »</Link></div>
+                <button className="text"><Link to="/official/ocd-division%2Fcountry%3Aus/0/0">Go to President's Page</Link></button>
               </div>
             </div>
           </div>
@@ -124,7 +119,7 @@ const HomeView = props => {
             <div className="container">
               <img src="/images/vp.png" alt="vp icon" height="230px" className="quick"/>
               <div className="overlay">
-                <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus/1/0">Go to Vice President's Page »</Link></div>
+                <button className="text"><Link to="/official/ocd-division%2Fcountry%3Aus/1/0">Go to Vice President's Page</Link></button>
               </div>
             </div>
           </div>
@@ -132,7 +127,7 @@ const HomeView = props => {
             <div className="container">
              <img src="/images/speaker.png" alt="speaker icon" height="230px" className="quick"/>
              <div className="overlay">
-               <div className="text"><Link to="/official/ocd-division%2Fcountry%3Aus%2Fstate%3Aca%2Fcd%3A12/0/0">Go to Speaker of <br></br>the House's Page »</Link></div>
+               <button className="text"><Link to="/official/ocd-division%2Fcountry%3Aus%2Fstate%3Aca%2Fcd%3A12/0/0">Go to Speaker of <br></br>the House's Page</Link></button>
              </div>
             </div>
           </div>

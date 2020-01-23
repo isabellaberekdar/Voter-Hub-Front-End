@@ -1,0 +1,71 @@
+/* Fonts */
+@font-face {
+    font-family: avenir;
+    src: url('../views/fonts/AvenirLTStd-Book.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: avenir-medium;
+    src: url('../views/fonts/AvenirLTStd-Medium.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: avenir-black;
+    src: url('../views/fonts/Avenir-Black.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: roboto-slab;
+    src: url('../views/fonts/RobotoSlab-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: besley-medium;
+    src: url('../views/fonts/besleymed.otf') format('opentype');
+  }
+
+div.funding-block {
+    background-color: rgba(245, 245, 245, 80);
+    border-top: 5px solid rgb(159, 57, 255);
+}
+
+.funding-block > #down-triangle {
+    margin: 0px;
+    padding: 0px;
+    font-size: 50px;
+    color: rgb(159, 57, 255);
+    transform: translate(1.2em, -12px);
+}
+
+
+.funding-block > h2 {
+    font-family: avenir-black;
+    margin: 0px;
+    margin-left: 80px;
+    color: #293B59;
+    padding: 0px;
+}
+
+.funding-info-container {
+    background-color: rgba(245, 245, 245, 80);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(90, 90, 90);
+}
+
+.funding {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    border-left: 5px solid #4df76e;
+    border-radius: 7px;
+    width: 900px;
+}
+
+p#no-funding-message {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    font-family: avenir-medium;
+}
