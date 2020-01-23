@@ -13,6 +13,7 @@ import {
   storeZip,
   storeCoordsThunk
 } from "../../store/utilities/official"
+import Map from './Map'
 
 class OfficialContainer extends Component {
   constructor(props) {
@@ -145,6 +146,7 @@ class OfficialContainer extends Component {
     return (
       <div>
         {/* <h1>OfficialContainer here</h1> */}
+        <Map />
         {this.props.official && <img src={this.props.official.photoUrl} />}
         <OfficialView
           officialObject={this.props.official}
