@@ -8,6 +8,8 @@ const GET_ARTICLES = "GET_ARTICLES"
 const GET_CID = "GET_CID"
 const STORE_NAME = "STORE_NAME"
 const GET_FUNDERS = "GET_FUNDERS"
+const STORE_STATE = "STORE_STATE"
+const STORE_CD = "STORE_CD"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -45,17 +47,31 @@ export const storeName = info => {
   }
 }
 
-const getCid = info => {
+export const getCid = info => {
   return {
     type: GET_CID,
     payload: info
   }
 }
 
-const getFunders = funders => {
+export const getFunders = funders => {
   return {
     type: GET_FUNDERS,
     payload: funders
+  }
+}
+
+export const storeState = stateAbbrev => {
+  return {
+    type: STORE_STATE,
+    payload: stateAbbrev
+  }
+}
+
+export const storeCD = CD => {
+  return {
+    type: STORE_CD,
+    payload: CD
   }
 }
 
@@ -253,6 +269,10 @@ const officialReducer = (state = initialState, action) => {
         ...state,
         funders: action.payload
       }
+    case STORE_STATE:
+      return { ...state, state: action.payload }
+    case STORE_CD:
+      return { ...state, cd: action.payload }
     default:
       return state
   }
