@@ -5,7 +5,12 @@ const GET_OFFICIAL = "GET_OFFICIAL"
 const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
-const GET_COORDINATES = "GET_COORDINATES"
+const GET_CID = "GET_CID"
+const STORE_NAME = "STORE_NAME"
+const GET_FUNDERS = "GET_FUNDERS"
+const STORE_STATE = "STORE_STATE"
+const STORE_CD = "STORE_CD"
+const STORE_COORDS = "STORE_COORDS"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -36,10 +41,45 @@ const getArticles = articles => {
   }
 }
 
-const getCoordinates = coordinates => {
+export const storeName = info => {
   return {
-    type: GET_COORDINATES,
-    payload: coordinates
+    type: STORE_NAME,
+    payload: info
+  }
+}
+
+export const getCid = info => {
+  return {
+    type: GET_CID,
+    payload: info
+  }
+}
+
+export const getFunders = funders => {
+  return {
+    type: GET_FUNDERS,
+    payload: funders
+  }
+}
+
+export const storeState = stateAbbrev => {
+  return {
+    type: STORE_STATE,
+    payload: stateAbbrev
+  }
+}
+
+export const storeCD = CD => {
+  return {
+    type: STORE_CD,
+    payload: CD
+  }
+}
+
+export const storeCoords = coords => {
+  return {
+    type: STORE_COORDS,
+    payload: coords
   }
 }
 
@@ -95,7 +135,11 @@ export const getArticlesThunk = name => async dispatch => {
   }
 }
 
-export const getOfficialThunk = (division, officeIndex, officialIndex) => async dispatch => {
+export const getOfficialThunk = (
+  division,
+  officeIndex,
+  officialIndex
+) => async dispatch => {
   try {
     const key = process.env.REACT_APP_GOOGLE_KEY
     let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=${key}`
@@ -106,7 +150,8 @@ export const getOfficialThunk = (division, officeIndex, officialIndex) => async 
     // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official: data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+      official:
+        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
     console.log(payload)
     dispatch(getOfficial(payload))
@@ -145,17 +190,81 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
   }
 }
 
-export const getCoordinatesThunk = address => async dispatch => {
+export const getCidThunk = nameObj => async dispatch => {
+  // console.log("arugula", nameObj)
   try {
-    const key = process.env.REACT_APP_GOOGLE_KEY
-    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
+    // Query the api for the officials associated with the given state abbrev
+    const { data } = await axios.get(
+      `https://www.opensecrets.org/api/?method=getLegislators&id=${nameObj.stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+    )
+    let legislators = data.response.legislator
+    // console.log("celery", legislators)
 
-    // Get the coordinates
-    const { data } = await axios.get(url)
-    console.log("************", data)
-    dispatch(getCoordinates(data))
+    // DON'T DELETE THE FOLLOWING LINES, in case phone numbers end up being insufficient
+    // Finds the legislator in legislators with the same last name (first name won't be sufficient)
+    // const found = legislators.find(element =>
+    //   element["@attributes"].firstlast.includes(nameObj.lastName)
+    // )
+
+    // Finds the legislator in legislators with the same phone number
+    const found = legislators.find(
+      element =>
+        element["@attributes"].phone
+          .replace("(", "")
+          .replace(")", "")
+          .replace("-", "")
+          .replace(" ", "")
+          .replace("-", "") === nameObj.phone
+    )
+    // console.log("wheatgrass", found["@attributes"].cid)
+    dispatch(getCid(found["@attributes"]))
   } catch (error) {
-    console.log("Error in getOfficialThunk:", error)
+    console.log("Error in getCidThunk:", error)
+  }
+}
+
+export const getFundersThunk = cid => async dispatch => {
+  console.log("CID", cid)
+  try {
+    let url = `https://www.opensecrets.org/api/?method=candIndustry&cid=${cid}&cycle=2020&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+
+    // Get the top ten industries who contributed for the 2020 cycle
+    const { data } = await axios.get(url)
+    // console.log("MEOW")
+    // console.log("DATA: ", data.response.industries.industry)
+    dispatch(getFunders(data.response.industries.industry))
+  } catch (error) {
+    console.log("Error in getFundersThunk:", error)
+  }
+}
+
+export const storeCoordsThunk = (state, cd) => async dispatch => {
+  console.log(state, cd)
+  if (cd !== undefined) {
+    // if the congressional district IS defined, obtain the coords for the representative
+    try {
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
+      )
+      console.log("honeydew", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  } else if (state !== undefined) {
+    // if the cd is undefined but state is defined, obtain the coords for the senator
+    try {
+      console.log("cucumber")
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/states/${state}/shape.geojson`
+      )
+      console.log("coconut", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
   }
 }
 
@@ -186,11 +295,27 @@ const officialReducer = (state = initialState, action) => {
         ...state,
         articles: action.payload
       }
-    case GET_COORDINATES:
+    case STORE_NAME:
       return {
         ...state,
-        coordinates: action.payload
+        nameObj: action.payload
       }
+    case GET_CID:
+      return {
+        ...state,
+        cid: action.payload
+      }
+    case GET_FUNDERS:
+      return {
+        ...state,
+        funders: action.payload
+      }
+    case STORE_STATE:
+      return { ...state, state: action.payload }
+    case STORE_CD:
+      return { ...state, cd: action.payload }
+    case STORE_COORDS:
+      return { ...state, coords: action.payload }
     default:
       return state
   }

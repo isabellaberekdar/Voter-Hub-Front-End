@@ -19,16 +19,24 @@
   src: url("../views/fonts/RobotoSlab-Regular.ttf");
 }
 /* ----------------------------------------------------------------------------------- */
-
+/* 
 .disqus-container {
   padding-top: 50px;
   width: 60%;
   margin: auto;
-}
+} */
+
 
 div.triptych {
   display: flex;
   height: 300px;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+div.triptych-container {
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 div.triptych > div.portrait {
@@ -58,6 +66,7 @@ div.info > p.first-name {
   font-size: 30px;
   margin-top: 15px;
   margin-bottom: 0px;
+  padding: 0px;
 }
 
 div.info > p.last-name {
@@ -65,7 +74,9 @@ div.info > p.last-name {
   font-size: 45px;
   margin-top: 0px;
   margin-bottom: 12px;
+  padding: 0px;
   color: #4d86f7;
+  letter-spacing: 10px;
 }
 
 div.info > p,
@@ -91,23 +102,7 @@ div.triptych > div.map {
 
 a > img.social-icon {
   height: 25px;
-  margin-top: 0px;
+  margin-top: 20px;
   margin-right: 30px;
 }
 
-/* 
-periwinkle
-#4d86f7
-
-white
-#ffffff
-
-navy
-#293b59
-
-red
-#e84a3d
-
-green
-#4df76e
-*/

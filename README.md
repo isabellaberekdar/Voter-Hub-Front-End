@@ -23,7 +23,11 @@ __Log-in,sign-up, form errors:__
 ![signup](https://i.imgur.com/LkClw72.png)
 ![formerror](https://i.imgur.com/lIxfSkY.png)
 __Single official page:__
-![single1](https://i.imgur.com/6tEJ9rw.png)
-![single2](https://i.imgur.com/L02Gv5H.png)
-__Upcoming events:__
-![upcoming](https://i.imgur.com/T28xPZv.png)
+![single1](https://i.imgur.com/opiZ2cF.png)
+![single2](https://i.imgur.com/hz1GY5X.png)
+![single3](https://i.imgur.com/n6IqwHz.png)
+__New threads pages and layouts:__
+![newthread1](https://i.imgur.com/46w8K0a.png)
+![newthread2](https://i.imgur.com/ucrhK1T.png)
+![threadpage](https://i.imgur.com/PkoOX3x.png)
+

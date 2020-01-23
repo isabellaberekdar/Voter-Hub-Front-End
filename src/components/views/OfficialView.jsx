@@ -1,22 +1,15 @@
 import React from "react"
 import Disqus from "disqus-react"
-import NewsArticlesContainer from '../views/NewsArticlesContainer'
-
+import NewsArticlesContainer from "../views/NewsArticlesContainer"
+import FundingContainer from "../containers/FundingContainer"
+import MessageBoardContainer from "../containers/MessageBoard"
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
 import "./OfficialView.css"
 
 const OfficialView = props => {
-  // Disqus configuration information
-  const disqusShortname = "voterbundle" //found in your Disqus.com dashboard
-  const disqusConfig = {
-    url: "http://localhost:3000", //this.props.pageUrl
-    identifier: "article-id", //this.props.uniqueId
-    title: "Title of Your Article" //this.props.title
-  }
-
-  // console.log("parsnip", props)
+  console.log("parsnip", props)
   let output = []
   let divisionId = ""
   let office = {}
@@ -27,14 +20,22 @@ const OfficialView = props => {
     official = props.officialObject.official
   }
 
+  // Disqus configuration information
+  const disqusShortname = "voterbundle" //found in your Disqus.com dashboard
+  const disqusConfig = {
+    url: window.location.href, //this.props.pageUrl
+    identifier: official.name, //this.props.uniqueId
+    title: official.name //this.props.title
+  }
+  // console.log(official)
+  // console.log(window.location.href)
+
   let firstName = ""
   let lastName = ""
   if (official.name) {
     firstName = official.name.substring(0, official.name.lastIndexOf(" "))
     lastName = official.name.substring(official.name.lastIndexOf(" ") + 1)
   }
-  console.log(office)
-  console.log(official)
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
   let channels = []
@@ -43,38 +44,51 @@ const OfficialView = props => {
       if (official.channels.hasOwnProperty(key)) {
         if (official.channels[key].type == "Facebook") {
           channels.push(
-            <p>
-              <a
-                href={"https://www.facebook.com/" + official.channels[key].id}
-                target="blank"
-              >
-                <img className="social-icon" src="/images/socialfacebook.svg" />
-              </a>
-            </p>
+            <a
+              href={"https://www.facebook.com/" + official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/facebook-card.svg"
+                alt="homepage-icon"
+                className="social-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
           )
         } else if (official.channels[key].type == "Twitter") {
           channels.push(
-            <p>
-              <a
-                href={"https://twitter.com/" + official.channels[key].id}
-                target="blank"
-              >
-                <img className="social-icon" src="/images/socialtwitter.svg" />
-              </a>
-            </p>
+            <a
+              href={"https://www.twitter.com/" + official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/twitter-card.svg"
+                alt="homepage-icon"
+                className="social-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
           )
         } else if (official.channels[key].type == "YouTube") {
           channels.push(
-            <p>
-              <a
-                href={
-                  "https://www.youtube.com/user/" + official.channels[key].id
-                }
-                target="blank"
-              >
-                <img className="social-icon" src="/images/socialyoutube.svg" />
-              </a>
-            </p>
+            <a
+              href={"https://www.youtube.com/" + official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/youtube-card.svg"
+                alt="homepage-icon"
+                className="social-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
           )
         }
       }
@@ -109,23 +123,23 @@ const OfficialView = props => {
     }
   }
 
-  console.log(office)
   return (
-    <div>
-      {/* <h2>OfficialView here</h2> */}
-
+    <div className="triptych-container">
       <div className="triptych">
         <div className="portrait">
           {official.photoUrl ? (
             <center>
-              <img src={official.photoUrl}/>
+              <img
+                src={official.photoUrl}
+                onError={e => {
+                  e.target.onerror = null
+                  e.target.src = "/images/placeholder.png"
+                }}
+              />
             </center>
           ) : (
             <center>
-              <img
-                src="/images/placeholder.png"
-                target="blank"
-              ></img>
+              <img src="/images/placeholder.png" target="blank"></img>
             </center>
           )}
         </div>
@@ -199,14 +213,20 @@ const OfficialView = props => {
       <div className="bing-news"></div>
 
       <p>{output}</p>
-      {props.officialObject && <NewsArticlesContainer official={props.officialObject.official.name} />}
+      {props.officialObject && (
+        <NewsArticlesContainer official={props.officialObject.official.name} />
+      )}
 
-      <div className="disqus-container">
+      {props.funders && <FundingContainer funders={props.funders} />}
+
+      <MessageBoardContainer />
+
+      {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
         />
-      </div>
+      </div> */}
     </div>
   )
 }

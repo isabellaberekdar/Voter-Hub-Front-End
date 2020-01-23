@@ -27,54 +27,87 @@
 .official-card {
   display: inline-block;
   vertical-align: top;
-  border: 2px solid #E84A3D;
-  background-color: white;
+  /* border: 2px solid #E84A3D; */
+  background-color: rgb(240, 240, 240);
   color: #142849;
   margin: 20px;
-  width: 660px;
-  height: 300px;
+  /* width: 660px; */
+  width: 45%;
+  /* height: 300px; */
+  height: 26%;
   font-family: avenir;
   font-size: 14px;
-  word-break: break-all;
+  word-break: keep-all;
   line-height: 0.8;
   text-align: left;
 }
 
+.official-card img {
+  object-fit: cover;
+}
+
 .official-card a {
   color: #142849;
-  
 }
 
 .official-card a:visited {
   color: #142849;
 }
 
+.official-card a#icon {
+  padding-right: 20px;
+}
+
 .official-content {
   float: left;
-  padding-left: 10px;
-  
+  padding-top: 5px;
+  padding-left: 15px;
+  /* overflow-wrap: break-word; */
+  /* word-wrap: break-word; */
+  word-break: keep-all;
+  /* -ms-hyphens: auto; */
+  /* -moz-hyphens: auto; */
+  /* -webkit-hyphens: auto; */
+  /* hyphens: auto; */
+  display: inline-block;
+  width: 50%;
 }
 
 #office-name {
   font-family: roboto-slab;
+  color: black;
+  font-size: 22px;
+  line-height: 22px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 #office-name a {
   text-decoration: none;
+  color: black;
+  width: 300px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 #officials-name a {
   text-decoration: none;
   font-family: avenir-black;
-  font-size: 18px;
+  font-size: 21px;
+  color: black;
+  margin-top: 0px;
+  padding-top: 0px;
 }
 
 #party {
   font-family: avenir-black;
+  padding-bottom: 3px;
 }
 
 #address {
   line-height: .2;
+  padding-bottom: 3px;
+  font-family: avenir-medium;
 }
 
 #mail {
