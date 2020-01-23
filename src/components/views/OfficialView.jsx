@@ -2,7 +2,6 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
-import FundingView from "../views/FundingView"
 import MessageBoardContainer from "../containers/MessageBoard"
 
 // If you need cards or styling, you can uncomment the lines here to import

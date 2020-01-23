@@ -10,7 +10,7 @@ export { default as OfficialContainer } from "./containers/OfficialContainer.jsx
 export { default as OfficialView } from "./views/OfficialView.jsx"
 
 export { default as FundingContainer } from "./containers/FundingContainer.jsx"
-export { default as FundingView } from "./views/FundingView.jsx"
+export { default as FundingCard } from "./views/FundingCard.jsx"
 
 export { default as OfficialCard } from "./views/OfficialCard.jsx"
 
