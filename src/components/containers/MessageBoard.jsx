@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { getMessageBoardThunk } from "../../store/utilities/message";
 import '../views/MessageBoard.css'
+
 const threads = [
     {
         id: 1,
@@ -89,9 +90,10 @@ class MessageBoard extends Component {
     render(){
         let officialId = 1;
         return (
-            <div>
+            <div className='message-board'>
+                <h3>Messageboard</h3>
                 {threads.map(thread => 
-                    <div>
+                    <div className='thread'>
                         {
                             <li>
                                 <a href={`/thread/${thread.id}`}>{thread.subject}</a>
