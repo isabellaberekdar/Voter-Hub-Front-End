@@ -93,6 +93,8 @@ const OfficialCard = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
+  
+  console.log("SAEJFILSJEIFALESFILAS", typeof props.office.name);
 
   return (
     <div className="official-card">
@@ -122,7 +124,6 @@ const OfficialCard = props => {
             <a href={officialPageUrl} target="blank">{props.official.name}</a>
           </h3>
           <p id="party">
-            {/* <b><u>Party</u>: </b> */}
             {props.official.party}
           </p>
 
