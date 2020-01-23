@@ -2,22 +2,19 @@ import MessageBoardCollection from ".."
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
-import { getThreadThunk } from "../../store/utilities/message"
+import { getThreadThunk, postMessageThunk } from "../../store/utilities/message"
 import { MessageCard } from ".."
 
 class Thread extends Component {
-  // constructor(){
-  //     super();
-  //     this.state = {
-  //         msgBoardArray: [],
-  //         inputText: "",
-  //         messageboardID: ""
-  //     }
-  // }
-
-  // handleChange = (event) => {
-  //     this.setState({inputText: event.target.value});
-  // }
+  constructor() {
+    super()
+    this.state = {
+      //         msgBoardArray: [],
+      //         inputText: "",
+      //         messageboardID: ""
+      inputText: ""
+    }
+  }
 
   // getThread = async () => {
   //     var res = await axios.get("http://localhost:5000/api/messages/messageboard/thread/1");
@@ -25,8 +22,37 @@ class Thread extends Component {
   //     // console.log("this msgBoard", this.state.msgBoardArray);
   // }
 
-  handleOnSubmit = () => {
-    
+  handleOnSubmit = e => {
+    e.preventDefault()
+    console.log(
+      "penguinades",
+      this.props.user.email,
+      this.state.inputText,
+      this.props.messages
+    )
+
+    if (this.props.isLoggedIn) {
+      //post request; add message to database
+
+      let msg = {
+        user: this.props.user.email,
+        text: this.state.inputText,
+        messageBoardID: this.props.match.params.threadId
+      }
+      this.props.postMessage(msg)
+      // axios.post("http://localhost:5000/api/messages", msg)
+      // .then(this.props.postMessage(msg))
+
+      //re-renders page to display new message
+      //doesn't actually change state
+      // .then(this.setState({ inputText: this.state.inputText }))
+    } else {
+      alert("Log in to post a request")
+    }
+  }
+
+  handleOnChange = e => {
+    this.setState({ inputText: e.target.value })
   }
 
   componentDidMount() {
@@ -37,8 +63,9 @@ class Thread extends Component {
   render() {
     let messageDisplay
     if (this.props.messages) {
-      console.log(this.props.messages)
-      messageDisplay = this.props.messages.messages.map(message => (
+      //console.log("brocali", this.props.thread.messages)
+
+      messageDisplay = this.props.messages.map(message => (
         <li>{message.text}</li>
       ))
     }
@@ -47,7 +74,14 @@ class Thread extends Component {
       <div>
         THREAD HERE
         {messageDisplay}
-        <input type="text" placeholder="Aa" onSubmit={this.handleOnSubmit}/>
+        <form onSubmit={this.handleOnSubmit}>
+          <input
+            type="text"
+            placeholder="Aa"
+            onChange={this.handleOnChange}
+            value={this.state.inputText}
+          />
+        </form>
       </div>
     )
   }
@@ -56,13 +90,16 @@ class Thread extends Component {
 //map state to props
 const mapState = state => {
   return {
-    messages: state.message.messages
+    messages: state.message.messages,
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getThread: threadId => dispatch(getThreadThunk(threadId))
+    getThread: threadId => dispatch(getThreadThunk(threadId)),
+    postMessage: message => dispatch(postMessageThunk(message))
   }
 }
 
