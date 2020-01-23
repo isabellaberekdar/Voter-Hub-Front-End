@@ -2,6 +2,7 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
+import FundingView from "../views/FundingView"
 import MessageBoardContainer from "../containers/MessageBoard"
 
 // If you need cards or styling, you can uncomment the lines here to import
@@ -9,7 +10,7 @@ import MessageBoardContainer from "../containers/MessageBoard"
 import "./OfficialView.css"
 
 const OfficialView = props => {
-  // console.log("parsnip", props)
+  console.log("parsnip", props)
   let output = []
   let divisionId = ""
   let office = {}
@@ -38,24 +39,22 @@ const OfficialView = props => {
   }
 
   // Officials can have anywhere from 0 to 3 channels! We will need to first see if they have any channels at all. If they do, we will then need to iterate through them to generate the elements. Ideally, we should be able to identify the domain of the channel, so that we can link to it directly. eg. https://www.facebook.com/newyorkstateag/ when the type is "Facebook"
-  let channels = [];
+  let channels = []
   if (official.channels) {
     for (let key in official.channels) {
       if (official.channels.hasOwnProperty(key)) {
         if (official.channels[key].type == "Facebook") {
           channels.push(
             <a
-              href={
-                "https://www.facebook.com/" + official.channels[key].id
-              }
+              href={"https://www.facebook.com/" + official.channels[key].id}
               target="blank"
               id="icon"
             >
-              <img 
-                src="/images/facebook-card.svg" 
-                alt="homepage-icon" 
+              <img
+                src="/images/facebook-card.svg"
+                alt="homepage-icon"
                 className="social-icon"
-                width="19px" 
+                width="19px"
                 height="19px"
               />
             </a>
@@ -63,17 +62,15 @@ const OfficialView = props => {
         } else if (official.channels[key].type == "Twitter") {
           channels.push(
             <a
-              href={
-                "https://www.twitter.com/" + official.channels[key].id
-              }
+              href={"https://www.twitter.com/" + official.channels[key].id}
               target="blank"
               id="icon"
             >
-              <img 
-                src="/images/twitter-card.svg" 
-                alt="homepage-icon" 
+              <img
+                src="/images/twitter-card.svg"
+                alt="homepage-icon"
                 className="social-icon"
-                width="19px" 
+                width="19px"
                 height="19px"
               />
             </a>
@@ -81,17 +78,15 @@ const OfficialView = props => {
         } else if (official.channels[key].type == "YouTube") {
           channels.push(
             <a
-              href={
-                "https://www.youtube.com/" + official.channels[key].id
-              }
+              href={"https://www.youtube.com/" + official.channels[key].id}
               target="blank"
               id="icon"
             >
-              <img 
-                src="/images/youtube-card.svg" 
-                alt="homepage-icon" 
+              <img
+                src="/images/youtube-card.svg"
+                alt="homepage-icon"
                 className="social-icon"
-                width="19px" 
+                width="19px"
                 height="19px"
               />
             </a>
@@ -131,7 +126,6 @@ const OfficialView = props => {
 
   return (
     <div className="triptych-container">
-
       <div className="triptych">
         <div className="portrait">
           {official.photoUrl ? (
@@ -218,9 +212,9 @@ const OfficialView = props => {
         <NewsArticlesContainer official={props.officialObject.official.name} />
       )}
 
-      {props.officialObject && <FundingContainer />}
+      {props.funders && <FundingContainer funders={props.funders} />}
 
-      <MessageBoardContainer/>
+      <MessageBoardContainer />
 
       {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed
@@ -228,7 +222,6 @@ const OfficialView = props => {
           config={disqusConfig}
         />
       </div> */}
-    
     </div>
   )
 }

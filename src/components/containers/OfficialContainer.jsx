@@ -6,6 +6,7 @@ import {
   getPhotoThunk,
   getArticlesThunk,
   getCidThunk,
+  getFundersThunk,
   storeName
 } from "../../store/utilities/official"
 
@@ -31,60 +32,70 @@ class OfficialContainer extends Component {
     // console.log("kumquat", division, officeIndex, officialIndex)
 
     const officialId =
-    division.replace(/\//gi, "%2F").replace(/:/gi, "%3A") +
-    "%2F" +
-    officeIndex +
-    "%2F" +
-    officialIndex
-  // console.log("chicken berry",officialId)
+      division.replace(/\//gi, "%2F").replace(/:/gi, "%3A") +
+      "%2F" +
+      officeIndex +
+      "%2F" +
+      officialIndex
 
-    this.props.getOfficial(division, officeIndex, officialIndex)
+    this.props
+      .getOfficial(division, officeIndex, officialIndex)
+      .then(() => {
+        // console.log("pepper", this.props)
+        let nameObj = {}
+        let stateAbbrev = this.props.official.office.divisionId.substring(
+          this.props.official.office.divisionId.lastIndexOf("state:") + 6
+        )
+        if (stateAbbrev.includes("/")) {
+          stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
+        }
+        let firstName = this.props.official.official.name.substring(
+          0,
+          this.props.official.official.name.indexOf(" ")
+        )
+        firstName = firstName.replace(".", "")
+        let lastName = this.props.official.official.name.substring(
+          this.props.official.official.name.lastIndexOf(" ") + 1
+        )
+        let phone = this.props.official.official.phones[0]
+          .replace("(", "")
+          .replace(")", "")
+          .replace("-", "")
+          .replace(" ", "")
+        // console.log({
+        //   stateAbbrev: stateAbbrev,
+        //   firstName: firstName,
+        //   lastName: lastName,
+        //   phone: phone
+        // })
+
+        this.props.storeName({
+          stateAbbrev: stateAbbrev,
+          firstName: firstName,
+          lastName: lastName,
+          phone: phone
+        })
+      })
+      .then(() =>
+        this.props.getCid(this.props.nameObj).then(() => {
+          if (this.props.cid) {
+            this.props.getFunders(this.props.cid.cid)
+          }
+        })
+      )
   }
 
   render() {
     // console.log("beet", this.props)
-    if (this.props.official) {
-      // console.log("pepper", this.props)
-      let nameObj = {}
-      let stateAbbrev = this.props.official.office.divisionId.substring(
-        this.props.official.office.divisionId.lastIndexOf("state:") + 6
-      )
-      if (stateAbbrev.includes("/")) {
-        stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
-      }
-      let firstName = this.props.official.official.name.substring(
-        0,
-        this.props.official.official.name.indexOf(" ")
-      )
-      firstName = firstName.replace(".", "")
-      let lastName = this.props.official.official.name.substring(
-        this.props.official.official.name.lastIndexOf(" ") + 1
-      )
-      let phone = this.props.official.official.phones[0]
-        .replace("(", "")
-        .replace(")", "")
-        .replace("-", "")
-        .replace(" ", "")
-      // console.log({
-      //   stateAbbrev: stateAbbrev,
-      //   firstName: firstName,
-      //   lastName: lastName,
-      //   phone: phone
-      // })
-
-      this.props.storeName({
-        stateAbbrev: stateAbbrev,
-        firstName: firstName,
-        lastName: lastName,
-        phone: phone
-      })
-    }
 
     return (
       <div>
         {/* <h1>OfficialContainer here</h1> */}
         {this.props.official && <img src={this.props.official.photoUrl} />}
-        <OfficialView officialObject={this.props.official} />
+        <OfficialView
+          officialObject={this.props.official}
+          funders={this.props.funders}
+        />
       </div>
     )
   }
@@ -98,7 +109,10 @@ const mapState = state => {
     division: "",
     office: "",
     official: state.official.official,
-    articles: state.official.articles
+    articles: state.official.articles,
+    nameObj: state.official.nameObj,
+    cid: state.official.cid,
+    funders: state.official.funders
   }
 }
 
@@ -108,9 +122,10 @@ const mapDispatch = dispatch => {
       dispatch(getOfficialThunk(division, officeIndex, officialIndex)),
     getPhoto: (number, state) => dispatch(getPhotoThunk(number, state)),
     getArticles: name => dispatch(getArticlesThunk(name)),
-    getCid: (stateAbbrev, fullName) =>
-      dispatch(getCidThunk(stateAbbrev, fullName)),
-    storeName: nameObj => dispatch(storeName(nameObj))
+    getCid: nameObj => dispatch(getCidThunk(nameObj)),
+    storeName: nameObj => dispatch(storeName(nameObj)),
+    getCid: nameObj => dispatch(getCidThunk(nameObj)),
+    getFunders: cid => dispatch(getFundersThunk(cid))
   }
 }
 

@@ -7,36 +7,12 @@ import { connect } from "react-redux"
 class FundingContainer extends React.Component {
   constructor(props) {
     super(props)
-    // this.state = {:}
-  }
-
-  componentDidMount() {
-    // this.props.getArticles(this.props.official)
-    this.props.getCid(this.props.nameObj)
   }
 
   render() {
-    // console.log("radicchio", this.props)
-    return <FundingView cid={this.props.cid} />
+    console.log("radicchio", this.props)
+    return <FundingView funders={this.props.funders} />
   }
 }
 
-FundingContainer.propTypes = {
-  // articles: PropTypes.array.isRequired
-}
-
-const mapState = state => {
-  return {
-    // articles: state.official.articles
-    nameObj: state.official.nameObj,
-    cid: state.official.cid
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    getCid: nameObj => dispatch(getCidThunk(nameObj))
-  }
-}
-
-export default connect(mapState, mapDispatch)(FundingContainer)
+export default FundingContainer
