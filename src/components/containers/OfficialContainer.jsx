@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
 import { getOfficialThunk, getPhotoThunk, getArticlesThunk } from "../../store/utilities/official"
-
+import Map from './Map'
 class OfficialContainer extends Component {
   componentDidMount() {
     // Fetch the object from the Google api that has information about the government official
@@ -25,6 +25,7 @@ class OfficialContainer extends Component {
     return (
       <div>
         {/* <h1>OfficialContainer here</h1> */}
+        <Map />
         {this.props.official && <img src={this.props.official.photoUrl} />}
         <OfficialView officialObject={this.props.official} />
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 // import { action } from "../../store/utilities/Home"; // Get the action creator for ____?
 import HomeView from "../views/HomeView"
-import { getOfficialsThunk } from "../../store/utilities/official"
+import { getOfficialsThunk, getCoordinatesThunk } from "../../store/utilities/official"
 
 class HomeContainer extends Component {
   constructor(props) {
@@ -26,6 +26,9 @@ class HomeContainer extends Component {
     event.preventDefault()
     // console.log("bar", this.state.searchbarValue)
     this.props.getOfficialsThunk(this.state.searchbarValue)
+
+    // Convert street address to coordinates for the Map on each Official page
+    this.props.getCoordinates(this.state.searchbarValue)     
   }
 
   focusFunc = () => {
@@ -102,7 +105,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getOfficialsThunk: searchbarValue =>
-      dispatch(getOfficialsThunk(searchbarValue))
+      dispatch(getOfficialsThunk(searchbarValue)),
+    getCoordinates: address => dispatch(getCoordinatesThunk(address))
   }
 }
 

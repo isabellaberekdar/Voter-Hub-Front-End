@@ -5,6 +5,7 @@ const GET_OFFICIAL = "GET_OFFICIAL"
 const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
+const GET_COORDINATES = "GET_COORDINATES"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -32,6 +33,13 @@ const getArticles = articles => {
   return {
     type: GET_ARTICLES,
     payload: articles
+  }
+}
+
+const getCoordinates = coordinates => {
+  return {
+    type: GET_COORDINATES,
+    payload: coordinates
   }
 }
 
@@ -137,6 +145,20 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
   }
 }
 
+export const getCoordinatesThunk = address => async dispatch => {
+  try {
+    const key = process.env.REACT_APP_GOOGLE_KEY
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`
+
+    // Get the coordinates
+    const { data } = await axios.get(url)
+    console.log("************", data)
+    dispatch(getCoordinates(data))
+  } catch (error) {
+    console.log("Error in getOfficialThunk:", error)
+  }
+}
+
 const initialState = {}
 
 // REDUCER
@@ -163,6 +185,11 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         articles: action.payload
+      }
+    case GET_COORDINATES:
+      return {
+        ...state,
+        coordinates: action.payload
       }
     default:
       return state
