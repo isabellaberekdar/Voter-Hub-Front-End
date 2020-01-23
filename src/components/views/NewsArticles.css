@@ -25,9 +25,9 @@
 }
 
 .headlines {
-  /* background-color: rgba(245, 245, 245, 80); */
+  background-color: rgba(245, 245, 245, 80);
   border-top: 5px solid #4df76e;
-  background-image: linear-gradient(rgba(245, 245, 245, 80) 70%, rgba(77, 247, 111, 0.089));
+  /* background-image: linear-gradient(rgba(245, 245, 245, 80) 70%, rgba(77, 247, 111, 0.089)); */
 
 }
 
