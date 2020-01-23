@@ -90,16 +90,30 @@ class OfficialContainer extends Component {
         console.log("plantain", this.props.official.office.divisionId)
       })
       .then(() => {
+        let stateAbbrev
+        let cd
         if (this.props.official.office.divisionId.includes("state:")) {
-          let stateAbbrev = this.props.official.office.divisionId.substring(
+          stateAbbrev = this.props.official.office.divisionId.substring(
             this.props.official.office.divisionId.lastIndexOf("state:") + 6
+          )
+          if (stateAbbrev.includes("/")) {
+            stateAbbrev = stateAbbrev
+              .substring(0, stateAbbrev.indexOf("/"))
+              .toUpperCase()
+          }
+          console.log(stateAbbrev)
+        } else {
+          storeState(undefined)
+        }
+
+        if (this.props.official.office.divisionId.includes("cd:")) {
+          cd = this.props.official.office.divisionId.substring(
+            this.props.official.office.divisionId.lastIndexOf("cd:") + 3
           )
           if (stateAbbrev.includes("/")) {
             stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
           }
-        }
-        if (this.props.official.office.divisionId.includes("cd:")) {
-          storeCD()
+          console.log(cd)
         } else {
           storeCD(undefined)
         }
