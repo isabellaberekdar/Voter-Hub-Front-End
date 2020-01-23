@@ -10,6 +10,7 @@ import {
   storeName,
   storeState,
   storeCD,
+  storeZip,
   storeCoordsThunk
 } from "../../store/utilities/official"
 import Map from './Map'
@@ -94,6 +95,7 @@ class OfficialContainer extends Component {
       .then(() => {
         let stateAbbrev
         let cd
+        let zip
         if (this.props.official.office.divisionId.includes("state:")) {
           stateAbbrev = this.props.official.office.divisionId.substring(
             this.props.official.office.divisionId.lastIndexOf("state:") + 6
@@ -103,8 +105,9 @@ class OfficialContainer extends Component {
           }
           stateAbbrev = stateAbbrev.toUpperCase()
           console.log(stateAbbrev)
+          this.props.storeState(stateAbbrev)
         } else {
-          storeState(undefined)
+          this.props.storeState(undefined)
         }
 
         if (this.props.official.office.divisionId.includes("cd:")) {
@@ -115,10 +118,25 @@ class OfficialContainer extends Component {
             stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
           }
           console.log(cd)
+          this.props.storeCD(cd)
         } else {
-          storeCD(undefined)
+          this.props.storeCD(undefined)
         }
-        this.props.storeCoords(stateAbbrev, cd)
+
+        if (
+          this.props.official.office.divisionId.includes("place:") ||
+          this.props.official.office.divisionId.includes("county:")
+        ) {
+          zip = this.props.official.official.address[0].zip
+          console.log("yuzu", zip)
+          this.props.storeZip(zip)
+        } else {
+          this.props.storeZip(undefined)
+        }
+
+        console.log("passionfruit", this.props.official.official.address[0].zip)
+
+        this.props.storeCoords(stateAbbrev, cd, zip)
       })
   }
 
@@ -165,7 +183,8 @@ const mapDispatch = dispatch => {
     getFunders: cid => dispatch(getFundersThunk(cid)),
     storeState: stateAbbrev => dispatch(storeState(stateAbbrev)),
     storeCD: CD => dispatch(storeCD(CD)),
-    storeCoords: (state, cd) => dispatch(storeCoordsThunk(state, cd))
+    storeZip: zip => dispatch(storeZip(zip)),
+    storeCoords: (state, cd, zip) => dispatch(storeCoordsThunk(state, cd, zip))
   }
 }
 

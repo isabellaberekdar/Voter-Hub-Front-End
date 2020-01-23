@@ -10,6 +10,7 @@ const STORE_NAME = "STORE_NAME"
 const GET_FUNDERS = "GET_FUNDERS"
 const STORE_STATE = "STORE_STATE"
 const STORE_CD = "STORE_CD"
+const STORE_ZIP = "STORE_ZIP"
 const STORE_COORDS = "STORE_COORDS"
 
 // ACTION CREATORS
@@ -73,6 +74,13 @@ export const storeCD = CD => {
   return {
     type: STORE_CD,
     payload: CD
+  }
+}
+
+export const storeZip = zip => {
+  return {
+    type: STORE_ZIP,
+    payload: zip
   }
 }
 
@@ -238,22 +246,23 @@ export const getFundersThunk = cid => async dispatch => {
   }
 }
 
-export const storeCoordsThunk = (state, cd) => async dispatch => {
-  console.log(state, cd)
-  if (cd !== undefined) {
-    // if the congressional district IS defined, obtain the coords for the representative
+export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
+  console.log(state, cd, zip)
+
+  async function countryCoords() {
     try {
+      console.log("cucumber")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
-        `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
+        `https://raw.githubusercontent.com/johan/world.geo.json/master/countries/USA.geo.json`
       )
-      console.log("honeydew", data)
+      console.log("raspberry", data.features[0].geometry)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
     }
-  } else if (state !== undefined) {
-    // if the cd is undefined but state is defined, obtain the coords for the senator
+  }
+  async function stateCoords(state) {
     try {
       console.log("cucumber")
       // Query the api for the geoJSON for the given state and congressional district
@@ -265,6 +274,56 @@ export const storeCoordsThunk = (state, cd) => async dispatch => {
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
     }
+  }
+  async function districtCoords(state, cd) {
+    try {
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
+      )
+      console.log("honeydew", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  }
+  async function zipCoords(zip) {
+    try {
+      console.log("kiwi")
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/states/${state}/shape.geojson`
+      )
+      console.log("coconut", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  }
+
+  countryCoords()
+  if (
+    (state == undefined && cd !== undefined) ||
+    (state == undefined && cd == undefined && zip == undefined)
+  ) {
+    // country
+    countryCoords()
+    console.log("COUNTRY")
+  } else if (state !== undefined && cd == undefined && zip == undefined) {
+    // state
+    stateCoords(state)
+    console.log("STATE")
+  } else if (state !== undefined && cd !== undefined) {
+    // congressional district
+    districtCoords(state, cd)
+    console.log("CONGRESSIONAL DISTRICT")
+  } else if (cd == undefined && zip !== undefined) {
+    zipCoords(zip)
+    console.log("COUNTY / ZIP CODE")
+  } else {
+    // country
+    countryCoords()
+    console.log("COUNTRY")
   }
 }
 
@@ -314,6 +373,8 @@ const officialReducer = (state = initialState, action) => {
       return { ...state, state: action.payload }
     case STORE_CD:
       return { ...state, cd: action.payload }
+    case STORE_ZIP:
+      return { ...state, zip: action.payload }
     case STORE_COORDS:
       return { ...state, coords: action.payload }
     default:
