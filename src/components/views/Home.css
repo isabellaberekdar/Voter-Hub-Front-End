@@ -122,7 +122,7 @@ h3#join-discussion-title {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(41, 59, 89, .8);
+    background-color: rgba(26, 38, 59, 0.9);
     overflow: hidden;
     width: 0;
     height: 100%;
@@ -130,8 +130,12 @@ h3#join-discussion-title {
   }
 
   .text {
+    background: #E84A3D;
+    font-family: avenir-medium;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
     color: white;
-    font-size: 18px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -139,16 +143,40 @@ h3#join-discussion-title {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     white-space: nowrap;
+    transition: all 0.5s;
   }
+
 
   .text > a {
     color: white;
     text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
   }
 
   .text > a:visited {
     color: white;
     text-decoration: none;
+  }
+  
+  .text >a:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .text:hover a {
+      padding-right: 25px;
+  }
+
+  .text:hover a:after {
+      opacity: 1;
+      right: 0;
   }
 
   .container {
