@@ -298,6 +298,7 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
     }
   }
 
+  countryCoords()
   if (
     (state == undefined && cd !== undefined) ||
     (state == undefined && cd == undefined && zip == undefined)
