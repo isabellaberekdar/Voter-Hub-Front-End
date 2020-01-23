@@ -2,13 +2,13 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
-import MessageBoardContainer from "../containers/MessageBoard"
+import MessageBoard from "../containers/MessageBoard"
 
 import "./OfficialView.css"
 import "./SingleSideNav.css"
 import SingleSideNav from "../containers/SingleSideNav"
 
-import AnchorLink from 'react-anchor-link-smooth-scroll'
+import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
   console.log("parsnip", props)
@@ -124,7 +124,7 @@ const OfficialView = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
-
+  console.log("starfruit", props.officialId)
   return (
     <div className="triptych-container">
       <div className="triptych">
@@ -214,24 +214,29 @@ const OfficialView = props => {
       <div className="sidenav">
         <SingleSideNav />
       </div>
-      
-      <div className="lower-content">
 
+      <div className="lower-content">
         {/* NEWS SECTION */}
         {props.officialObject && (
-          <NewsArticlesContainer official={props.officialObject.official.name} id="news-anchor"/>
+          <NewsArticlesContainer
+            official={props.officialObject.official.name}
+            id="news-anchor"
+          />
         )}
 
         {/* FUNDING SECTION */}
-        {props.funders && <FundingContainer funders={props.funders} id="funding-anchor"/>}
+        {props.funders && (
+          <FundingContainer funders={props.funders} id="funding-anchor" />
+        )}
 
+        <MessageBoard officialId={props.officialId} />
         <h1 id="test"></h1>
 
         {/* MESSAGEBOARD SECTION */}
-        <MessageBoardContainer id="messageboard-anchor"/>
+        <MessageBoardContainer id="messageboard-anchor" />
       </div>
     </div>
   )
 }
 
-export default OfficialView;
+export default OfficialView

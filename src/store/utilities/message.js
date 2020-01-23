@@ -6,6 +6,7 @@ import axios from "axios"
 const GET_MESSAGEBOARD = "GET_MESSAGEBOARD"
 const POST_MESSAGE = "POST_MESSAGE"
 const GET_THREAD = "GET_THREAD"
+const POST_THREAD = "POST_THREAD"
 
 // ACTION CREATORS
 
@@ -27,6 +28,13 @@ const getThread = messages => {
   return {
     type: GET_THREAD,
     payload: messages
+  }
+}
+
+const postThread = newThread => {
+  return {
+    type: POST_THREAD,
+    payload: newThread
   }
 }
 
@@ -75,6 +83,26 @@ export const postMessageThunk = message => async dispatch => {
   }
 }
 
+//info has thread and message
+export const postThreadThunk = info => async dispatch => {
+  try {
+    // const headers = {
+    //   "Content-Type": "application/json"
+    // }
+    let { data } = await axios.post(
+      "http://localhost:5000/api/messages/messageboard",
+      info
+      // {
+      //   headers: headers
+      // }
+    ) //in backend, thread is returned
+    console.log("Pichu", data)
+    dispatch(postThread(data))
+  } catch (error) {
+    console.log("Error in postMessageThunk", error)
+  }
+}
+
 const initialState = {}
 
 // REDUCER
@@ -95,6 +123,11 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         messages: [...state.messages, action.payload]
+      }
+    case POST_THREAD:
+      return {
+        ...state,
+        threads: [...state.threads, action.payload]
       }
 
     default:
