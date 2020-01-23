@@ -129,6 +129,8 @@ const OfficialView = props => {
 
   return (
     <div className="triptych-container">
+       <div className="map"></div>
+        <Map coords={props.coords} />
       <div className="triptych">
         <div className="portrait">
           {official.photoUrl ? (
@@ -209,8 +211,7 @@ const OfficialView = props => {
           )}
         </div>
 
-        <div className="map"></div>
-        <Map coords={props.coords} />
+       
       </div>
 
       {/* SIDEBAR FLOATS HERE */}
