@@ -32,7 +32,7 @@ const updateUser = updatedUserInfo => {
 
 // Edit posts
 // not tested yet
-export const updateUserInfoThunk = updatedUserInfo => async dispatch => {
+export const updateUserThunk = updatedUserInfo => async dispatch => {
   try {
     axios.put('/urltoupdatestuff', updatedUserInfo)
   }

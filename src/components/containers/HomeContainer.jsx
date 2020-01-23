@@ -67,6 +67,9 @@ class HomeContainer extends Component {
     }
   }
 
+  updateAddress = () => {
+    console.log('Button pushed')
+  }
   render() {
     console.log(this.props.store)
     return (
@@ -81,6 +84,7 @@ class HomeContainer extends Component {
           store={this.props.store}
           handleScriptLoad={this.handleScriptLoad}
           handleSelectAddress={this.handleSelectAddress}
+          updateAddress={this.updateAddress}
         />
       </div>
     )
