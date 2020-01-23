@@ -1,6 +1,7 @@
 import React from "react"
 import MessageBoard from ".."
 
+
 //contains props official and messageBoardArray
 const MessageBoardCollection = props => {
   const { official, messageBoardArray } = props
@@ -9,10 +10,9 @@ const MessageBoardCollection = props => {
     <div>{MessageBoard}</div>
   ))
 
-  return (
-    <div>
-      <h2>{official}'s MessageBoards</h2>
-      {messageBoardArr}
+    return <div>
+        <h2 id="msgboard-title">{official}'s MessageBoards</h2>
+        {messageBoardArr}
     </div>
   )
 }

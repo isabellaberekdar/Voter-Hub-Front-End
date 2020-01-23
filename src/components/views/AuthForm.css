@@ -35,7 +35,7 @@
 }
 
 .login-box {
-    width: 350px;
+    width: 35%;
     height: 300px;
     border: 1px solid silver;
     border-radius: 20px;
@@ -54,16 +54,15 @@ h1#form-title {
 input {
     float: right;
     margin-right: 30px;
-    height: 20px;
-    width: 200px;
+    height: 30px;
+    width: 70%;
     border-radius: 50px;
     margin-top: 0px;
     padding: 0px;
     font-family: avenir-medium;
-    font-style: italic;
     color: #293B59;
     padding-left: 10px;
-    font-size: 18px;
+    font-size: 16px;
 
 }
 
@@ -103,4 +102,16 @@ small {
     font-family: avenir-medium;
     font-style: italic;
     text-align: center;
+}
+
+.home-content {
+    flex: 1 0 auto;
+}
+
+.home-content RoutesContainer Switch Route :not(#homepage) {
+    padding: 20px;
+}
+
+.home-content:not(#nonhome) {
+    font-family: avenir;
 }

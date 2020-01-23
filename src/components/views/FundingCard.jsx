@@ -5,7 +5,7 @@ import "./FundingCard.css"
 const FundingCard = props => {
   return (
     <div className="funding-card">
-      <div className="octothorpe">#</div>
+      <div className="index">{props.index}</div>
       <div className="funding-info">
         <p className="funding-industry">
           {props.funder["@attributes"].industry_name.toUpperCase()}
