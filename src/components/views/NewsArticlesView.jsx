@@ -6,7 +6,7 @@ const NewsArticlesView = props => {
   return (
     <div className="headlines">
       <p id="down-triangle">▼</p>
-      <h2>Latest Headlines...</h2>
+      <h2>Latest Headlines</h2>
       <div className="articles-container">
         {props.articles ? (
           props.articles.map(article => {
