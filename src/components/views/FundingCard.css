@@ -1,0 +1,16 @@
+div.funding-grid {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 25px;
+  grid-auto-flow: column;
+}
+
+div.funding-card {
+  display: flex;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+div.octothorpe {
+  font-size: 200px;
+}

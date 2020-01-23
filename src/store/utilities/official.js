@@ -7,6 +7,7 @@ const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
 const GET_CID = "GET_CID"
 const STORE_NAME = "STORE_NAME"
+const GET_FUNDERS = "GET_FUNDERS"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -48,6 +49,13 @@ const getCid = info => {
   return {
     type: GET_CID,
     payload: info
+  }
+}
+
+const getFunders = funders => {
+  return {
+    type: GET_FUNDERS,
+    payload: funders
   }
 }
 
@@ -188,6 +196,21 @@ export const getCidThunk = nameObj => async dispatch => {
   }
 }
 
+export const getFundersThunk = cid => async dispatch => {
+  console.log("CID", cid)
+  try {
+    let url = `https://www.opensecrets.org/api/?method=candIndustry&cid=${cid}&cycle=2020&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
+
+    // Get the top ten industries who contributed for the 2020 cycle
+    const { data } = await axios.get(url)
+    // console.log("MEOW")
+    // console.log("DATA: ", data.response.industries.industry)
+    dispatch(getFunders(data.response.industries.industry))
+  } catch (error) {
+    console.log("Error in getFundersThunk:", error)
+  }
+}
+
 const initialState = {}
 
 // REDUCER
@@ -224,6 +247,11 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         cid: action.payload
+      }
+    case GET_FUNDERS:
+      return {
+        ...state,
+        funders: action.payload
       }
     default:
       return state
