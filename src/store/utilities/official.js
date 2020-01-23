@@ -5,7 +5,6 @@ const GET_OFFICIAL = "GET_OFFICIAL"
 const GET_OFFICIALS = "GET_OFFICIALS"
 const GET_PHOTO = "GET_PHOTO"
 const GET_ARTICLES = "GET_ARTICLES"
-
 const GET_CID = "GET_CID"
 const STORE_NAME = "STORE_NAME"
 const GET_FUNDERS = "GET_FUNDERS"
@@ -167,14 +166,14 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
 export const getCidThunk = nameObj => async dispatch => {
   // console.log("arugula", nameObj)
   try {
-    // Query the OpenSecrets API for the officials associated with the given state abbrev
+    // Query the api for the officials associated with the given state abbrev
     const { data } = await axios.get(
       `https://www.opensecrets.org/api/?method=getLegislators&id=${nameObj.stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
     )
     let legislators = data.response.legislator
     // console.log("celery", legislators)
 
-    // Don't delete the following lines, in case phone numbers end up being insufficient
+    // DON'T DELETE THE FOLLOWING LINES, in case phone numbers end up being insufficient
     // Finds the legislator in legislators with the same last name (first name won't be sufficient)
     // const found = legislators.find(element =>
     //   element["@attributes"].firstlast.includes(nameObj.lastName)

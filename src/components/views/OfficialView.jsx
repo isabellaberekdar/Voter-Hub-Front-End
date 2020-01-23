@@ -3,6 +3,7 @@ import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
 import FundingView from "../views/FundingView"
+import MessageBoardContainer from "../containers/MessageBoard"
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
@@ -44,38 +45,51 @@ const OfficialView = props => {
       if (official.channels.hasOwnProperty(key)) {
         if (official.channels[key].type == "Facebook") {
           channels.push(
-            <p>
-              <a
-                href={"https://www.facebook.com/" + official.channels[key].id}
-                target="blank"
-              >
-                <img className="social-icon" src="/images/socialfacebook.svg" />
-              </a>
-            </p>
+            <a
+              href={"https://www.facebook.com/" + official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/facebook-card.svg"
+                alt="homepage-icon"
+                className="social-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
           )
         } else if (official.channels[key].type == "Twitter") {
           channels.push(
-            <p>
-              <a
-                href={"https://twitter.com/" + official.channels[key].id}
-                target="blank"
-              >
-                <img className="social-icon" src="/images/socialtwitter.svg" />
-              </a>
-            </p>
+            <a
+              href={"https://www.twitter.com/" + official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/twitter-card.svg"
+                alt="homepage-icon"
+                className="social-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
           )
         } else if (official.channels[key].type == "YouTube") {
           channels.push(
-            <p>
-              <a
-                href={
-                  "https://www.youtube.com/user/" + official.channels[key].id
-                }
-                target="blank"
-              >
-                <img className="social-icon" src="/images/socialyoutube.svg" />
-              </a>
-            </p>
+            <a
+              href={"https://www.youtube.com/" + official.channels[key].id}
+              target="blank"
+              id="icon"
+            >
+              <img
+                src="/images/youtube-card.svg"
+                alt="homepage-icon"
+                className="social-icon"
+                width="19px"
+                height="19px"
+              />
+            </a>
           )
         }
       }
@@ -110,11 +124,8 @@ const OfficialView = props => {
     }
   }
 
-  console.log(office)
   return (
-    <div>
-      {/* <h2>OfficialView here</h2> */}
-
+    <div className="triptych-container">
       <div className="triptych">
         <div className="portrait">
           {official.photoUrl ? (
@@ -202,6 +213,8 @@ const OfficialView = props => {
       )}
 
       {props.funders && <FundingContainer funders={props.funders} />}
+
+      <MessageBoardContainer />
 
       {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed

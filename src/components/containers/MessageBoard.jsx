@@ -5,7 +5,7 @@ import axios from "axios";
 import { getMessageBoardThunk } from "../../store/utilities/message";
 
 
-class MessageBoardCollectionContainer extends Component {
+class MessageBoard extends Component {
     constructor(){
         super();
         this.state = {
@@ -69,19 +69,9 @@ class MessageBoardCollectionContainer extends Component {
                     {
                         msgBoard.officialId === officialId ? 
                         <li>
-                            {msgBoard.subject}
+                            <a href={`/thread/${msgBoard.id}`}>{msgBoard.subject}</a>
                             <br/>
-                            Message Board ID: {msgBoard.id}
-                            <ol>
-                                <form onSubmit={this.handleSubmit}>
-                                    {
-                                        msgBoard.messages.map(message => <div>
-                                            <li>{message.user}: {'\xa0\xa0\xa0\xa0\xa0\xa0\xa0'} {message.text}</li>
-                                        </div>) 
-                                    }
-                                    <input type="text" placeholder="Aa" value={this.state.inputText} onChange={this.handleChange}/>
-                                </form>
-                            </ol>
+                            Thread ID: {msgBoard.id} <br/>
                         </li>
                         : 
                         <div></div>    
@@ -111,4 +101,4 @@ const mapDispatch = dispatch => {
     }
 };
 
-export default connect(mapState,mapDispatch)(MessageBoardCollectionContainer)
+export default connect(mapState,mapDispatch)(MessageBoard)

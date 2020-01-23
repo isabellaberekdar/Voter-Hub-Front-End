@@ -3,13 +3,12 @@ import { withRouter } from "react-router-dom"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { logout } from "../../thunks";
 import { connect } from "react-redux"
-import { me } from "../../thunks"
 import "../views/Navbar.css"
 
 class NavbarContainer extends Component {
 
     render() {
-      console.log(this.props)
+      // console.log(this.props)
       let logInOrOut, logInLink, logOutLink, displayUser;
       if(!this.props.isLoggedIn){
         logInLink = <Link to="/login">Login</Link>
@@ -59,6 +58,7 @@ const mapDispatch = dispatch => {
     logout: () => dispatch(logout())
   }
 };
+
 
 export default withRouter(connect(mapState, mapDispatch)(NavbarContainer));
 // export const Logout = connect(null, mapDispatch)(NavbarContainer);
