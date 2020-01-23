@@ -25,9 +25,9 @@
 }
 
 .headlines {
-  background-color: rgba(245, 245, 245, 80);
+  background-color: rgba(245, 245, 245);
   border-top: 5px solid #4df76e;
-  /* background-image: linear-gradient(rgba(245, 245, 245, 80) 70%, rgba(77, 247, 111, 0.089)); */
+  /* scroll-behavior: smooth; */
 }
 
 .headlines > h2 {
@@ -38,7 +38,7 @@
   padding: 0px;
 }
 
-.headlines > #down-triangle {
+.down-triangle {
   margin: 0px;
   padding: 0px;
   font-size: 50px;
@@ -52,6 +52,7 @@
   flex-direction: column;
   align-items: center;
   color: rgb(90, 90, 90);
+  padding-bottom: 60px;
 }
 
 .articles-container > .article {

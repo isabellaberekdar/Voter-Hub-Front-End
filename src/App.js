@@ -14,8 +14,8 @@ class App extends Component {
           <div className="home-content">
             <RoutesContainer />
           </div>
-          <Footer />
         </div>
+        <Footer />
       </div>
     );
   }
