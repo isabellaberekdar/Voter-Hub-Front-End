@@ -110,7 +110,7 @@ const OfficialCard = props => {
     }
   }
 
-  console.log("SAEJFILSJEIFALESFILAS", typeof props.office.name)
+  // console.log("mango", props.office.divisionId)
 
   return (
     <div className="official-card">

@@ -9,7 +9,8 @@ import {
   getFundersThunk,
   storeName,
   storeState,
-  storeCD
+  storeCD,
+  storeCoordsThunk
 } from "../../store/utilities/official"
 
 class OfficialContainer extends Component {
@@ -97,10 +98,9 @@ class OfficialContainer extends Component {
             this.props.official.office.divisionId.lastIndexOf("state:") + 6
           )
           if (stateAbbrev.includes("/")) {
-            stateAbbrev = stateAbbrev
-              .substring(0, stateAbbrev.indexOf("/"))
-              .toUpperCase()
+            stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
           }
+          stateAbbrev = stateAbbrev.toUpperCase()
           console.log(stateAbbrev)
         } else {
           storeState(undefined)
@@ -117,6 +117,7 @@ class OfficialContainer extends Component {
         } else {
           storeCD(undefined)
         }
+        this.props.storeCoords(stateAbbrev, cd)
       })
   }
 
@@ -161,7 +162,8 @@ const mapDispatch = dispatch => {
     storeName: nameObj => dispatch(storeName(nameObj)),
     getFunders: cid => dispatch(getFundersThunk(cid)),
     storeState: stateAbbrev => dispatch(storeState(stateAbbrev)),
-    storeCD: CD => dispatch(storeCD(CD))
+    storeCD: CD => dispatch(storeCD(CD)),
+    storeCoords: (state, cd) => dispatch(storeCoordsThunk(state, cd))
   }
 }
 

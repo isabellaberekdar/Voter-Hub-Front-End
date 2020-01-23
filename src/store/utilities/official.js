@@ -10,6 +10,7 @@ const STORE_NAME = "STORE_NAME"
 const GET_FUNDERS = "GET_FUNDERS"
 const STORE_STATE = "STORE_STATE"
 const STORE_CD = "STORE_CD"
+const STORE_COORDS = "STORE_COORDS"
 
 // ACTION CREATORS
 const getOfficial = official => {
@@ -72,6 +73,13 @@ export const storeCD = CD => {
   return {
     type: STORE_CD,
     payload: CD
+  }
+}
+
+export const storeCoords = coords => {
+  return {
+    type: STORE_COORDS,
+    payload: coords
   }
 }
 
@@ -227,6 +235,36 @@ export const getFundersThunk = cid => async dispatch => {
   }
 }
 
+export const storeCoordsThunk = (state, cd) => async dispatch => {
+  console.log(state, cd)
+  if (cd !== undefined) {
+    // if the congressional district IS defined, obtain the coords for the representative
+    try {
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
+      )
+      console.log("honeydew", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  } else if (state !== undefined) {
+    // if the cd is undefined but state is defined, obtain the coords for the senator
+    try {
+      console.log("cucumber")
+      // Query the api for the geoJSON for the given state and congressional district
+      const { data } = await axios.get(
+        `https://theunitedstates.io/districts/states/${state}/shape.geojson`
+      )
+      console.log("coconut", data)
+      dispatch(storeCoords(data))
+    } catch (error) {
+      console.log("Error in getCoordsThunk:", error)
+    }
+  }
+}
+
 const initialState = {}
 
 // REDUCER
@@ -273,6 +311,8 @@ const officialReducer = (state = initialState, action) => {
       return { ...state, state: action.payload }
     case STORE_CD:
       return { ...state, cd: action.payload }
+    case STORE_COORDS:
+      return { ...state, coords: action.payload }
     default:
       return state
   }

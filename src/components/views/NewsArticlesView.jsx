@@ -12,7 +12,7 @@ const NewsArticlesView = props => {
           props.articles.map(article => {
             var s = article.datePublished
             s = s.substring(0, s.indexOf("T"))
-            console.log("pineapple", article)
+            // console.log("pineapple", article)
             return (
               <div className="article" key={article.name}>
                 <span className="headline">
