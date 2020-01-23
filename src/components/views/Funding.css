@@ -31,7 +31,7 @@ div.funding-block {
     padding-bottom: 60px;
 }
 
-.funding-block > #down-triangle {
+div.funding-block .down-triangle {
     margin: 0px;
     padding: 0px;
     font-size: 50px;
@@ -72,5 +72,5 @@ p#no-funding-message {
 }
 
 h2#top-10-title {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }

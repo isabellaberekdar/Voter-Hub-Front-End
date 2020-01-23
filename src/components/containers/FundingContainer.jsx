@@ -15,7 +15,7 @@ class FundingContainer extends React.Component {
     ))
     return (
       <div className="funding-block">
-        <p id="down-triangle">▼</p>
+        <p id="funding-anchor" class="down-triangle">▼</p>
         <h2 id="top-10-title">Top 10 Industry Funders for the 2020 Cycle</h2>
         <div className="funding-grid">{funderCards}</div>
       </div>

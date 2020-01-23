@@ -27,6 +27,7 @@
 .headlines {
   background-color: rgba(245, 245, 245);
   border-top: 5px solid #4df76e;
+  /* scroll-behavior: smooth; */
 }
 
 .headlines > h2 {
@@ -37,7 +38,7 @@
   padding: 0px;
 }
 
-.headlines > #down-triangle {
+.down-triangle {
   margin: 0px;
   padding: 0px;
   font-size: 50px;

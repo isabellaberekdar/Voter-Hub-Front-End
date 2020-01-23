@@ -5,14 +5,13 @@ import "./NewsArticles.css"
 const NewsArticlesView = props => {
   return (
     <div className="headlines">
-      <p id="down-triangle">▼</p>
+      <p id="headlines-anchor" class="down-triangle">▼</p>
       <h2>Latest Headlines</h2>
       <div className="articles-container">
         {props.articles ? (
           props.articles.map(article => {
             var s = article.datePublished
             s = s.substring(0, s.indexOf("T"))
-            // console.log("pineapple", article)
             return (
               <div className="article" key={article.name}>
                 <span className="headline">
