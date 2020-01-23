@@ -5,9 +5,14 @@ const mapStyles = {
   height: "50%"
 }
 class GoogleMap extends React.Component {
-  componentDidMount() {
-    let address='new york city'
+  this.state = {
+    stores: 
   }
+  
+  componentDidMount() {
+    
+  }
+
   render() {
     return (
       <Map
