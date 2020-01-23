@@ -75,8 +75,8 @@ const HomeView = props => {
              handleScriptLoad={props.handleScriptLoad}
              handleLocationSelect={props.handleLocationSelect}
           />
-          <button onClick={props.updateAddress}>{'Save this as your address'}</button> 
-        </div>
+{/*           <button onClick={props.updateAddress}>{'Save this as your address'}</button> 
+ */}        </div>
       </div>
       <div className="home-content">
         <center>{officialCards}</center>
