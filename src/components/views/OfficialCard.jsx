@@ -132,7 +132,7 @@ const OfficialCard = props => {
         {props.official.phones ? <p id="phone-num">{props.official.phones[0]}</p> : <div></div>}
         {props.official.urls ? (
           <a href={props.official.urls[0]} target="blank" id="channels">
-            {props.official.urls[0]}{" "}
+            Official Website
           </a>
         ) : (
           <div></div>

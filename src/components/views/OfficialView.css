@@ -26,9 +26,6 @@
   margin: auto;
 } */
 
-p.last-name {
-  letter-spacing: 10px;
-}
 
 div.triptych {
   display: flex;
@@ -69,6 +66,7 @@ div.info > p.first-name {
   font-size: 30px;
   margin-top: 15px;
   margin-bottom: 0px;
+  padding: 0px;
 }
 
 div.info > p.last-name {
@@ -76,7 +74,9 @@ div.info > p.last-name {
   font-size: 45px;
   margin-top: 0px;
   margin-bottom: 12px;
+  padding: 0px;
   color: #4d86f7;
+  letter-spacing: 10px;
 }
 
 div.info > p,

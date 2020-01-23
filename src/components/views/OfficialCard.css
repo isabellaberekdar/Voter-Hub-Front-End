@@ -35,7 +35,16 @@
   height: 300px;
   font-family: avenir;
   font-size: 14px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
   word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
   line-height: 0.8;
   text-align: left;
 }
@@ -61,23 +70,34 @@
   float: left;
   padding-top: 5px;
   padding-left: 15px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
   word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 #office-name {
   font-family: roboto-slab;
   color: black;
+  word-break: break-all;
+  font-size: 18px;
 }
 
 #office-name a {
   text-decoration: none;
   color: black;
+  word-break: break-all;
 }
 
 #officials-name a {
   text-decoration: none;
   font-family: avenir-black;
-  font-size: 20px;
+  font-size: 24px;
   color: black;
 }
 
