@@ -4,9 +4,13 @@ import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
 import MessageBoardContainer from "../containers/MessageBoard"
 
-// If you need cards or styling, you can uncomment the lines here to import
-// import { OfficialCard } from "..";
 import "./OfficialView.css"
+import "./SingleSideNav.css"
+import SingleSideNav from "../containers/SingleSideNav"
+
+import Map from "../containers/Map"
+
+import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
   console.log("parsnip", props)
@@ -206,27 +210,33 @@ const OfficialView = props => {
         </div>
 
         <div className="map"></div>
+        <Map coords={props.coords} />
       </div>
 
-      <div className="twitter"></div>
+      {/* SIDEBAR FLOATS HERE */}
+      <div className="sidenav">
+        <SingleSideNav />
+      </div>
 
-      <div className="bing-news"></div>
+      <div className="lower-content">
+        {/* NEWS SECTION */}
+        {props.officialObject && (
+          <NewsArticlesContainer
+            official={props.officialObject.official.name}
+            id="news-anchor"
+          />
+        )}
 
-      <p>{output}</p>
-      {props.officialObject && (
-        <NewsArticlesContainer official={props.officialObject.official.name} />
-      )}
+        {/* FUNDING SECTION */}
+        {props.funders && (
+          <FundingContainer funders={props.funders} id="funding-anchor" />
+        )}
 
-      {props.funders && <FundingContainer funders={props.funders} />}
+        <h1 id="test"></h1>
 
-      <MessageBoardContainer />
-
-      {/* <div className="disqus-container">
-        <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
-        />
-      </div> */}
+        {/* MESSAGEBOARD SECTION */}
+        <MessageBoardContainer id="messageboard-anchor" />
+      </div>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { HomeContainer, NotFound, OfficialContainer } from "../../components"
 import MessageBoardCollectionContainer from '../containers/MessageBoardCollection';
 import MessageBoard from "../containers/MessageBoard";
 import Thread from "../containers/Thread";
+import AuthFormContainer from "../containers/AuthFormContainer";
 
 
 const RoutesView = props => {
@@ -21,7 +22,8 @@ const RoutesView = props => {
       <Route exact path="/messageboardcontainer" component={MessageBoardCollectionContainer}/>
       <Route exact path="/messageboard" component={MessageBoard}/>
       <Route exact path="/thread/:threadId" component={Thread}/>
-      {/* placeOrCounty and placeOrCountyName are optional */}
+      <Route exact path="/login" component={AuthFormContainer}/>
+      <Route exact path="/signup/" component={AuthFormContainer}/>
       <Route
         exact
         path="/official/:division/:officeIndex/:officialIndex"
@@ -38,7 +40,6 @@ const RoutesView = props => {
         </Switch>
       )} */}
       {/* Displays our Login component as a fallback */}
-      <Route component={Login} />
     </Switch>
   )
 }

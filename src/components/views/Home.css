@@ -274,13 +274,17 @@ h2#sign-up-title {
 }
 
 .home-body {
+    /* height: 100vh; */
+    /* height: 20000px; */
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .home-content {
+    /* display: flex; */
     flex: 1 0 auto;
+    /* flex-basis: 800px; */
 }
 
 .home-content RoutesContainer Switch Route :not(#homepage) {

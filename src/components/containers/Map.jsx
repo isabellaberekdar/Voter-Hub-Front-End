@@ -1,17 +1,17 @@
 import { Map, GoogleApiWrapper } from "google-maps-react"
 import React from "react"
+
 const mapStyles = {
   width: "50%",
   height: "50%"
 }
+
 class GoogleMap extends React.Component {
-  this.state = {
-    stores: 
-  }
-  
-  componentDidMount() {
-    
-  }
+  // this.state = {
+  //   stores:
+  // }
+
+  componentDidMount() {}
 
   render() {
     return (
@@ -19,10 +19,22 @@ class GoogleMap extends React.Component {
         google={this.props.google}
         zoom={5}
         style={mapStyles}
-        initialCenter={{ lat: 40.444, lng: -98.176 }}
+        onReady={this.loadGeoJson(this.props.coords)}
         disableDefaultUI={true}
       />
     )
+  }
+
+  autoCenterMap = ({ google }, map) => {
+    this.loadGeoJson(map)
+    // *code continues*
+  }
+
+  loadGeoJson = async map => {
+    // const geojsonRoutes = await this.getRoutes(feed_code)
+    // const geojsonEnvelope = await this.getEnvelope(feed_code)
+    // map.data.addGeoJson(geojsonEnvelope)
+    // map.data.addGeoJson(geojsonRoutes) // # load geojson layer
   }
 }
 
