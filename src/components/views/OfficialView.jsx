@@ -2,7 +2,7 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
-import MessageBoardContainer from "../containers/MessageBoard"
+import MessageBoard from "../containers/MessageBoard"
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
@@ -122,7 +122,7 @@ const OfficialView = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
-
+  console.log("starfruit", props.officialId)
   return (
     <div className="triptych-container">
       <div className="triptych">
@@ -219,7 +219,7 @@ const OfficialView = props => {
 
       {props.funders && <FundingContainer funders={props.funders} />}
 
-      <MessageBoardContainer />
+      <MessageBoard officialId={props.officialId} />
 
       {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed
