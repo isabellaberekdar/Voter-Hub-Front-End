@@ -8,7 +8,9 @@ import "./OfficialView.css"
 import "./SingleSideNav.css"
 import SingleSideNav from "../containers/SingleSideNav"
 
-import AnchorLink from 'react-anchor-link-smooth-scroll'
+import Map from "../containers/Map"
+
+import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
   console.log("parsnip", props)
@@ -208,30 +210,35 @@ const OfficialView = props => {
         </div>
 
         <div className="map"></div>
+        <Map coords={props.coords} />
       </div>
 
       {/* SIDEBAR FLOATS HERE */}
       <div className="sidenav">
         <SingleSideNav />
       </div>
-      
-      <div className="lower-content">
 
+      <div className="lower-content">
         {/* NEWS SECTION */}
         {props.officialObject && (
-          <NewsArticlesContainer official={props.officialObject.official.name} id="news-anchor"/>
+          <NewsArticlesContainer
+            official={props.officialObject.official.name}
+            id="news-anchor"
+          />
         )}
 
         {/* FUNDING SECTION */}
-        {props.funders && <FundingContainer funders={props.funders} id="funding-anchor"/>}
+        {props.funders && (
+          <FundingContainer funders={props.funders} id="funding-anchor" />
+        )}
 
         <h1 id="test"></h1>
 
         {/* MESSAGEBOARD SECTION */}
-        <MessageBoardContainer id="messageboard-anchor"/>
+        <MessageBoardContainer id="messageboard-anchor" />
       </div>
     </div>
   )
 }
 
-export default OfficialView;
+export default OfficialView
