@@ -2,13 +2,14 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
+import FundingView from "../views/FundingView"
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
 import "./OfficialView.css"
 
 const OfficialView = props => {
-  // console.log("parsnip", props)
+  console.log("parsnip", props)
   let output = []
   let divisionId = ""
   let office = {}
@@ -200,7 +201,7 @@ const OfficialView = props => {
         <NewsArticlesContainer official={props.officialObject.official.name} />
       )}
 
-      {props.officialObject && <FundingContainer />}
+      {props.funders && <FundingContainer funders={props.funders} />}
 
       {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed

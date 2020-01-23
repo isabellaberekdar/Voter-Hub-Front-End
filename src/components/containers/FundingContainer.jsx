@@ -10,13 +10,6 @@ class FundingContainer extends React.Component {
     // this.state = {:}
   }
 
-  componentDidMount() {
-    // this.props.getArticles(this.props.official)
-    this.props.getCid(this.props.nameObj).then(() => {
-      this.props.getFunders(this.props.cid.cid)
-    })
-  }
-
   render() {
     // console.log("radicchio", this.props)
 
@@ -31,17 +24,11 @@ FundingContainer.propTypes = {
 const mapState = state => {
   return {
     // articles: state.official.articles
-    nameObj: state.official.nameObj,
-    cid: state.official.cid,
-    funders: state.official.funders
   }
 }
 
 const mapDispatch = dispatch => {
-  return {
-    getCid: nameObj => dispatch(getCidThunk(nameObj)),
-    getFunders: cid => dispatch(getFundersThunk(cid))
-  }
+  return {}
 }
 
 export default connect(mapState, mapDispatch)(FundingContainer)
