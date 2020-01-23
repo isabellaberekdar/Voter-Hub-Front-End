@@ -1,3 +1,4 @@
 .move-content {
-    margin-top: 50px;
+    flex: 1 0 auto;
+    padding-top: 50px;
 }

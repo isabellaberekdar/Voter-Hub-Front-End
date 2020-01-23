@@ -104,3 +104,15 @@ small {
     font-style: italic;
     text-align: center;
 }
+
+.home-content {
+    flex: 1 0 auto;
+}
+
+.home-content RoutesContainer Switch Route :not(#homepage) {
+    padding: 20px;
+}
+
+.home-content:not(#nonhome) {
+    font-family: avenir;
+}
