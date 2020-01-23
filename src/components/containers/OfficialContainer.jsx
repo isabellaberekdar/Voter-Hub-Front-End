@@ -30,6 +30,14 @@ class OfficialContainer extends Component {
     const officialIndex = this.props.match.params.officialIndex
     // console.log("kumquat", division, officeIndex, officialIndex)
 
+    const officialId =
+    division.replace(/\//gi, "%2F").replace(/:/gi, "%3A") +
+    "%2F" +
+    officeIndex +
+    "%2F" +
+    officialIndex
+  // console.log("chicken berry",officialId)
+
     this.props.getOfficial(division, officeIndex, officialIndex)
   }
 

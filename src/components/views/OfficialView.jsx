@@ -2,6 +2,7 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
+import MessageBoardContainer from "../containers/MessageBoard"
 
 // If you need cards or styling, you can uncomment the lines here to import
 // import { OfficialCard } from "..";
@@ -219,12 +220,15 @@ const OfficialView = props => {
 
       {props.officialObject && <FundingContainer />}
 
+      <MessageBoardContainer/>
+
       {/* <div className="disqus-container">
         <Disqus.DiscussionEmbed
           shortname={disqusShortname}
           config={disqusConfig}
         />
       </div> */}
+    
     </div>
   )
 }
