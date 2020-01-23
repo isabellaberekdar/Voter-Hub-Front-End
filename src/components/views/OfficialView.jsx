@@ -129,7 +129,13 @@ const OfficialView = props => {
         <div className="portrait">
           {official.photoUrl ? (
             <center>
-              <img src={official.photoUrl} />
+              <img
+                src={official.photoUrl}
+                onError={e => {
+                  e.target.onerror = null
+                  e.target.src = "/images/placeholder.png"
+                }}
+              />
             </center>
           ) : (
             <center>
