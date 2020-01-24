@@ -2,11 +2,13 @@ import React from "react"
 import Disqus from "disqus-react"
 import NewsArticlesContainer from "../views/NewsArticlesContainer"
 import FundingContainer from "../containers/FundingContainer"
-import MessageBoardContainer from "../containers/MessageBoard"
+import MessageBoard from "../containers/MessageBoard"
 
-// If you need cards or styling, you can uncomment the lines here to import
-// import { OfficialCard } from "..";
 import "./OfficialView.css"
+import "./SingleSideNav.css"
+import SingleSideNav from "../containers/SingleSideNav"
+
+import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
   console.log("parsnip", props)
@@ -122,7 +124,7 @@ const OfficialView = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
-
+  console.log("starfruit", props.officialId)
   return (
     <div className="triptych-container">
       <div className="triptych">
@@ -208,25 +210,28 @@ const OfficialView = props => {
         <div className="map"></div>
       </div>
 
-      <div className="twitter"></div>
+      {/* SIDEBAR FLOATS HERE */}
+      <div className="sidenav">
+        <SingleSideNav />
+      </div>
 
-      <div className="bing-news"></div>
+      <div className="lower-content">
+        {/* NEWS SECTION */}
+        {props.officialObject && (
+          <NewsArticlesContainer
+            official={props.officialObject.official.name}
+            id="news-anchor"
+          />
+        )}
 
-      <p>{output}</p>
-      {props.officialObject && (
-        <NewsArticlesContainer official={props.officialObject.official.name} />
-      )}
+        {/* FUNDING SECTION */}
+        {props.funders && (
+          <FundingContainer funders={props.funders} id="funding-anchor" />
+        )}
 
-      {props.funders && <FundingContainer funders={props.funders} />}
-
-      <MessageBoardContainer />
-
-      {/* <div className="disqus-container">
-        <Disqus.DiscussionEmbed
-          shortname={disqusShortname}
-          config={disqusConfig}
-        />
-      </div> */}
+        <MessageBoard id="messageboard-anchor" officialId={props.officialId} />
+        <h1 id="test"></h1>
+      </div>
     </div>
   )
 }

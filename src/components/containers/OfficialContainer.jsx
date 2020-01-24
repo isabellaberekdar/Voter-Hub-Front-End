@@ -18,7 +18,8 @@ class OfficialContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      stateAbbrev: ""
+      stateAbbrev: "",
+      officialId: ""
     }
   }
 
@@ -42,6 +43,8 @@ class OfficialContainer extends Component {
       officeIndex +
       "%2F" +
       officialIndex
+
+    this.setState({ officialId: officialId })
 
     this.props
       .getOfficial(division, officeIndex, officialIndex)
@@ -149,6 +152,7 @@ class OfficialContainer extends Component {
         <OfficialView
           officialObject={this.props.official}
           funders={this.props.funders}
+          officialId={this.state.officialId}
         />
       </div>
     )

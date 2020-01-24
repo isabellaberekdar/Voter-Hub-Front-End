@@ -1,0 +1,73 @@
+div.nav {
+    width: 180px;
+    border-right: 3px solid rgb(161, 161, 161);
+    padding-right: 20px;
+    text-align: right;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    
+    /* border-image: 
+    linear-gradient(
+      to bottom, 
+      white, 
+      rgba(77, 134, 247, 0.233)
+    ) 1 100%; */
+}
+
+div.nav AnchorLink {
+    font-family: avenir-black;
+    color: rgb(97, 97, 97);
+    font-size: 15px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+div.nav a {
+    font-family: avenir-black;
+    color: rgb(97, 97, 97);
+    font-size: 15px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+div.nav a:hover {
+    color: rgb(97, 97, 97);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+div.nav a:visited {
+    color: rgb(97, 97, 97);
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+div.nav p {
+    display: inline-block;
+    font-weight: bold;
+}
+
+div.nav h2 {
+    font-family: roboto-slab;
+    color: silver;
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+p#headline-circle {
+    color: #4DF76E;
+}
+
+p#funding-circle {
+    color: #CF73F8;
+}
+
+p#messageboard-circle {
+    color: #FFBC60;
+}
+
