@@ -87,9 +87,10 @@ export const storeCoords = coords => {
 export const getOfficialsThunk = searchbarValue => async dispatch => {
   // console.log(address);
   try {
+    const key = process.env.REACT_APP_GOOGLE_KEY
     // Query the api for the officials associated with the given address
     const { data } = await axios.get(
-      `https://www.googleapis.com/civicinfo/v2/representatives?address=${searchbarValue}&key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
+      `https://www.googleapis.com/civicinfo/v2/representatives?address=${searchbarValue}&key=${key}`
     )
     // console.log("cantaloupe", data)
     dispatch(getOfficials(data))
@@ -139,7 +140,9 @@ export const getOfficialThunk = (
   officialIndex
 ) => async dispatch => {
   try {
-    let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=AIzaSyCzgqBJLDzmJQo5Cj7PVBKr7DS8fdH-c8M`
+  const key =  process.env.REACT_APP_GOOGLE_KEY
+
+    let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=${key}`
 
     // Get the official
     const { data } = await axios.get(url)
