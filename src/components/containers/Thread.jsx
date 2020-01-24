@@ -67,9 +67,9 @@ class Thread extends Component {
     let messages = [
       {
         id: 1,
-        user: "Bob",
+        user: "Henry",
         text:
-          "Hi my name is Bob. This is the first message. This is the first message. This is the first message. This is the first message.",
+          "Metropolitan Transportation Authority transit chief Andy Byford resigns",
         messageBoardID: 1,
         createdAt: "2020-01-23T01:58:10.363Z",
         updatedAt: "2020-01-23T15:58:10.457Z",
@@ -77,9 +77,9 @@ class Thread extends Component {
       },
       {
         id: 2,
-        user: "Joe",
+        user: "Emilia",
         text:
-          "Hi my name is Joe. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message.",
+          "This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message.",
         messageBoardID: 1,
         createdAt: "2020-01-23T03:58:10.367Z",
         updatedAt: "2020-01-23T15:58:10.461Z",
@@ -87,9 +87,9 @@ class Thread extends Component {
       },
       {
         id: 1,
-        user: "Alice",
+        user: "Dumaine",
         text:
-          "Hi my name is Alice. This is the third message. Undefined pumpkin.",
+          "Hello, my name is Dumaine. This is the third message. Undefined pumpkin.",
         messageBoardID: 1,
         createdAt: "2020-01-23T06:58:10.363Z",
         updatedAt: "2020-01-23T15:58:16.457Z",
@@ -98,7 +98,7 @@ class Thread extends Component {
       {
         id: 2,
         user: "Ophelia",
-        text: "Hi my name is Ophelia. This is the fourth message.",
+        text: "Hello, my name is Ophelia. This is the fourth message.",
         messageBoardID: 1,
         createdAt: "2020-01-23T15:58:12.367Z",
         updatedAt: "2020-01-23T19:58:12.461Z",
