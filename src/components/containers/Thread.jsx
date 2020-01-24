@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import axios from "axios"
 import { getThreadThunk, postMessageThunk } from "../../store/utilities/message"
 import { MessageCard, MessageCardFirst } from ".."
+import './Thread.css'
 
 class Thread extends Component {
   constructor() {
@@ -64,88 +65,53 @@ class Thread extends Component {
 
   render() {
     console.log(this.props.messages)
-    let messages = [
-      {
-        id: 1,
-        user: "Bob",
-        text:
-          "Hi my name is Bob. This is the first message. This is the first message. This is the first message. This is the first message.",
-        messageBoardID: 1,
-        createdAt: "2020-01-23T01:58:10.363Z",
-        updatedAt: "2020-01-23T15:58:10.457Z",
-        messageboardId: 1
-      },
-      {
-        id: 2,
-        user: "Joe",
-        text:
-          "Hi my name is Joe. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message.",
-        messageBoardID: 1,
-        createdAt: "2020-01-23T03:58:10.367Z",
-        updatedAt: "2020-01-23T15:58:10.461Z",
-        messageboardId: 1
-      },
-      {
-        id: 1,
-        user: "Alice",
-        text:
-          "Hi my name is Alice. This is the third message. Undefined pumpkin.",
-        messageBoardID: 1,
-        createdAt: "2020-01-23T06:58:10.363Z",
-        updatedAt: "2020-01-23T15:58:16.457Z",
-        messageboardId: 1
-      },
-      {
-        id: 2,
-        user: "Ophelia",
-        text: "Hi my name is Ophelia. This is the fourth message.",
-        messageBoardID: 1,
-        createdAt: "2020-01-23T15:58:12.367Z",
-        updatedAt: "2020-01-23T19:58:12.461Z",
-        messageboardId: 1
-      }
-    ]
 
     // DON'T FORGET TO UNCOMMENT THIS
     // this is commented so we can use placeholder hardcoded messages while styling the Threads pages
     // if (this.props.messages) {
     //   // console.log("broccoli", this.props.thread.messages)
-
-    //   messageDisplay = this.props.messages.map(message => (
-    //     <li>
-    //       {message.text}
-    //       {message.user}
-    //       {message.createdAt}
-    //     </li>
-    //   ))
-    // }
+/* 
+       messageDisplay = this.props.messages.map(message => (
+         <li>
+           {message.text}
+           {message.user}
+           {message.createdAt}
+         </li>
+      ))
+    } */
     // REPLACE THIS WITH THE CODE ABOVE
     // messages is a hardcoded array of message objects
-    let messageFirst = (
+/*     let messageFirst = (
       <MessageCardFirst
         message={messages[0]}
         commentCount={messages.length - 1}
       />
-    )
-    let messageDisplay = messages.slice(1).map(message => (
-      <MessageCard message={message} />
-      // <li>
-      //   {message.text}
-      //   {message.user}
-      //   {message.createdAt}
-      // </li>
-    ))
+    ) */
+    let messageDisplay 
+    if (this.props.messages) {
+
+      messageDisplay = this.props.messages.map(message => (
+        <MessageCard message={message} />
+  /*        <li>
+           {message.text}
+           {message.user}
+           {message.createdAt}
+         </li> */
+      ))
+    }
 
     return (
       <div className="thread-container">
-        {messageFirst}
+        <h1 className='thread-subject'>{this.props.threadSubject}</h1>
+       {/*  {messageFirst} */}
         {messageDisplay}
         <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
-            placeholder="Aa"
+            placeholder="Enter message..."
             onChange={this.handleOnChange}
             value={this.state.inputText}
+            className="new-message-form"
           />
         </form>
       </div>
@@ -158,7 +124,8 @@ const mapState = state => {
   return {
     messages: state.message.messages,
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    threadSubject: state.message.threadSubject
   }
 }
 

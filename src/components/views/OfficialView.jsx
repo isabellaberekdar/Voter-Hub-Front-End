@@ -233,7 +233,6 @@ const OfficialView = props => {
         )}
 
         <MessageBoard id="messageboard-anchor" officialId={props.officialId} />
-        <h1 id="test"></h1>
       </div>
     </div>
   )

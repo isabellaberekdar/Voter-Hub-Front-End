@@ -1,0 +1,9 @@
+.thread-subject {
+  font-family: roboto-slab;
+  color: #293B59;
+}
+
+input.new-message-form {
+  width: 700px;
+  margin-bottom: 50px;
+}
