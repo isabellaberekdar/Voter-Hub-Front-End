@@ -11,6 +11,7 @@ import SingleSideNav from "../containers/SingleSideNav"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
+  
   console.log("parsnip", props)
   let output = []
   let divisionId = ""

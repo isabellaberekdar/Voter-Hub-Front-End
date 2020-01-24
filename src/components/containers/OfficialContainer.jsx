@@ -129,7 +129,6 @@ class OfficialContainer extends Component {
 
     return (
       <div>
-        {/* <h1>OfficialContainer here</h1> */}
         {this.props.official && <img src={this.props.official.photoUrl} />}
         <OfficialView
           officialObject={this.props.official}
