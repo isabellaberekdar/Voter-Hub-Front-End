@@ -324,7 +324,8 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   }
 }
 
-const initialState = {}
+const initialState = { coords: { features: [{ geometry: {} }] } }
+// this.props.coords.features[0].geometry
 
 // REDUCER
 const officialReducer = (state = initialState, action) => {

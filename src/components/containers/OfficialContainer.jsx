@@ -153,6 +153,7 @@ class OfficialContainer extends Component {
           officialObject={this.props.official}
           funders={this.props.funders}
           officialId={this.state.officialId}
+          coords={this.props.coords}
         />
       </div>
     )
@@ -170,7 +171,8 @@ const mapState = state => {
     articles: state.official.articles,
     nameObj: state.official.nameObj,
     cid: state.official.cid,
-    funders: state.official.funders
+    funders: state.official.funders,
+    coords: state.official.coords
   }
 }
 
