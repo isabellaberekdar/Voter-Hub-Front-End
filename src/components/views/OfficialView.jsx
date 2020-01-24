@@ -7,11 +7,11 @@ import MessageBoard from "../containers/MessageBoard"
 import "./OfficialView.css"
 import "./SingleSideNav.css"
 import SingleSideNav from "../containers/SingleSideNav"
+import Map from "../containers/Map"
 
 import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
-  
   console.log("parsnip", props)
   let output = []
   let divisionId = ""
@@ -208,12 +208,14 @@ const OfficialView = props => {
           )}
         </div>
 
-        <div className="map"></div>
+        <div className="map">
+          <Map />
+        </div>
       </div>
 
       {/* SIDEBAR FLOATS HERE */}
       <div className="sidenav">
-        <SingleSideNav />
+        <SingleSideNav funding={props.funding} />
       </div>
 
       <div className="lower-content">

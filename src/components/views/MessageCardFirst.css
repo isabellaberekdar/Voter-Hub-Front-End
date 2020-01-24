@@ -1,0 +1,58 @@
+/* Fonts */
+@font-face {
+  font-family: avenir;
+  src: url("../views/fonts/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-medium;
+  src: url("../views/fonts/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-black;
+  src: url("../views/fonts/Avenir-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: roboto-slab;
+  src: url("../views/fonts/RobotoSlab-Regular.ttf");
+}
+
+@font-face {
+  font-family: besley-medium;
+  src: url("../views/fonts/besleymed.otf") format("opentype");
+}
+
+div.first-message {
+}
+
+span.comment-count {
+  margin-left: 20px;
+}
+
+span.comment-count > img {
+  width: 20px;
+  margin-right: 5px;
+}
+
+span.comment-count {
+  font-family: avenir-black;
+  color: gray;
+}
+
+p.first-meta {
+  font-style: italic;
+  color: #b2b2b2;
+  font-family: avenir-medium;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+p.first-text {
+  font-family: roboto-slab;
+  font-weight: bold;
+  color: #293b59;
+  font-size: 25px;
+  margin-top: 5px;
+}

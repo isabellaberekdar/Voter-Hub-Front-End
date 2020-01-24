@@ -48,7 +48,7 @@ div.triptych > div.portrait img {
 }
 
 div.triptych > div.info {
-  width: 50%;
+  width: 40%;
   background-color: white;
   height: 100%;
   padding-left: 50px;
@@ -88,7 +88,7 @@ div.social-media-bar {
 }
 
 div.triptych > div.map {
-  width: 25%;
+  width: 35%;
   background-color: #293b59;
   height: 100%;
 }
@@ -103,4 +103,3 @@ a > img.social-icon {
 div.lower-content {
   margin-left: 200px;
 }
-
