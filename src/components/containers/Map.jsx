@@ -55,7 +55,6 @@ class Map extends Component {
   }
 }
 
-<<<<<<< HEAD
 const mapState = state => {
   return {
     coords: state.official.coords
@@ -67,8 +66,3 @@ const mapState = state => {
 // }
 
 export default connect(mapState)(Map)
-=======
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_PLACES_KEY
-})(GoogleMap)
->>>>>>> 15aa0ee727764942e03db8decb2279af140980f0

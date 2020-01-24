@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
-import MessageBoard from '../views/MessageBoard'
+import MessageBoard from "../views/MessageBoard"
 import {
   getOfficialThunk,
   getPhotoThunk,
@@ -14,14 +14,15 @@ import {
   storeZip,
   storeCoordsThunk
 } from "../../store/utilities/official"
-import Map from './Map'
+import Map from "./Map"
 
 class OfficialContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       stateAbbrev: "",
-      officialId: ""
+      officialId: "",
+      funding: false
     }
   }
 
@@ -50,6 +51,14 @@ class OfficialContainer extends Component {
 
     this.props
       .getOfficial(division, officeIndex, officialIndex)
+      .then(() => {
+        if (
+          this.props.official.office.name.includes("U.S. Senator") ||
+          this.props.official.office.name.includes("U.S. Representative")
+        ) {
+          this.setState({ funding: true })
+        }
+      })
       .then(() => {
         // console.log("pepper", this.props)
         let nameObj = {}
@@ -155,6 +164,7 @@ class OfficialContainer extends Component {
           funders={this.props.funders}
           officialId={this.state.officialId}
           coords={this.props.coords}
+          funding={this.state.funding}
         />
         <MessageBoard />
       </div>

@@ -12,7 +12,6 @@ import Map from "../containers/Map"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
-  
   console.log("parsnip", props)
   let output = []
   let divisionId = ""
@@ -216,7 +215,7 @@ const OfficialView = props => {
 
       {/* SIDEBAR FLOATS HERE */}
       <div className="sidenav">
-        <SingleSideNav />
+        <SingleSideNav funding={props.funding} />
       </div>
 
       <div className="lower-content">
