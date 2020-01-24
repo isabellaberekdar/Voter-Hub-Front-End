@@ -66,22 +66,11 @@ class MessageBoard extends Component {
   }
   //life cycle: constructor, render, componentDidMount, re-render
   render() {
- 
 
-    console.log("peach", this.props)
-    let officialId = 1
-    if (this.state.msgBoardArray.length > 0) {
-      var threads = this.state.msgBoardArray.map(msgBoard => (
+    if (this.props.threads.length > 0) {
+      var threads = this.props.threads.map(thread => (
         <div>
-          {msgBoard.officialId === officialId ? (
-            <li>
-              <a href={`/thread/${msgBoard.id}`}>{msgBoard.subject}</a>
-              <br />
-              Thread ID: {msgBoard.id} <br />
-            </li>
-          ) : (
-            <div></div>
-          )}
+          {thread.subject}
         </div>
       ))
     }

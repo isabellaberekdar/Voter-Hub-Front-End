@@ -95,7 +95,7 @@ export const getOfficialsThunk = searchbarValue => async dispatch => {
     // console.log("cantaloupe", data)
     dispatch(getOfficials(data))
   } catch (error) {
-    console.log("Error in getOfficialsThunk:", error)
+    console.log(error)
   }
 }
 
@@ -140,8 +140,7 @@ export const getOfficialThunk = (
   officialIndex
 ) => async dispatch => {
   try {
-  const key =  process.env.REACT_APP_GOOGLE_KEY
-
+    const key = process.env.REACT_APP_GOOGLE_KEY
     let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=${key}`
 
     // Get the official
