@@ -33,7 +33,6 @@ class NavbarContainer extends Component {
             </div>
             <div className="navbar-links">
                 <Link to="/">Home</Link>  
-                <Link>Your Stream</Link>  
                 {logInLink}
                 {logOutLink}
                 {logInOrOut} 

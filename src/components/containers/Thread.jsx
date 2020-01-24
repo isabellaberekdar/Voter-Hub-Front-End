@@ -3,7 +3,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
 import { getThreadThunk, postMessageThunk } from "../../store/utilities/message"
-import { MessageCard } from ".."
+import { MessageCard, MessageCardFirst } from ".."
+import './Thread.css'
 
 class Thread extends Component {
   constructor() {
@@ -25,7 +26,7 @@ class Thread extends Component {
   handleOnSubmit = e => {
     e.preventDefault()
     console.log(
-      "penguinades",
+      "acai",
       this.props.user.email,
       this.state.inputText,
       this.props.messages
@@ -56,36 +57,61 @@ class Thread extends Component {
   }
 
   componentDidMount() {
-
     const id = this.props.match.params.threadId
     this.props.getThread(id)
   }
 
-  componentDidUpdate(prevProps) {
-  }
+  componentDidUpdate(prevProps) {}
 
   render() {
     console.log(this.props.messages)
-    let messageDisplay
+
+    // DON'T FORGET TO UNCOMMENT THIS
+    // this is commented so we can use placeholder hardcoded messages while styling the Threads pages
+    // if (this.props.messages) {
+    //   // console.log("broccoli", this.props.thread.messages)
+/* 
+       messageDisplay = this.props.messages.map(message => (
+         <li>
+           {message.text}
+           {message.user}
+           {message.createdAt}
+         </li>
+      ))
+    } */
+    // REPLACE THIS WITH THE CODE ABOVE
+    // messages is a hardcoded array of message objects
+/*     let messageFirst = (
+      <MessageCardFirst
+        message={messages[0]}
+        commentCount={messages.length - 1}
+      />
+    ) */
+    let messageDisplay 
     if (this.props.messages) {
-      //console.log("brocali", this.props.thread.messages)
 
       messageDisplay = this.props.messages.map(message => (
-/*         {this.props.threadSubject}
- */        <li>{message.text}</li>
+        <MessageCard message={message} />
+  /*        <li>
+           {message.text}
+           {message.user}
+           {message.createdAt}
+         </li> */
       ))
     }
 
     return (
-      <div>
-        {this.props.threadSubject}
+      <div className="thread-container">
+        <h1 className='thread-subject'>{this.props.threadSubject}</h1>
+       {/*  {messageFirst} */}
         {messageDisplay}
         <form onSubmit={this.handleOnSubmit}>
           <input
             type="text"
-            placeholder="Aa"
+            placeholder="Enter message..."
             onChange={this.handleOnChange}
             value={this.state.inputText}
+            className="new-message-form"
           />
         </form>
       </div>

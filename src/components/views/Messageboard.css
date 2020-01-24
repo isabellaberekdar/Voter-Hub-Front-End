@@ -24,8 +24,11 @@
   src: url("../views/fonts/besleymed.otf") format("opentype");
 }
 
-h2#msgboard-title {
-    
+h3.msgboard-title {
+  color: #293B59;
+  font-family: avenir-black;
+  font-size: 22px;
+  margin-left: 80px;
 }
 
 .message-board {
@@ -80,4 +83,8 @@ h2#msgboard-title {
 .new-form > button {
   margin-top: 20px;
   width: 130px;
+}
+
+p#messageboard-anchor.down-triangle {
+  color: rgb(255, 199, 94);
 }

@@ -85,7 +85,8 @@ class MessageBoard extends Component {
 
     return (
       <div className='message-board'>
-        <h3>Messageboard</h3>
+        <p id="messageboard-anchor" class="down-triangle">▼</p>
+        <h3 className="msgboard-title">Messageboard</h3>
         {threads}
          <div className='new-thread'>
          <h3>New Thread</h3>
