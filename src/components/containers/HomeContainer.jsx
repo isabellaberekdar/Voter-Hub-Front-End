@@ -10,20 +10,23 @@ class HomeContainer extends Component {
 
     this.state = {
       placeholder: "Enter Address...",
-      searchbarValue: ""
+      searchbarValue: "",
     }
   }
 
   componentDidMount() {}
 
   handleChange = event => {
-    this.setState({ searchbarValue: event.target.value })
+    this.setState({ 
+      searchbarValue: event.target.value,
+    })
   }
 
   handleSubmit = event => {
     event.preventDefault()
     // console.log("bar", this.state.searchbarValue)
     this.props.getOfficialsThunk(this.state.searchbarValue)
+
   }
 
   focusFunc = () => {
@@ -44,6 +47,30 @@ class HomeContainer extends Component {
     }
   }
 
+  handleScriptLoad = () => {
+    /*global google*/
+    this.autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("address-entry"),
+    )
+    this.autocomplete.setFields(["address_components", "formatted_address"])
+    this.autocomplete.addListener("place_changed", this.handleSelectAddress)
+  }
+
+  handleSelectAddress = () => {
+    const addressObject = this.autocomplete.getPlace()
+    const address = addressObject.address_components
+
+    if (address) {
+      // Set State
+      this.setState({
+        searchbarValue: addressObject.formatted_address
+      })
+    }
+  }
+
+  updateAddress = () => {
+    console.log('Button pushed')
+  }
   render() {
     console.log(this.props.store)
     return (
@@ -56,6 +83,9 @@ class HomeContainer extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           store={this.props.store}
+          handleScriptLoad={this.handleScriptLoad}
+          handleSelectAddress={this.handleSelectAddress}
+          updateAddress={this.updateAddress}
         />
       </div>
     )
@@ -73,7 +103,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getOfficialsThunk: searchbarValue =>
-      dispatch(getOfficialsThunk(searchbarValue))
+      dispatch(getOfficialsThunk(searchbarValue)),
   }
 }
 
