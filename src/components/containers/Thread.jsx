@@ -25,7 +25,7 @@ class Thread extends Component {
   handleOnSubmit = e => {
     e.preventDefault()
     console.log(
-      "penguinades",
+      "acai",
       this.props.user.email,
       this.state.inputText,
       this.props.messages
@@ -68,7 +68,8 @@ class Thread extends Component {
       {
         id: 1,
         user: "Bob",
-        text: "Hi my name is Bob. This is the first message.",
+        text:
+          "Hi my name is Bob. This is the first message. This is the first message. This is the first message. This is the first message.",
         messageBoardID: 1,
         createdAt: "2020-01-23T01:58:10.363Z",
         updatedAt: "2020-01-23T15:58:10.457Z",
@@ -77,7 +78,8 @@ class Thread extends Component {
       {
         id: 2,
         user: "Joe",
-        text: "Hi my name is Joe. This is the second message.",
+        text:
+          "Hi my name is Joe. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message. This is the second message.",
         messageBoardID: 1,
         createdAt: "2020-01-23T03:58:10.367Z",
         updatedAt: "2020-01-23T15:58:10.461Z",
@@ -119,7 +121,12 @@ class Thread extends Component {
     // }
     // REPLACE THIS WITH THE CODE ABOVE
     // messages is a hardcoded array of message objects
-    let messageFirst = <MessageCardFirst message={messages[0]} />
+    let messageFirst = (
+      <MessageCardFirst
+        message={messages[0]}
+        commentCount={messages.length - 1}
+      />
+    )
     let messageDisplay = messages.slice(1).map(message => (
       <MessageCard message={message} />
       // <li>
@@ -130,7 +137,7 @@ class Thread extends Component {
     ))
 
     return (
-      <div>
+      <div className="thread-container">
         {messageFirst}
         {messageDisplay}
         <form onSubmit={this.handleOnSubmit}>

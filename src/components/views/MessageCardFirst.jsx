@@ -33,6 +33,10 @@ const MessageCardFirst = props => {
       </p>
 
       <p className="first-text">{props.message.text}</p>
+      <span className="comment-count">
+        <img src="/images/yellow-comment.svg" />
+        {props.commentCount} comments
+      </span>
     </div>
   )
 }

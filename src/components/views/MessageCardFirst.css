@@ -27,8 +27,32 @@
 div.first-message {
 }
 
-div.first-meta {
+span.comment-count {
+  margin-left: 20px;
 }
 
-div.first-text {
+span.comment-count > img {
+  width: 20px;
+  margin-right: 5px;
+}
+
+span.comment-count {
+  font-family: avenir-black;
+  color: gray;
+}
+
+p.first-meta {
+  font-style: italic;
+  color: #b2b2b2;
+  font-family: avenir-medium;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+p.first-text {
+  font-family: roboto-slab;
+  font-weight: bold;
+  color: #293b59;
+  font-size: 25px;
+  margin-top: 5px;
 }
