@@ -61,7 +61,7 @@ export const getThreadThunk = threadId => async dispatch => {
   // console.log(address);
   try {
     console.log("penguin berry")
-    // Query the api for the officials associated with the given address
+    // Get all messages associated with the threadId
     const { data } = await axios.get(
       `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
     )

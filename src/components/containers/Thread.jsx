@@ -56,11 +56,16 @@ class Thread extends Component {
   }
 
   componentDidMount() {
+
     const id = this.props.match.params.threadId
     this.props.getThread(id)
   }
 
+  componentDidUpdate(prevProps) {
+  }
+
   render() {
+    console.log(this.props.messages)
     let messageDisplay
     if (this.props.messages) {
       //console.log("brocali", this.props.thread.messages)
