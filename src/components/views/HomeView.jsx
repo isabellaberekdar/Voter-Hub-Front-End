@@ -1,7 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { OfficialCard } from ".."
-import SearchBar from './SearchBar'
 import "./Home.css"
 
 const HomeView = props => {
@@ -65,22 +64,23 @@ const HomeView = props => {
             how to contact them, their funding records,
             and their latest social media and news mentions!
           </h3>
-          <SearchBar 
-             placeholderText={props.placeholderText}
-             focusFunc={props.focusFunc}
-             blurFunc={props.blurFunc}
-             handleChange={props.handleChange}
-             handleSubmit={props.handleSubmit}
-             address_input={props.address_input}
-             handleScriptLoad={props.handleScriptLoad}
-             handleLocationSelect={props.handleLocationSelect}
-          />
-{/*           <button onClick={props.updateAddress}>{'Save this as your address'}</button> 
- */}        </div>
+          <form onSubmit={props.handleSubmit}>
+            <input
+              type="text"
+              name="address"
+              placeholder={props.placeholderText}
+              onFocus={props.focusFunc}
+              onBlur={props.blurFunc}
+              onChange={props.handleChange}
+              value={props.address_input}
+              id="address-entry"
+            />
+          </form>
+        </div>
       </div>
       <div className="home-content">
         <center>{officialCards}</center>
-        <h3 id="join-discussion-title">Join the Discussion..</h3>
+        <h3 id="join-discussion-title">Join the Discussion.</h3>
         <div className="row">
           <div className="column" id="one">
             <img src="/images/news.png" alt="news icon" width="50"/> <br></br>
