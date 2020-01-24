@@ -1,0 +1,68 @@
+/* Fonts */
+@font-face {
+  font-family: avenir;
+  src: url("../views/fonts/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-medium;
+  src: url("../views/fonts/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-black;
+  src: url("../views/fonts/Avenir-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: roboto-slab;
+  src: url("../views/fonts/RobotoSlab-Regular.ttf");
+}
+
+@font-face {
+  font-family: besley-medium;
+  src: url("../views/fonts/besleymed.otf") format("opentype");
+}
+
+div.message-card {
+  /* border-style: solid;
+  border-radius: 20px; */
+  width: 900px;
+
+  margin: 10px;
+  margin-left: 100px;
+  padding: 15px;
+
+  margin: 20px;
+  margin-bottom: 5px;
+
+  border-left: 5px solid rgb(255, 199, 94);
+  /* border-radius: 7px; */
+}
+
+div.message-meta {
+  display: flex;
+  align-items: flex-end;
+}
+
+div.message-meta > p {
+  margin: 5px;
+  margin-left: 0px;
+  font-family: avenir;
+  font-size: 20px;
+}
+
+div.message-meta > p.username {
+  color: #293b59;
+  font-family: avenir-black;
+}
+
+div.message-meta > p.datetime {
+  color: #b2b2b2;
+  font-family: avenir-black;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+p.message-text {
+}

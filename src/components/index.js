@@ -24,6 +24,7 @@ export { default as MessageBoardCollection } from "./views/MessageBoardCollectio
 export { default as MessageBoardContainer } from "./containers/MessageBoard"
 export { default as Thread } from "./containers/Thread"
 export { default as MessageCard } from "./views/MessageCard"
+export { default as MessageCardFirst } from "./views/MessageCardFirst"
 // export { default as MessageBoardCollectionContainer } from "./containers/MessageBoardCollection";
 
 export { default as Map } from "./containers/Map"

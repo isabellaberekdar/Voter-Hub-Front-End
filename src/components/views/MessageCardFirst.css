@@ -1,0 +1,34 @@
+/* Fonts */
+@font-face {
+  font-family: avenir;
+  src: url("../views/fonts/AvenirLTStd-Book.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-medium;
+  src: url("../views/fonts/AvenirLTStd-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: avenir-black;
+  src: url("../views/fonts/Avenir-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: roboto-slab;
+  src: url("../views/fonts/RobotoSlab-Regular.ttf");
+}
+
+@font-face {
+  font-family: besley-medium;
+  src: url("../views/fonts/besleymed.otf") format("opentype");
+}
+
+div.first-message {
+}
+
+div.first-meta {
+}
+
+div.first-text {
+}

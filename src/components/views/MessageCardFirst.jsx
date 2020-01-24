@@ -1,8 +1,8 @@
 import React from "react"
 
-import "./MessageCard.css"
+import "./MessageCardFirst.css"
 
-const MessageCard = props => {
+const MessageCardFirst = props => {
   // const { user, text } = props;
 
   // var today = new Date();
@@ -27,19 +27,12 @@ const MessageCard = props => {
     ("0" + datetime.getMinutes()).slice(-2)
 
   return (
-    <div className="message-card">
-      <div className="message-meta">
-        <p className="username">
-          <b>{props.message.user}</b>
-        </p>
-        <p className="datetime">
-          <i>
-            posted {dateString} at {timeString}
-          </i>
-        </p>
-      </div>
+    <div className="first-message">
+      <p className="first-meta">
+        Posted by {props.message.user} {dateString} at {timeString}
+      </p>
 
-      <p className="message-text">{props.message.text}</p>
+      <p className="first-text">{props.message.text}</p>
     </div>
   )
 }
@@ -49,4 +42,4 @@ const MessageCard = props => {
 //   text: PropTypes.string.isRequired,
 // };
 
-export default MessageCard
+export default MessageCardFirst
