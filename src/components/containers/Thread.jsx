@@ -71,13 +71,14 @@ class Thread extends Component {
       //console.log("brocali", this.props.thread.messages)
 
       messageDisplay = this.props.messages.map(message => (
-        <li>{message.text}</li>
+/*         {this.props.threadSubject}
+ */        <li>{message.text}</li>
       ))
     }
 
     return (
       <div>
-        THREAD HERE
+        {this.props.threadSubject}
         {messageDisplay}
         <form onSubmit={this.handleOnSubmit}>
           <input
@@ -97,7 +98,8 @@ const mapState = state => {
   return {
     messages: state.message.messages,
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    threadSubject: state.message.threadSubject
   }
 }
 
