@@ -24,10 +24,10 @@ const postMessage = message => {
   }
 }
 
-const getThread = messages => {
+const getThread = (messages, subject) => {
   return {
     type: GET_THREAD,
-    payload: messages
+    payload: {messages, subject}
   }
 }
 
@@ -65,8 +65,8 @@ export const getThreadThunk = threadId => async dispatch => {
     const { data } = await axios.get(
       `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
     )
-    console.log("cantaloupe berry", data.messages)
-    dispatch(getThread(data.messages))
+    console.log("cantaloupe berry", data)
+    dispatch(getThread(data.messages, data.subject))
   } catch (error) {
     console.log("Error in getThreadThunk:", error)
   }
@@ -113,7 +113,8 @@ const officialReducer = (state = initialState, action) => {
     case GET_THREAD:
       return {
         ...state,
-        messages: action.payload
+        messages: action.payload.messages,
+        threadSubject: action.payload.subject
       }
     case POST_MESSAGE:
       console.log("chicken", state.messages)

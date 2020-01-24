@@ -24,28 +24,77 @@
   src: url("../views/fonts/besleymed.otf") format("opentype");
 }
 
-h2#msgboard-title {
-    
+h3.msgboard-title {
+  color: #293B59;
+  font-family: avenir-black;
+  font-size: 22px;
+  margin-left: 80px;
 }
 
 .message-board {
   background-color: rgba(245, 245, 245, 80);
   border-top: 5px solid rgb(255, 199, 94);
-  padding-left: 40px;
+  padding-left:80px;
 }
 
 .thread {
   background-color: white;
   margin-bottom: 10px; 
   border: 1px solid rgb(161, 161, 161);
-  padding: 20px;
+  padding: 10px;
+  width: 800px;
 }
 
 .thread > a {
   font-family: avenir-black;
   text-decoration: none;
   color: #4d86f7;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
 
+.thread > span {
+  font-size: 12px;
+}
+
+.new-thread {
+  display: flex;
+  align-items: center;
+}
+
+.new-thread > button{
+  margin-left: 20px;
+  height: 30px;
+}
+
+.new-form {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+}
+
+.new-form > input {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+
+
+}
+.new-form > button {
+  margin-top: 20px;
+  width: 130px;
+  height: 40px;
+  background-color: rgb(255, 175, 83);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: none;
+  font-weight: 700;
+
+  font-family: roboto-slab;
+}
+
+p#messageboard-anchor.down-triangle {
+  color: rgb(255, 199, 94);
 }

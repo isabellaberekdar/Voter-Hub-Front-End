@@ -3,7 +3,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
 import { getThreadThunk, postMessageThunk } from "../../store/utilities/message"
-import { MessageCard } from ".."
+import { MessageCard, MessageCardFirst } from ".."
+import './Thread.css'
 
 class Thread extends Component {
   constructor() {
@@ -25,7 +26,7 @@ class Thread extends Component {
   handleOnSubmit = e => {
     e.preventDefault()
     console.log(
-      "penguinades",
+      "acai",
       this.props.user.email,
       this.state.inputText,
       this.props.messages
@@ -56,36 +57,70 @@ class Thread extends Component {
   }
 
   componentDidMount() {
-
     const id = this.props.match.params.threadId
     this.props.getThread(id)
   }
 
-  componentDidUpdate(prevProps) {
-  }
+  componentDidUpdate(prevProps) {}
 
   render() {
-    console.log(this.props.messages)
-    let messageDisplay
+    // console.log(this.props.messages)
+
+    // DON'T FORGET TO UNCOMMENT THIS
+    // this is commented so we can use placeholder hardcoded messages while styling the Threads pages
+    // if (this.props.messages) {
+    //   // console.log("broccoli", this.props.thread.messages)
+/* 
+       messageDisplay = this.props.messages.map(message => (
+         <li>
+           {message.text}
+           {message.user}
+           {message.createdAt}
+         </li>
+      ))
+    } */
+    // REPLACE THIS WITH THE CODE ABOVE
+    // messages is a hardcoded array of message objects
+/*     let messageFirst = (
+      <MessageCardFirst
+        message={messages[0]}
+        commentCount={messages.length - 1}
+      />
+    ) */
+    let messageDisplay 
     if (this.props.messages) {
-      //console.log("brocali", this.props.thread.messages)
 
       messageDisplay = this.props.messages.map(message => (
-        <li>{message.text}</li>
+        <MessageCard message={message} />
+  /*        <li>
+           {message.text}
+           {message.user}
+           {message.createdAt}
+         </li> */
       ))
     }
 
     return (
-      <div>
-        THREAD HERE
+      <div className="thread-container">
+        <h1 className='thread-subject'>{this.props.threadSubject}</h1>
+       {/*  {messageFirst} */}
         {messageDisplay}
-        <form onSubmit={this.handleOnSubmit}>
-          <input
-            type="text"
-            placeholder="Aa"
-            onChange={this.handleOnChange}
-            value={this.state.inputText}
-          />
+        <form className='new-message-form' onSubmit={this.handleOnSubmit}>
+            <p>Post New Comment</p>
+            <textarea rows="5" cols="50" required onChange={this.handleOnChange}>
+            </textarea>
+{/* 
+            <input
+              id='subject'
+              type='text'
+              placeholder='Enter a message'
+              required
+              value={this.state.inputText}
+              handleSubjectChange={this.state.handleSubjectChange}
+              onChange={this.handleOnChange}
+              
+              ></input> */}
+              <button type='subnmit'>{'Post'}</button>
         </form>
       </div>
     )
@@ -97,7 +132,8 @@ const mapState = state => {
   return {
     messages: state.message.messages,
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    threadSubject: state.message.threadSubject
   }
 }
 
