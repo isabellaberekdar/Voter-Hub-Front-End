@@ -1,6 +1,7 @@
 import MessageBoardCollection from ".."
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import '../views/Messageboard.css'
 import axios from "axios"
 import {
   getMessageBoardThunk,
@@ -67,16 +68,16 @@ class MessageBoard extends Component {
   //life cycle: constructor, render, componentDidMount, re-render
   render() {
 
-    if (this.props.threads.length > 0) {
+    if (this.props.threads && this.props.threads.length > 0) {
       var threads = this.props.threads.map(thread => (
-        <div>
-          {thread.subject}
+        <div className='thread'>
+          <a href={`/thread/${thread.id}`}>{thread.subject}</a>
         </div>
       ))
     }
 
     return (
-      <div>
+      <div className='message-board'>
         {threads}
         <form onSubmit={this.handleFormSubmit}>
           <h3>New Thread</h3>
