@@ -38,17 +38,19 @@ const postThread = newThread => {
   }
 }
 
-//return all the threadsnpm
-export const getMessageBoardThunk = messageBoardId => async dispatch => {
+//return all the threads belonging to the official with officialId
+export const getMessageBoardThunk = officialId => async dispatch => {
   // console.log(address);
   try {
-    console.log("blueberry")
     // Query the api for the officials associated with the given address
     const { data } = await axios.get(
-      `http://localhost:5000/api/messages/messageboard/${messageBoardId}`
+      `http://localhost:5000/api/messages/messageboard`
     )
-    console.log("cantaloupe", data)
-    dispatch(getMessageBoard(data))
+    console.log('**************************', data)
+    console.log(officialId)
+    const filteredData = data.filter(thread => thread.officialId == officialId)
+    console.log('filtered data:', filteredData)
+    dispatch(getMessageBoard(filteredData))
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error)
   }
@@ -59,7 +61,7 @@ export const getThreadThunk = threadId => async dispatch => {
   // console.log(address);
   try {
     console.log("penguin berry")
-    // Query the api for the officials associated with the given address
+    // Get all messages associated with the threadId
     const { data } = await axios.get(
       `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
     )
@@ -72,10 +74,7 @@ export const getThreadThunk = threadId => async dispatch => {
 
 export const postMessageThunk = message => async dispatch => {
   try {
-    let newMessage = await axios.post(
-      "http://localhost:5000/api/messages",
-      message
-    )
+    let newMessage = await axios.post("http://localhost:5000/api/messages", message)
     console.log("pikachu", newMessage.datas)
     dispatch(postMessage(newMessage.data))
   } catch (error) {
@@ -86,16 +85,14 @@ export const postMessageThunk = message => async dispatch => {
 //info has thread and message
 export const postThreadThunk = info => async dispatch => {
   try {
-    // const headers = {
-    //   "Content-Type": "application/json"
-    // }
-    let { data } = await axios.post(
-      "http://localhost:5000/api/messages/messageboard",
-      info
-      // {
-      //   headers: headers
-      // }
-    ) //in backend, thread is returned
+    const headers = {
+      "Content-Type": "application/json"
+    }
+    console.log("Australia", info)
+    let { data } = await axios.post("http://localhost:5000/api/messages/messageboard", info, {
+      headers: headers
+    }) 
+    //new thread object is returned
     console.log("Pichu", data)
     dispatch(postThread(data))
   } catch (error) {

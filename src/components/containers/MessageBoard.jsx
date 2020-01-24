@@ -1,11 +1,9 @@
 import MessageBoardCollection from ".."
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import "../views/Messageboard.css"
 import axios from "axios"
-import {
-  getMessageBoardThunk,
-  postThreadThunk
-} from "../../store/utilities/message"
+import { getMessageBoardThunk, postThreadThunk } from "../../store/utilities/message"
 
 class MessageBoard extends Component {
   constructor() {
@@ -15,13 +13,11 @@ class MessageBoard extends Component {
       inputText: "",
       messageboardID: "",
       subjectInput: "",
-      messageInput: ""
+      messageInput: "",
+      newThread: false
     }
   }
 
-  handleChange = event => {
-    this.setState({ inputText: event.target.value })
-  }
   handleSubjectChange = event => {
     this.setState({ subjectInput: event.target.value })
   }
@@ -29,56 +25,22 @@ class MessageBoard extends Component {
     this.setState({ messageInput: event.target.value })
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
-    // console.log("submitted");
-    console.log("id", this.state.messageboardID)
-    let message = {
-      user: "cats@gmail.cpom",
-      text: "sucessful post",
-      // user: this.props.userEmail,
-      // text: this.state.inputText,
-      // messageboardID: this.state.messageboardID
-      messageboardID: 1
-    }
-    // axios.post("http://localhost:5000/api/messages", { message })
-    //     .then(res => {
-    //         console.log(res);
-    //         console.log("posted")
-    //     })
-    axios
-      .post("http://localhost:5000/api/messages", {
-        user: "asdass",
-        text: "scc",
-        messageboardID: 1
-      })
-      .then(function(response) {
-        console.log(response)
-      })
-      .catch(function(error) {
-        console.log(error)
-      })
-  }
-
   handleFormSubmit = e => {
     e.preventDefault()
-    // axios.post("http://localhost:5000/api/messages/messageboard", payload)
-    console.log("Whale Pancake")
     if (this.props.isLoggedIn) {
       let data = {
         threadInfo: {
           officialId: this.props.officialId,
-          subject: this.state.subject
+          subject: this.state.subjectInput
         },
         messageInfo: {
-          id: this.props.userId,
           user: this.props.userEmail,
           text: this.state.messageInput
         }
       }
-      this.props.postThread()
+      this.props.postThread(data)
     } else {
-      alert("User not logged in!")
+      alert("You must log in to make a post.")
     }
   }
 
@@ -89,55 +51,62 @@ class MessageBoard extends Component {
   }
 
   componentDidMount() {
-    this.getMessageBoards()
-    this.props.getMessageBoard(1)
+    console.log(this.props)
+    this.props.getMessageBoard(this.props.officialId)
+    // get all threads where the officialId is the id of this official
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.officialId != this.props.officialId) {
+      this.props.getMessageBoard(this.props.officialId)
+    }
   }
   //life cycle: constructor, render, componentDidMount, re-render
+  toggleForm = () => {
+    this.setState({ newThread: !this.state.newThread })
+  }
   render() {
-    console.log("peach", this.props.officialId)
-    let officialId = 1
-    if (this.state.msgBoardArray.length > 0) {
-      var threads = this.state.msgBoardArray.map(msgBoard => (
-        <div>
-          {msgBoard.officialId === officialId ? (
-            <li>
-              <a href={`/thread/${msgBoard.id}`}>{msgBoard.subject}</a>
-              <br />
-              Thread ID: {msgBoard.id} <br />
-            </li>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      ))
+    if (this.props.threads && this.props.threads.length > 0) {
+      var threads = this.props.threads.map(thread => {
+        // parse time created string into date and time
+        const created = thread.createdAt.split("T")
+        const date = thread.createdAt.split("T")[0]
+        const time = thread.createdAt.split("T")[1].split(".")[0]
+        return (
+          <div className='thread'>
+            <span className='posted-by'>
+              Posted on {date} at {time}{" "}
+            </span>
+            <a href={`/thread/${thread.id}`}>{thread.subject}</a>
+          </div>
+        )
+      })
     }
 
     return (
-      <div>
+      <div className='message-board'>
+        <h3>Messageboard</h3>
         {threads}
-        <form onSubmit={this.handleFormSubmit}>
-          <h3>New Thread</h3>
-          Subject
-          <input
-            id="subject"
-            type="text"
-            placeholder="Coconut Human"
-            required
-            subjectInput={this.state.subjectInput}
-            handleSubjectChange={this.state.handleSubjectChange}
-          ></input>
-          <br />
-          Message
-          <input
-            id="message"
-            type="text"
-            placeholder="Aa"
-            required
-            messageInput={this.state.messageInput}
-          ></input>
-          <br />
-          <button type="subnmit">Submit</button>
-        </form>
+         <div className='new-thread'>
+         <h3>New Thread</h3>
+          <button onClick={this.toggleForm}>{'New thread +'}</button>
+         </div>
+        
+        {this.state.newThread ? (
+          <form className='new-form' onSubmit={this.handleFormSubmit}>
+            Subject
+            <input
+              id='subject'
+              type='text'
+              placeholder='Thread subject'
+              required
+              subjectInput={this.state.subjectInput}
+              handleSubjectChange={this.state.handleSubjectChange}
+              onChange={this.handleSubjectChange}
+              ></input>
+            <button type='subnmit'>{'Create new thread'}</button>
+          </form>
+        ) : null}
       </div>
     )
   }
@@ -148,7 +117,8 @@ const mapState = state => {
   return {
     userEmail: state.user.email,
     userId: state.user.id,
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    threads: state.message.threads
   }
 }
 

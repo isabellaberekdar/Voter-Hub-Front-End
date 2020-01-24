@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import OfficialView from "../views/OfficialView"
+import MessageBoard from '../views/MessageBoard'
 import {
   getOfficialThunk,
   getPhotoThunk,
@@ -13,6 +14,7 @@ import {
   storeZip,
   storeCoordsThunk
 } from "../../store/utilities/official"
+import Map from './Map'
 
 class OfficialContainer extends Component {
   constructor(props) {
@@ -147,7 +149,6 @@ class OfficialContainer extends Component {
 
     return (
       <div>
-        {/* <h1>OfficialContainer here</h1> */}
         {this.props.official && <img src={this.props.official.photoUrl} />}
         <OfficialView
           officialObject={this.props.official}
@@ -155,6 +156,7 @@ class OfficialContainer extends Component {
           officialId={this.state.officialId}
           coords={this.props.coords}
         />
+        <MessageBoard />
       </div>
     )
   }

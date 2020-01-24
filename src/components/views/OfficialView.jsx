@@ -12,6 +12,7 @@ import Map from "../containers/Map"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
+  
   console.log("parsnip", props)
   let output = []
   let divisionId = ""
