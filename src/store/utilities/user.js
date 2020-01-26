@@ -43,7 +43,7 @@ export const updateUserThunk = updatedUserInfo => async dispatch => {
 
 export const me = () => async dispatch => {
   try {
-    const res = await axios.get("http://localhost:5000/auth/me", { withCredentials: true })
+    const res = await axios.get("http://voterhub.herokuapp.com/auth/me", { withCredentials: true })
     dispatch(getUser(res.data || {}))
   } catch (err) {
     console.error(err)
@@ -54,7 +54,7 @@ export const auth = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(
-      `http://localhost:5000/auth/${method}`,
+      `http://voterhub.herokuapp.com/auth/${method}`,
       { email, password },
       { withCredentials: true }
     )
@@ -71,7 +71,7 @@ export const auth = (email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    await axios.delete("http://localhost:5000/auth/logout", { withCredentials: true })
+    await axios.delete("http://voterhub.herokuapp.com/auth/logout", { withCredentials: true })
     dispatch(removeUser())
   } catch (err) {
     console.error(err)

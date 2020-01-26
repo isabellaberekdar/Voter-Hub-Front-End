@@ -44,7 +44,7 @@ export const getMessageBoardThunk = officialId => async dispatch => {
   try {
     // Query the api for the officials associated with the given address
     const { data } = await axios.get(
-      `http://localhost:5000/api/messages/messageboard`
+      `http://voterhub.herokuapp.com/api/messages/messageboard`
     )
     console.log('**************************', data)
     console.log(officialId)
@@ -63,7 +63,7 @@ export const getThreadThunk = threadId => async dispatch => {
     console.log("penguin berry")
     // Get all messages associated with the threadId
     const { data } = await axios.get(
-      `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
+      `http://voterhub.herokuapp.com/api/messages/messageboard/thread/${threadId}`
     )
     console.log("cantaloupe berry", data)
     dispatch(getThread(data.messages, data.subject))
@@ -74,7 +74,7 @@ export const getThreadThunk = threadId => async dispatch => {
 
 export const postMessageThunk = message => async dispatch => {
   try {
-    let newMessage = await axios.post("http://localhost:5000/api/messages", message)
+    let newMessage = await axios.post("http://voterhub.herokuapp.com/api/messages", message)
     console.log("pikachu", newMessage.datas)
     dispatch(postMessage(newMessage.data))
   } catch (error) {
@@ -89,7 +89,7 @@ export const postThreadThunk = info => async dispatch => {
       "Content-Type": "application/json"
     }
     console.log("Australia", info)
-    let { data } = await axios.post("http://localhost:5000/api/messages/messageboard", info, {
+    let { data } = await axios.post("http://voterhub.herokuapp.com/api/messages/messageboard", info, {
       headers: headers
     }) 
     //new thread object is returned

@@ -36,7 +36,7 @@ class MessageBoardCollectionContainer extends Component {
         //         console.log(res);
         //         console.log("posted")
         //     })
-        axios.post('http://localhost:5000/api/messages', {
+        axios.post('http://voterhub.herokuapp.com/api/messages', {
             user: "asdass",
             text: "scc",
             messageboardID: 1
@@ -51,7 +51,7 @@ class MessageBoardCollectionContainer extends Component {
     }
 
     getMessageBoards = async () => {    
-        var res = await axios.get("http://localhost:5000/api/messages/messageboard");
+        var res = await axios.get("http://voterhub.herokuapp.com/api/messages/messageboard");
         await this.setState({ msgBoardArray: res.data});
         // console.log("this msgBoard", this.state.msgBoardArray);
     }

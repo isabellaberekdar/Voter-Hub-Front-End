@@ -45,7 +45,7 @@ class MessageBoard extends Component {
   }
 
   getMessageBoards = async () => {
-    var res = await axios.get("http://localhost:5000/api/messages/messageboard")
+    var res = await axios.get("http://voterhub.herokuapp.com/api/messages/messageboard")
     await this.setState({ msgBoardArray: res.data })
     // console.log("this msgBoard", this.state.msgBoardArray);
   }
