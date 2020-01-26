@@ -42,6 +42,7 @@ h3.msgboard-title {
   margin-bottom: 10px; 
   border: 1px solid rgb(161, 161, 161);
   padding: 10px;
+  width: 800px;
 }
 
 .thread > a {
@@ -79,10 +80,19 @@ h3.msgboard-title {
   margin-top: 20px;
   justify-content: center;
 
+
 }
 .new-form > button {
   margin-top: 20px;
   width: 130px;
+  height: 40px;
+  background-color: rgb(255, 175, 83);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: none;
+  font-weight: 700;
+
+  font-family: roboto-slab;
 }
 
 p#messageboard-anchor.down-triangle {

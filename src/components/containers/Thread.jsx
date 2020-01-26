@@ -64,7 +64,7 @@ class Thread extends Component {
   componentDidUpdate(prevProps) {}
 
   render() {
-    console.log(this.props.messages)
+    // console.log(this.props.messages)
 
     // DON'T FORGET TO UNCOMMENT THIS
     // this is commented so we can use placeholder hardcoded messages while styling the Threads pages
@@ -105,14 +105,22 @@ class Thread extends Component {
         <h1 className='thread-subject'>{this.props.threadSubject}</h1>
        {/*  {messageFirst} */}
         {messageDisplay}
-        <form onSubmit={this.handleOnSubmit}>
-          <input
-            type="text"
-            placeholder="Enter message..."
-            onChange={this.handleOnChange}
-            value={this.state.inputText}
-            className="new-message-form"
-          />
+        <form className='new-message-form' onSubmit={this.handleOnSubmit}>
+            <p>Post New Comment</p>
+            <textarea rows="5" cols="50" required onChange={this.handleOnChange}>
+            </textarea>
+{/* 
+            <input
+              id='subject'
+              type='text'
+              placeholder='Enter a message'
+              required
+              value={this.state.inputText}
+              handleSubjectChange={this.state.handleSubjectChange}
+              onChange={this.handleOnChange}
+              
+              ></input> */}
+              <button type='subnmit'>{'Post'}</button>
         </form>
       </div>
     )
