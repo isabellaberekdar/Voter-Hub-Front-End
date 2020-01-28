@@ -2,7 +2,11 @@ import MessageBoardCollection from ".."
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
-import { getThreadThunk, postMessageThunk } from "../../store/utilities/message"
+import {
+  getThreadThunk,
+  postMessageThunk,
+  deleteMessageThunk
+} from "../../store/utilities/message"
 import { MessageCard, MessageCardFirst } from ".."
 import "./Thread.css"
 
@@ -56,9 +60,10 @@ class Thread extends Component {
     this.setState({ inputText: e.target.value })
   }
 
-  handleDelete = messageId => {
+  handleDelete = message => {
     console.log("props", this.props)
-    console.log("deleting message", messageId)
+    console.log("deleting message in Thread.jsx", message)
+    this.props.deleteMessage(message)
   }
   componentDidMount() {
     const id = this.props.match.params.threadId
@@ -98,7 +103,7 @@ class Thread extends Component {
           {console.log("message", message)}
           <MessageCard
             message={message}
-            handleDelete={() => this.handleDelete(message.id)}
+            handleDelete={() => this.handleDelete(message)}
           />
           {/* <li>{message}</li> */}
         </div>
@@ -154,7 +159,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getThread: threadId => dispatch(getThreadThunk(threadId)),
-    postMessage: message => dispatch(postMessageThunk(message))
+    postMessage: message => dispatch(postMessageThunk(message)),
+    deleteMessage: message => dispatch(deleteMessageThunk(message))
   }
 }
 
