@@ -3,7 +3,10 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import "../views/Messageboard.css"
 import axios from "axios"
-import { getMessageBoardThunk, postThreadThunk } from "../../store/utilities/message"
+import {
+  getMessageBoardThunk,
+  postThreadThunk
+} from "../../store/utilities/message"
 
 class MessageBoard extends Component {
   constructor() {
@@ -51,7 +54,7 @@ class MessageBoard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    // console.log(this.props)
     this.props.getMessageBoard(this.props.officialId)
     // get all threads where the officialId is the id of this official
   }
@@ -73,8 +76,8 @@ class MessageBoard extends Component {
         const date = thread.createdAt.split("T")[0]
         const time = thread.createdAt.split("T")[1].split(".")[0]
         return (
-          <div className='thread'>
-            <span className='posted-by'>
+          <div className="thread">
+            <span className="posted-by">
               Posted on {date} at {time}{" "}
             </span>
             <a href={`/thread/${thread.id}`}>{thread.subject}</a>
@@ -84,28 +87,30 @@ class MessageBoard extends Component {
     }
 
     return (
-      <div className='message-board'>
-        <p id="messageboard-anchor" class="down-triangle">▼</p>
+      <div className="message-board">
+        <p id="messageboard-anchor" class="down-triangle">
+          ▼
+        </p>
         <h3 className="msgboard-title">Messageboard</h3>
         {threads}
-         <div className='new-thread'>
-         <h3>New Thread</h3>
-          <button onClick={this.toggleForm}>{'New thread +'}</button>
-         </div>
-        
+        <div className="new-thread">
+          <h3>New Thread</h3>
+          <button onClick={this.toggleForm}>{"New thread +"}</button>
+        </div>
+
         {this.state.newThread ? (
-          <form className='new-form' onSubmit={this.handleFormSubmit}>
+          <form className="new-form" onSubmit={this.handleFormSubmit}>
             Subject
             <input
-              id='subject'
-              type='text'
-              placeholder='Thread subject'
+              id="subject"
+              type="text"
+              placeholder="Thread subject"
               required
               subjectInput={this.state.subjectInput}
               handleSubjectChange={this.state.handleSubjectChange}
               onChange={this.handleSubjectChange}
-              ></input>
-            <button type='subnmit'>{'Create new thread'}</button>
+            ></input>
+            <button type="subnmit">{"Create new thread"}</button>
           </form>
         ) : null}
       </div>

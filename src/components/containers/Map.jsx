@@ -17,7 +17,7 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    console.log("kiwi", this.props)
+    // console.log("kiwi", this.props)
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       // style: "mapbox://styles/mapbox/streets-v11",
@@ -32,8 +32,19 @@ class Map extends Component {
         id: "state",
         type: "fill",
         source: {
-          type: "geojson"
-          // data: this.props.coords
+          type: "geojson",
+          data: {
+            type: "MultiPolygon",
+            coordinates: [
+              [
+                [
+                  [-73.933406, 40.833179],
+                  [-55.933406, 20.833179],
+                  [-85.933406, 10.833179]
+                ]
+              ]
+            ]
+          }
         },
         layout: {},
         paint: {
@@ -45,7 +56,7 @@ class Map extends Component {
   }
 
   render() {
-    console.log("beet", this.props)
+    console.log("beet", this.props.coords)
 
     return (
       <div>
@@ -56,6 +67,7 @@ class Map extends Component {
 }
 
 const mapState = state => {
+  // ("peanut", state)
   return {
     coords: state.official.coords
   }

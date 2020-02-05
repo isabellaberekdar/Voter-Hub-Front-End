@@ -250,12 +250,12 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
 
   async function countryCoords() {
     try {
-      console.log("cucumber")
+      // console.log("cucumber")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
         `https://raw.githubusercontent.com/johan/world.geo.json/master/countries/USA.geo.json`
       )
-      console.log("raspberry", data.features[0].geometry)
+      // console.log("raspberry", data.features[0].geometry)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -263,12 +263,12 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   }
   async function stateCoords(state) {
     try {
-      console.log("cucumber")
+      // console.log("cucumber")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
         `https://theunitedstates.io/districts/states/${state}/shape.geojson`
       )
-      console.log("coconut", data)
+      // console.log("coconut", data)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -280,7 +280,7 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
       const { data } = await axios.get(
         `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
       )
-      console.log("honeydew", data)
+      // console.log("honeydew", data)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -288,12 +288,12 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   }
   async function zipCoords(zip) {
     try {
-      console.log("kiwi")
+      // console.log("kiwi")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
         `https://theunitedstates.io/districts/states/${state}/shape.geojson`
       )
-      console.log("coconut", data)
+      // console.log("coconut", data)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -326,8 +326,20 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   }
 }
 
-const initialState = { coords: { features: [{ geometry: {} }] } }
-// this.props.coords.features[0].geometry
+const initialState = {
+  coords: {
+    type: "MultiPolygon",
+    coordinates: [
+      [
+        [
+          [-73.933406, 40.833179],
+          [-55.933406, 20.833179],
+          [-65.933406, 10.833179]
+        ]
+      ]
+    ]
+  }
+}
 
 // REDUCER
 const officialReducer = (state = initialState, action) => {
@@ -378,6 +390,7 @@ const officialReducer = (state = initialState, action) => {
     case STORE_COORDS:
       return { ...state, coords: action.payload }
     default:
+      console.log("HERE", state)
       return state
   }
 }
