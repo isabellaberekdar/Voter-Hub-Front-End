@@ -7,63 +7,66 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiZ2xlbm52YXJnYXMiLCJhIjoiY2s1bHd0N2tyMHRoMjNtcDQyd29jODYzZyJ9.dtibsg-o8MUWwBgXEPMHUA"
 
 class Map extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      lng: -115,
-      lat: 48,
-      zoom: 1.5
-    }
-  }
+  map
+
+  // componentDidUpdate() {
+  //   this.setFill()
+  // }
 
   componentDidMount() {
-    console.log("kiwi", this.props)
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: this.mapContainer,
-      // style: "mapbox://styles/mapbox/streets-v11",
-      style: "mapbox://styles/mapbox/light-v10",
-      // style: "mapbox://styles/mapbox/dark-v10",
-      // style: "mapbox://styles/mapbox/satellite-v9",
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
+      style: "mapbox://styles/mapbox/streets-v9",
+      center: [-70, 44],
+      zoom: 1.5
     })
-    let newLocal = this.props.coords
-    map.on("load", function() {
-      map.addLayer({
-        id: "state",
-        type: "fill",
-        source: {
-          type: "geojson",
-          data: newLocal
-        },
-        layout: {},
-        paint: {
-          "fill-color": "#088",
-          "fill-opacity": 0.8
-        }
+
+    this.map.on("load", () => {
+      console.log("taro", this.props.coords)
+      this.map.addSource("outline", {
+        type: "geojson",
+        data: this.props.coords
       })
+
+      this.map.addLayer(
+        {
+          id: "outline",
+          type: "fill",
+          source: "outline"
+        },
+        "country-label-lg"
+      ) // ID metches `mapbox/streets-v9`
+
+      // this.setFill()
+      this.map.setPaintProperty("outline", "fill-color", "#22f")
+      this.map.setPaintProperty("outline", "fill-opacity", 0.4)
     })
   }
 
-  render() {
-    console.log("beet", this.props)
+  // setFill() {
+  //   const { property, stops } = this.props.active
+  //   this.map.setPaintProperty("countries", "fill-color", {
+  //     property,
+  //     stops
+  //   })
+  // }
 
+  render() {
     return (
-      <div>
-        <div ref={el => (this.mapContainer = el)} />
-      </div>
+      <div
+        ref={el => (this.mapContainer = el)}
+        className="absolute top right left bottom"
+      />
     )
   }
 }
 
-const mapState = state => {
+function mapStateToProps(state) {
   return {
     coords: state.official.coords
   }
 }
 
-// const mapDispatch = dispatch => {
-//   return {}
-// }
+Map = connect(mapStateToProps)(Map)
 
-export default connect(mapState)(Map)
+export default Map
