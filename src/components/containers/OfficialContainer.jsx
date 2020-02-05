@@ -14,7 +14,6 @@ import {
   storeZip,
   storeCoordsThunk
 } from "../../store/utilities/official"
-import Map from "./Map"
 
 class OfficialContainer extends Component {
   constructor(props) {

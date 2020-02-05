@@ -52,12 +52,25 @@ class Map extends Component {
   // }
 
   render() {
+    // console.log(this.props.coords)
     return (
       <div
         ref={el => (this.mapContainer = el)}
         className="absolute top right left bottom"
       />
     )
+  }
+
+  autoCenterMap = ({ google }, map) => {
+    this.loadGeoJson(map)
+    // *code continues*
+  }
+
+  loadGeoJson = async map => {
+    // const geojsonRoutes = await this.getRoutes(feed_code)
+    // const geojsonEnvelope = await this.getEnvelope(feed_code)
+    // map.data.addGeoJson(geojsonEnvelope)
+    // map.data.addGeoJson(geojsonRoutes) // # load geojson layer
   }
 }
 
