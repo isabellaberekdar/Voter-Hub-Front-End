@@ -35,7 +35,7 @@ const deleteMessage = message => {
 const getThread = (messages, subject) => {
   return {
     type: GET_THREAD,
-    payload: { messages, subject }
+    payload: {messages, subject}
   }
 }
 
@@ -51,7 +51,7 @@ export const getMessageBoardThunk = officialId => async dispatch => {
   // console.log(address);
   try {
     // Query the api for the officials associated with the given address
-    const { data } = await axios.get(
+    const {data} = await axios.get(
       `http://localhost:5000/api/messages/messageboard`
     )
     console.log("**************************", data)
@@ -70,7 +70,7 @@ export const getThreadThunk = threadId => async dispatch => {
   try {
     console.log("penguin berry")
     // Get all messages associated with the threadId
-    const { data } = await axios.get(
+    const {data} = await axios.get(
       `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
     )
     console.log("cantaloupe berry", data)
@@ -100,7 +100,7 @@ export const postThreadThunk = info => async dispatch => {
       "Content-Type": "application/json"
     }
     console.log("Australia", info)
-    let { data } = await axios.post(
+    let {data} = await axios.post(
       "http://localhost:5000/api/messages/messageboard",
       info,
       {
@@ -119,11 +119,18 @@ export const deleteMessageThunk = message => async dispatch => {
     const headers = {
       "Content-Type": "application/json"
     }
+    let messageIdObject = {
+      "id":message.id
+    }
+    console.log("message object", messageIdObject)
+    console.log("mango", headers)
     let successMessage = await axios.delete(
       "http://localhost:5000/api/messages/",
-      message, //message to delete
       {
-        headers: headers
+        headers: headers,
+        'body': {
+          'id': 20
+        }
       }
     )
     dispatch(deleteMessage(message))
