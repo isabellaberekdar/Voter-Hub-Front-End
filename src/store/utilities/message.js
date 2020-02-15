@@ -128,9 +128,7 @@ export const deleteMessageThunk = message => async dispatch => {
       "http://localhost:5000/api/messages/",
       {
         headers: headers,
-        'body': {
-          'id': 20
-        }
+        'data': messageIdObject
       }
     )
     dispatch(deleteMessage(message))
