@@ -5,6 +5,7 @@ import axios from "axios"
 // ACTION TYPES
 const GET_MESSAGEBOARD = "GET_MESSAGEBOARD"
 const POST_MESSAGE = "POST_MESSAGE"
+const DELETE_MESSAGE = "DELETE_MESSAGE"
 const GET_THREAD = "GET_THREAD"
 const POST_THREAD = "POST_THREAD"
 
@@ -20,6 +21,13 @@ const getMessageBoard = messageBoard => {
 const postMessage = message => {
   return {
     type: POST_MESSAGE,
+    payload: message
+  }
+}
+
+const deleteMessage = message => {
+  return {
+    type: DELETE_MESSAGE,
     payload: message
   }
 }
@@ -43,13 +51,13 @@ export const getMessageBoardThunk = officialId => async dispatch => {
   // console.log(address);
   try {
     // Query the api for the officials associated with the given address
-    const { data } = await axios.get(
+    const {data} = await axios.get(
       `http://localhost:5000/api/messages/messageboard`
     )
-    console.log('**************************', data)
+    console.log("**************************", data)
     console.log(officialId)
     const filteredData = data.filter(thread => thread.officialId == officialId)
-    console.log('filtered data:', filteredData)
+    console.log("filtered data:", filteredData)
     dispatch(getMessageBoard(filteredData))
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error)
@@ -62,7 +70,7 @@ export const getThreadThunk = threadId => async dispatch => {
   try {
     console.log("penguin berry")
     // Get all messages associated with the threadId
-    const { data } = await axios.get(
+    const {data} = await axios.get(
       `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
     )
     console.log("cantaloupe berry", data)
@@ -74,7 +82,10 @@ export const getThreadThunk = threadId => async dispatch => {
 
 export const postMessageThunk = message => async dispatch => {
   try {
-    let newMessage = await axios.post("http://localhost:5000/api/messages", message)
+    let newMessage = await axios.post(
+      "http://localhost:5000/api/messages",
+      message
+    )
     console.log("pikachu", newMessage.datas)
     dispatch(postMessage(newMessage.data))
   } catch (error) {
@@ -89,14 +100,41 @@ export const postThreadThunk = info => async dispatch => {
       "Content-Type": "application/json"
     }
     console.log("Australia", info)
-    let { data } = await axios.post("http://localhost:5000/api/messages/messageboard", info, {
-      headers: headers
-    }) 
+    let {data} = await axios.post(
+      "http://localhost:5000/api/messages/messageboard",
+      info,
+      {
+        headers: headers
+      }
+    )
     //new thread object is returned
     console.log("Pichu", data)
     dispatch(postThread(data))
   } catch (error) {
     console.log("Error in postMessageThunk", error)
+  }
+}
+export const deleteMessageThunk = message => async dispatch => {
+  try {
+    const headers = {
+      "Content-Type": "application/json"
+    }
+    let messageIdObject = {
+      "id":message.id
+    }
+    console.log("message object", messageIdObject)
+    console.log("mango", headers)
+    let successMessage = await axios.delete(
+      "http://localhost:5000/api/messages/",
+      {
+        headers: headers,
+        'data': messageIdObject
+      }
+    )
+    dispatch(deleteMessage(message))
+    console.log("is deletion successful?", successMessage)
+  } catch (error) {
+    console.log("Error in deleteMessageThunk", error)
   }
 }
 
@@ -126,6 +164,12 @@ const officialReducer = (state = initialState, action) => {
       return {
         ...state,
         threads: [...state.threads, action.payload]
+      }
+    case DELETE_MESSAGE:
+      console.log("chickening away")
+      return {
+        ...state,
+        messages: state.messages.filter(message => message != action.payload)
       }
 
     default:

@@ -10,7 +10,7 @@ const MessageCard = props => {
   // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   // var dateTime = date+' '+time;
 
-  console.log(props)
+  console.log("butterfly", props)
 
   // "2020-01-23T15:58:10.367Z"
   let datetime = new Date(props.message.createdAt)
@@ -40,6 +40,7 @@ const MessageCard = props => {
       </div>
 
       <p className="message-text">{props.message.text}</p>
+      <button onClick={props.handleDelete}>Delete Message</button>
     </div>
   )
 }
