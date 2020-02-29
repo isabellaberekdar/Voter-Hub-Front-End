@@ -1,12 +1,7 @@
 import MessageBoardCollection from ".."
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import axios from "axios"
-import {
-  getThreadThunk,
-  postMessageThunk,
-  deleteMessageThunk
-} from "../../store/utilities/message"
+import { getThreadThunk, postMessageThunk, deleteMessageThunk } from "../../store/utilities/message"
 import { MessageCard, MessageCardFirst } from ".."
 import "./Thread.css"
 
@@ -14,22 +9,12 @@ class Thread extends Component {
   constructor() {
     super()
     this.state = {
-      //         msgBoardArray: [],
-      //         inputText: "",
-      //         messageboardID: ""
       inputText: ""
     }
   }
 
-  // getThread = async () => {
-  //     var res = await axios.get("http://localhost:5000/api/messages/messageboard/thread/1");
-  //     await this.setState({ msgBoardArray: res.data});
-  //     // console.log("this msgBoard", this.state.msgBoardArray);
-  // }
-
   handleOnSubmit = e => {
     e.preventDefault()
-
 
     if (this.props.isLoggedIn) {
       //post request; add message to database
@@ -40,12 +25,6 @@ class Thread extends Component {
         messageBoardID: this.props.match.params.threadId
       }
       this.props.postMessage(msg)
-      // axios.post("http://localhost:5000/api/messages", msg)
-      // .then(this.props.postMessage(msg))
-
-      //re-renders page to display new message
-      //doesn't actually change state
-      // .then(this.setState({ inputText: this.state.inputText }))
     } else {
       alert("Log in to post a request")
     }
@@ -56,8 +35,6 @@ class Thread extends Component {
   }
 
   handleDelete = message => {
-    console.log("props", this.props)
-    console.log("deleting message in Thread.jsx", message)
     this.props.deleteMessage(message)
   }
   componentDidMount() {
@@ -65,76 +42,30 @@ class Thread extends Component {
     this.props.getThread(id)
   }
 
-  componentDidUpdate(prevProps) {}
-
   render() {
-    // console.log(this.props.messages)
-
-    // DON'T FORGET TO UNCOMMENT THIS
-    // this is commented so we can use placeholder hardcoded messages while styling the Threads pages
-    // if (this.props.messages) {
-    //   // console.log("broccoli", this.props.thread.messages)
-    /* 
-       messageDisplay = this.props.messages.map(message => (
-         <li>
-           {message.text}
-           {message.user}
-           {message.createdAt}
-         </li>
-      ))
-    } */
-    // REPLACE THIS WITH THE CODE ABOVE
-    // messages is a hardcoded array of message objects
-    /*     let messageFirst = (
-      <MessageCardFirst
-        message={messages[0]}
-        commentCount={messages.length - 1}
-      />
-    ) */
     let messageDisplay
-    if (this.props.messages) {
-      messageDisplay = this.props.messages.map(message => (
+    let { messages, user, threadSubject } = this.props
+
+    if (messages) {
+      messageDisplay = messages.map(message => (
         <div>
-          {console.log("message", message)}
           <MessageCard
             message={message}
             handleDelete={() => this.handleDelete(message)}
+            loggedInUser={user.email}
           />
-          {/* <li>{message}</li> */}
         </div>
-        /*        <li>
-           {message.text}
-           {message.user}
-           {message.createdAt}
-         </li> */
       ))
     }
 
     return (
-      <div className="thread-container">
-        <h1 className="thread-subject">{this.props.threadSubject}</h1>
-        {/*  {messageFirst} */}
+      <div className='thread-container'>
+        <h1 className='thread-subject'>{threadSubject}</h1>
         {messageDisplay}
-        <form className="new-message-form" onSubmit={this.handleOnSubmit}>
+        <form className='new-message-form' onSubmit={this.handleOnSubmit}>
           <p>Post New Comment</p>
-          <textarea
-            rows="5"
-            cols="50"
-            required
-            onChange={this.handleOnChange}
-          ></textarea>
-          {/* 
-            <input
-              id='subject'
-              type='text'
-              placeholder='Enter a message'
-              required
-              value={this.state.inputText}
-              handleSubjectChange={this.state.handleSubjectChange}
-              onChange={this.handleOnChange}
-              
-              ></input> */}
-          <button type="subnmit">{"Post"}</button>
+          <textarea rows='5' cols='50' required onChange={this.handleOnChange}></textarea>
+          <button type='subnmit'>{"Post"}</button>
         </form>
       </div>
     )
