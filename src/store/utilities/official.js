@@ -113,9 +113,7 @@ export const getArticlesThunk = name => async dispatch => {
     // Query the microsoft api for news articles about the given person
     const { data } = await axios.get(`https://gnews.io/api/v3/search?q="${name}"&token=${key}&max=5`)
 
-    const articles = data.articles.map(article => article)
-
-    dispatch(getArticles(articles)) // Passes an array of articles
+    dispatch(getArticles(data.articles)) // Passes an array of articles
   } catch (error) {
     console.log(error)
   }
