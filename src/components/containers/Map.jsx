@@ -17,7 +17,6 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    console.log("kiwi", this.props)
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       // style: "mapbox://styles/mapbox/streets-v11",
@@ -45,8 +44,6 @@ class Map extends Component {
   }
 
   render() {
-    console.log("beet", this.props)
-
     return (
       <div>
         <div ref={el => (this.mapContainer = el)} />

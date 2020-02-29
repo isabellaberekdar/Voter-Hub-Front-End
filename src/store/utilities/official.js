@@ -212,7 +212,6 @@ export const getFundersThunk = cid => async dispatch => {
 }
 
 export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
-  console.log(state, cd, zip)
 
   async function countryCoords() {
     try {

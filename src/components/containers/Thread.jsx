@@ -29,12 +29,7 @@ class Thread extends Component {
 
   handleOnSubmit = e => {
     e.preventDefault()
-    console.log(
-      "acai",
-      this.props.user.email,
-      this.state.inputText,
-      this.props.messages
-    )
+
 
     if (this.props.isLoggedIn) {
       //post request; add message to database
