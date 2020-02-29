@@ -51,7 +51,6 @@ class MessageBoard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.getMessageBoard(this.props.officialId)
     // get all threads where the officialId is the id of this official
   }

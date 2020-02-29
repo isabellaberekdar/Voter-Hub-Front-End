@@ -3,7 +3,7 @@ A full-stack web app made to engage and inform citizens.</br>
 __Made by:__ Darren Zhang, Eva Yan, Isabella Berekdar, Samson Wu </br>
 __Date:__ January 2020 </br>
 __Timeframe:__ 4-6 days </br>
-__Deployed at:__ TBA </br>
+__Deployed at:__ https://voterhub.netlify.com/ </br>
 __Link to Back-end:__ https://github.com/isabellaberekdar/capstone-back-end </br>
 
 ## UI Wireframes:
