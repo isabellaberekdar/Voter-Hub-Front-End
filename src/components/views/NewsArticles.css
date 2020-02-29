@@ -75,7 +75,9 @@
 }
 
 .article-thumbnail > img {
-  width: 130px;
+  object-fit: cover;
+  height: 100px;
+  width: 100px;
   margin-right: 10px;
 }
 
