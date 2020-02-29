@@ -9,7 +9,6 @@ class FundingContainer extends React.Component {
   }
 
   render() {
-    // console.log("radicchio", this.props)
     let funderCards = this.props.funders.map((funder, index) => (
       <FundingCard funder={funder} index={index+1}/>
     ))

@@ -24,7 +24,6 @@ class HomeContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    // console.log("bar", this.state.searchbarValue)
     this.props.getOfficialsThunk(this.state.searchbarValue)
 
   }
@@ -36,7 +35,6 @@ class HomeContainer extends Component {
   }
 
   blurFunc = event => {
-    console.log("unfocusing");
     this.setState({
       placeholder: "Enter Address..."
     })
@@ -72,7 +70,6 @@ class HomeContainer extends Component {
     console.log('Button pushed')
   }
   render() {
-    console.log(this.props.store)
     return (
       <div>
         <HomeView
@@ -93,7 +90,6 @@ class HomeContainer extends Component {
 }
 
 const mapState = state => {
-  // console.log(state)
   return {
     photo: state.official,
     store: state.official.officials

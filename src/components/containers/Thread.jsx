@@ -2,9 +2,13 @@ import MessageBoardCollection from ".."
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
-import { getThreadThunk, postMessageThunk } from "../../store/utilities/message"
+import {
+  getThreadThunk,
+  postMessageThunk,
+  deleteMessageThunk
+} from "../../store/utilities/message"
 import { MessageCard, MessageCardFirst } from ".."
-import './Thread.css'
+import "./Thread.css"
 
 class Thread extends Component {
   constructor() {
@@ -25,12 +29,7 @@ class Thread extends Component {
 
   handleOnSubmit = e => {
     e.preventDefault()
-    console.log(
-      "acai",
-      this.props.user.email,
-      this.state.inputText,
-      this.props.messages
-    )
+
 
     if (this.props.isLoggedIn) {
       //post request; add message to database
@@ -56,6 +55,11 @@ class Thread extends Component {
     this.setState({ inputText: e.target.value })
   }
 
+  handleDelete = message => {
+    console.log("props", this.props)
+    console.log("deleting message in Thread.jsx", message)
+    this.props.deleteMessage(message)
+  }
   componentDidMount() {
     const id = this.props.match.params.threadId
     this.props.getThread(id)
@@ -70,7 +74,7 @@ class Thread extends Component {
     // this is commented so we can use placeholder hardcoded messages while styling the Threads pages
     // if (this.props.messages) {
     //   // console.log("broccoli", this.props.thread.messages)
-/* 
+    /* 
        messageDisplay = this.props.messages.map(message => (
          <li>
            {message.text}
@@ -81,18 +85,24 @@ class Thread extends Component {
     } */
     // REPLACE THIS WITH THE CODE ABOVE
     // messages is a hardcoded array of message objects
-/*     let messageFirst = (
+    /*     let messageFirst = (
       <MessageCardFirst
         message={messages[0]}
         commentCount={messages.length - 1}
       />
     ) */
-    let messageDisplay 
+    let messageDisplay
     if (this.props.messages) {
-
       messageDisplay = this.props.messages.map(message => (
-        <MessageCard message={message} />
-  /*        <li>
+        <div>
+          {console.log("message", message)}
+          <MessageCard
+            message={message}
+            handleDelete={() => this.handleDelete(message)}
+          />
+          {/* <li>{message}</li> */}
+        </div>
+        /*        <li>
            {message.text}
            {message.user}
            {message.createdAt}
@@ -102,14 +112,18 @@ class Thread extends Component {
 
     return (
       <div className="thread-container">
-        <h1 className='thread-subject'>{this.props.threadSubject}</h1>
-       {/*  {messageFirst} */}
+        <h1 className="thread-subject">{this.props.threadSubject}</h1>
+        {/*  {messageFirst} */}
         {messageDisplay}
-        <form className='new-message-form' onSubmit={this.handleOnSubmit}>
-            <p>Post New Comment</p>
-            <textarea rows="5" cols="50" required onChange={this.handleOnChange}>
-            </textarea>
-{/* 
+        <form className="new-message-form" onSubmit={this.handleOnSubmit}>
+          <p>Post New Comment</p>
+          <textarea
+            rows="5"
+            cols="50"
+            required
+            onChange={this.handleOnChange}
+          ></textarea>
+          {/* 
             <input
               id='subject'
               type='text'
@@ -120,7 +134,7 @@ class Thread extends Component {
               onChange={this.handleOnChange}
               
               ></input> */}
-              <button type='subnmit'>{'Post'}</button>
+          <button type="subnmit">{"Post"}</button>
         </form>
       </div>
     )
@@ -140,7 +154,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getThread: threadId => dispatch(getThreadThunk(threadId)),
-    postMessage: message => dispatch(postMessageThunk(message))
+    postMessage: message => dispatch(postMessageThunk(message)),
+    deleteMessage: message => dispatch(deleteMessageThunk(message))
   }
 }
 

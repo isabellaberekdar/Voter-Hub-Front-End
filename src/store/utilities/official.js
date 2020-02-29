@@ -100,7 +100,6 @@ export const getOfficialsThunk = searchbarValue => async dispatch => {
     const { data } = await axios.get(
       `https://www.googleapis.com/civicinfo/v2/representatives?address=${searchbarValue}&key=${key}`
     )
-    // console.log("cantaloupe", data)
     dispatch(getOfficials(data))
   } catch (error) {
     console.log(error)
@@ -109,58 +108,28 @@ export const getOfficialsThunk = searchbarValue => async dispatch => {
 
 export const getArticlesThunk = name => async dispatch => {
   try {
-    const key = process.env.REACT_APP_MICROSOFT_KEY
+    const key = process.env.REACT_APP_GNEWS_KEY
 
     // Query the microsoft api for news articles about the given person
-    const { data } = await axios.get(
-      `https://api.cognitive.microsoft.com/bing/v7.0/news/search?q=${name}&count=5&offset=0&mkt=en-us&safeSearch=Off`,
-      {
-        headers: {
-          "Ocp-Apim-Subscription-Key": key
-        }
-      }
-    )
+    const { data } = await axios.get(`https://gnews.io/api/v3/search?q="${name}"&token=${key}&max=5`)
 
-    const articles = data.value.map(article => {
-      return {
-        name: article.name,
-        url: article.url,
-        articleThumbnail: article.image,
-        /* providerThumbnail: article.provider[0].image.thumbnail.contentUrl,  */
-        description: article.description,
-        provider: article.provider[0].name,
-        datePublished: article.datePublished
-      }
-    })
-
-    console.log(data.value)
-    console.log(articles)
-
-    dispatch(getArticles(articles)) // Passes an array of articles
+    dispatch(getArticles(data.articles)) // Passes an array of articles
   } catch (error) {
     console.log(error)
   }
 }
 
-export const getOfficialThunk = (
-  division,
-  officeIndex,
-  officialIndex
-) => async dispatch => {
+export const getOfficialThunk = (division, officeIndex, officialIndex) => async dispatch => {
   try {
     const key = process.env.REACT_APP_GOOGLE_KEY
     let url = `https://www.googleapis.com/civicinfo/v2/representatives/${division}?key=${key}`
 
     // Get the official
     const { data } = await axios.get(url)
-    // console.log("DATA: ", data)
-    // console.log("rutabaga", officeIndex, officialIndex)
     let payload = {
       office: data.offices[officeIndex],
-      official:
-        data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
+      official: data.officials[data.offices[officeIndex].officialIndices[officialIndex]]
     }
-    console.log(payload)
     dispatch(getOfficial(payload))
   } catch (error) {
     console.log("Error in getOfficialThunk:", error)
@@ -198,14 +167,12 @@ export const getPhotoThunk = (first, last, state) => async dispatch => {
 }
 
 export const getCidThunk = nameObj => async dispatch => {
-  // console.log("arugula", nameObj)
   try {
     // Query the api for the officials associated with the given state abbrev
     const { data } = await axios.get(
       `https://www.opensecrets.org/api/?method=getLegislators&id=${nameObj.stateAbbrev}&apikey=968574846610c513dface6ad9e5a2aa9&output=json`
     )
     let legislators = data.response.legislator
-    // console.log("celery", legislators)
 
     // DON'T DELETE THE FOLLOWING LINES, in case phone numbers end up being insufficient
     // Finds the legislator in legislators with the same last name (first name won't be sufficient)
@@ -223,7 +190,6 @@ export const getCidThunk = nameObj => async dispatch => {
           .replace(" ", "")
           .replace("-", "") === nameObj.phone
     )
-    // console.log("wheatgrass", found["@attributes"].cid)
     dispatch(getCid(found["@attributes"]))
   } catch (error) {
     console.log("Error in getCidThunk:", error)
@@ -246,16 +212,13 @@ export const getFundersThunk = cid => async dispatch => {
 }
 
 export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
-  console.log(state, cd, zip)
 
   async function countryCoords() {
     try {
-      console.log("cucumber")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
         `https://raw.githubusercontent.com/johan/world.geo.json/master/countries/USA.geo.json`
       )
-      console.log("raspberry", data.features[0].geometry)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -263,12 +226,10 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   }
   async function stateCoords(state) {
     try {
-      console.log("cucumber")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
         `https://theunitedstates.io/districts/states/${state}/shape.geojson`
       )
-      console.log("coconut", data)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -280,7 +241,6 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
       const { data } = await axios.get(
         `https://theunitedstates.io/districts/cds/2012/${state}-${cd}/shape.geojson`
       )
-      console.log("honeydew", data)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -288,12 +248,10 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   }
   async function zipCoords(zip) {
     try {
-      console.log("kiwi")
       // Query the api for the geoJSON for the given state and congressional district
       const { data } = await axios.get(
         `https://theunitedstates.io/districts/states/${state}/shape.geojson`
       )
-      console.log("coconut", data)
       dispatch(storeCoords(data))
     } catch (error) {
       console.log("Error in getCoordsThunk:", error)
@@ -307,22 +265,17 @@ export const storeCoordsThunk = (state, cd, zip) => async dispatch => {
   ) {
     // country
     countryCoords()
-    console.log("COUNTRY")
   } else if (state !== undefined && cd == undefined && zip == undefined) {
     // state
     stateCoords(state)
-    console.log("STATE")
   } else if (state !== undefined && cd !== undefined) {
     // congressional district
     districtCoords(state, cd)
-    console.log("CONGRESSIONAL DISTRICT")
   } else if (cd == undefined && zip !== undefined) {
     zipCoords(zip)
-    console.log("COUNTY / ZIP CODE")
   } else {
     // country
     countryCoords()
-    console.log("COUNTRY")
   }
 }
 
