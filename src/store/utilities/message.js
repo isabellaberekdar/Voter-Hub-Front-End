@@ -54,10 +54,7 @@ export const getMessageBoardThunk = officialId => async dispatch => {
     const {data} = await axios.get(
       `http://localhost:5000/api/messages/messageboard`
     )
-    console.log("**************************", data)
-    console.log(officialId)
     const filteredData = data.filter(thread => thread.officialId == officialId)
-    console.log("filtered data:", filteredData)
     dispatch(getMessageBoard(filteredData))
   } catch (error) {
     console.log("Error in getOfficialsThunk:", error)
@@ -68,12 +65,10 @@ export const getMessageBoardThunk = officialId => async dispatch => {
 export const getThreadThunk = threadId => async dispatch => {
   // console.log(address);
   try {
-    console.log("penguin berry")
     // Get all messages associated with the threadId
     const {data} = await axios.get(
       `http://localhost:5000/api/messages/messageboard/thread/${threadId}`
     )
-    console.log("cantaloupe berry", data)
     dispatch(getThread(data.messages, data.subject))
   } catch (error) {
     console.log("Error in getThreadThunk:", error)
@@ -86,7 +81,6 @@ export const postMessageThunk = message => async dispatch => {
       "http://localhost:5000/api/messages",
       message
     )
-    console.log("pikachu", newMessage.datas)
     dispatch(postMessage(newMessage.data))
   } catch (error) {
     console.log("Error in postMessageThunk", error)
@@ -99,7 +93,6 @@ export const postThreadThunk = info => async dispatch => {
     const headers = {
       "Content-Type": "application/json"
     }
-    console.log("Australia", info)
     let {data} = await axios.post(
       "http://localhost:5000/api/messages/messageboard",
       info,
@@ -108,7 +101,6 @@ export const postThreadThunk = info => async dispatch => {
       }
     )
     //new thread object is returned
-    console.log("Pichu", data)
     dispatch(postThread(data))
   } catch (error) {
     console.log("Error in postMessageThunk", error)

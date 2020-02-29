@@ -103,9 +103,6 @@ class OfficialContainer extends Component {
         })
       )
       .then(() => {
-        console.log("plantain", this.props.official.office.divisionId)
-      })
-      .then(() => {
         let stateAbbrev
         let cd
         let zip
@@ -117,7 +114,6 @@ class OfficialContainer extends Component {
             stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
           }
           stateAbbrev = stateAbbrev.toUpperCase()
-          console.log(stateAbbrev)
           this.props.storeState(stateAbbrev)
         } else {
           this.props.storeState(undefined)
@@ -130,7 +126,6 @@ class OfficialContainer extends Component {
           if (stateAbbrev.includes("/")) {
             stateAbbrev = stateAbbrev.substring(0, stateAbbrev.indexOf("/"))
           }
-          console.log(cd)
           this.props.storeCD(cd)
         } else {
           this.props.storeCD(undefined)
@@ -141,13 +136,11 @@ class OfficialContainer extends Component {
           this.props.official.office.divisionId.includes("county:")
         ) {
           zip = this.props.official.official.address[0].zip
-          console.log("yuzu", zip)
           this.props.storeZip(zip)
         } else {
           this.props.storeZip(undefined)
         }
 
-        console.log("passionfruit", this.props.official.official.address[0].zip)
 
         this.props.storeCoords(stateAbbrev, cd, zip)
       })
