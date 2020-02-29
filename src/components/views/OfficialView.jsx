@@ -12,7 +12,6 @@ import Map from "../containers/Map"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 
 const OfficialView = props => {
-  console.log("parsnip", props)
   let output = []
   let divisionId = ""
   let office = {}
@@ -125,7 +124,6 @@ const OfficialView = props => {
       addressLines.push(<p>{line2}</p>)
     }
   }
-  console.log("starfruit", props.officialId)
   return (
     <div className="triptych-container">
       <div className="triptych">

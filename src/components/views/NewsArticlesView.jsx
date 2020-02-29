@@ -4,47 +4,42 @@ import "./NewsArticles.css"
 
 const NewsArticlesView = props => {
   return (
-    <div className="headlines">
-      <p id="headlines-anchor" class="down-triangle">▼</p>
+    <div className='headlines'>
+      <p id='headlines-anchor' class='down-triangle'>
+        ▼
+      </p>
       <h2>Latest Headlines</h2>
-      <div className="articles-container">
+      <div className='articles-container'>
         {props.articles ? (
           props.articles.map(article => {
-            var s = article.datePublished
-            s = s.substring(0, s.indexOf("T"))
+            let date = article.publishedAt
+            date = date.substring(0, date.indexOf(" "))
             return (
-              <div className="article" key={article.name}>
-                <span className="headline">
+              <div className='article' key={article.title}>
+                <span className='headline'>
                   <i>
-                    <b>{article.provider}</b>
+                    <b>{article.source.name}</b>
                   </i>
                 </span>
-                <div className="article-content">
-                  {article.articleThumbnail &&
-                  article.articleThumbnail.thumbnail ? (
-                    <div className="article-thumbnail">
-                      <img
-                        src={article.articleThumbnail.thumbnail.contentUrl}
-                      />
+                <div className='article-content'>
+                  {article.image && (
+                    <div className='article-thumbnail'>
+                      <img src={article.image} />
                     </div>
-                  ) : (
-                    <div></div>
                   )}
-                  <div className="article-info">
-                    <a href={article.url} target="blank">
-                      {article.name}
+                  <div className='article-info'>
+                    <a href={article.url} target='blank'>
+                      {article.title}
                     </a>{" "}
-                    <b id="timestamp">posted {s}</b>
-                    <p id="article-description">{article.description}</p>
+                    <b id='timestamp'>posted {date}</b>
+                    <p id='article-description'>{article.description}</p>
                   </div>
                 </div>
               </div>
             )
           })
         ) : (
-          <p id="no-articles-found">
-            There were no articles found about this official.
-          </p>
+          <p id='no-articles-found'>There were no articles found about this official.</p>
         )}
       </div>
     </div>
